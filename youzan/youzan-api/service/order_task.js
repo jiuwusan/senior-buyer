@@ -19,8 +19,12 @@ class OrderTask {
     return await Promise.all(this.buyers.map(buyer => buyer.queryCart()));
   }
 
-  async createOrder() {
-    return await Promise.all(this.buyers.map(buyer => buyer.orderCart()));
+  async createOrder({ combine }) {
+    return await Promise.all(this.buyers.map(buyer => buyer.orderCart({ combine })));
+  }
+
+  async queryPreOrder() {
+    return await Promise.all(this.buyers.map(buyer => buyer.queryPreOrder()));
   }
 
   async startTask(diffTimestamp) {

@@ -15,6 +15,7 @@ class Buyer {
   };
   orderList = [];
   succeedIds = [];
+  combineOrder = {};
   constructor(config) {
     this.config = config;
   }
@@ -82,7 +83,7 @@ class Buyer {
 
   async queryCart() {
     const clientIp = await queryPublicIp();
-    const result = await this.fetchAPI('https://shop118814709.youzan.com/wsctrade/cartGoodstList.json', {
+    const result = await this.fetchAPI(`https://shop${this.config.kdt_id}.youzan.com/wsctrade/cartGoodstList.json`, {
       query: {
         kdt_id: this.config.kdt_id,
         store_id: 0,
@@ -93,13 +94,44 @@ class Buyer {
       }
     });
     const items = result?.data?.[0]?.items || [];
-    this.orderList = await this.generateOrderList(items, clientIp);
+    if (items?.length > 0) {
+      this.orderList = await this.generateOrderList(items, clientIp);
+      this.combineOrder = await this.generateCombineOrder(items, clientIp);
+    }
     return this.orderList;
   }
-  async orderCart() {
-    return await Promise.all(this.orderList.map(orderInfo => this.creatOrder(orderInfo)));
+
+  async queryPreOrder() {
+    return {
+      buyer_name: this.config.buyer_name,
+      order_total: this.orderList?.length,
+      order_list: this.orderList,
+      combine_order: this.combineOrder
+    };
+  }
+
+  async orderCart({ combine }) {
+    if (this.orderList?.length < 1) {
+      return '购物车为空';
+    }
+    if (this.succeedIds.includes('combine')) {
+      return '已下单成功';
+    }
+    if (combine) {
+      return this.creatOrder(this.combineOrder);
+    }
+    console.log('购物车结算...');
+    const batchSize = 2;
+    const results = [];
+    for (let i = 0; i < this.orderList.length; i += batchSize) {
+      const batchOrder = this.orderList.slice(i, i + batchSize);
+      const batchResults = await Promise.all(batchOrder.map(order => this.creatOrder(order)));
+      results.push(...batchResults);
+    }
+    return results;
   }
   async creatOrder(orderInfo) {
+    // 随机等待5-20ms
     const { submitId, itemName, orderParam } = orderInfo;
     if (this.succeedIds.includes(submitId)) {
       console.log('已下单成功，跳过...', submitId);
@@ -110,7 +142,8 @@ class Buyer {
         message: '已下单成功'
       };
     }
-    console.log('开始下单...', submitId);
+    console.log('开始下单...', submitId, itemName);
+    // return await new Promise(resolve => setTimeout(resolve, parseInt(Math.random() * 15) + 5));
     const result = await this.fetchAPI('https://cashier.youzan.com/pay/wsctrade/order/buy/v2/bill-fast.json', {
       method: 'POST',
       query: { kdt_id: this.config.kdt_id },
@@ -175,13 +208,167 @@ class Buyer {
         source: 'goods_detail'
       })
     };
-    const result = await this.fetchAPI('https://shop118814709.youzan.com/wsctrade/order/goodsBook.json', {
+    const result = await this.fetchAPI(`https://shop${this.config.kdt_id}.youzan.com/wsctrade/order/goodsBook.json`, {
       method: 'POST',
       query: { kdt_id: this.config.kdt_id },
       data: bookpKeyParams
     });
     console.log('获取商品 bookKey 结果:', result);
     return result?.data;
+  }
+  async generateCombineOrder(selectedItems, clientIp) {
+    const shippingAddress = this.config.address;
+    // 4. 构造 items 详情
+    const items = selectedItems.map(item => ({
+      cartCreateTime: item.created_time,
+      cartUpdateTime: item.updated_time,
+      CART_ID: item.cart_id,
+      goodsId: item.goods_id,
+      skuId: item.sku_id,
+      num: item.num,
+      kdtId: item.kdt_id,
+      price: item.pay_price,
+      deliverTime: item.deliver_time || 0,
+      confirmTotalPrice: item.pay_price * item.num,
+      title: item.title,
+      activityId: item.activity_id,
+      activityType: item.activity_type
+    }));
+
+    // for (let index = 0; index < items.length; index++) {
+    //   items[index].bookKey = (await this.getGoodsBookKey(items[index]))?.bookKey;
+    // }
+
+    // 6. 返回最终 JSON 结构
+    return {
+      submitId: 'combine',
+      itemName: '聚合商品',
+      orderParam: {
+        version: 2,
+        source: {
+          bookKey: this.uuid(),
+          clientIp,
+          fromThirdApp: false,
+          isWeapp: false,
+          itemSources: items.map(item => ({
+            activityId: item.activityId,
+            activityType: item.activityType,
+            bizTracePointExt: JSON.stringify({
+              atr_uuid: '',
+              yzk_ex: '',
+              page_type: '',
+              tui_platform: '',
+              tui_click: '',
+              wecom_uuid: '',
+              from_source: '',
+              pv_id: '/v2/showcase/homepage~ce2462ee-fa92-4487-a00f-0cdcd6ec88c0',
+              banner_id: 'cart.118622541~recService.1~1~j9NzLTY4',
+              st: 'js',
+              sv: '1.1.49',
+              yai: 'wsc_c',
+              uuid: '6a3b3b3f-3607-7659-bed3-08e4b81bb087',
+              userId: '',
+              platform: 'web',
+              alg: 'common_by_shop.store_ctr_30d_1000.0:20251225,common_by_shop.inner_hot.2:20251224,common_by_shop.inner_price_hot.0:20251224,common_by_shop.inner_7d_hot.0:20251224,common_by_shop.inner_1d_hot.0:20251224,cold_simple_rank,0.0.0.0.0.0.0.0.0_2b0e9eebd35d486c8a6927189f3850d7',
+              alias: '3ex44eto5dcbx6i'
+            }),
+            cartCreateTime: 0,
+            cartUpdateTime: 0,
+            goodsId: item.goodsId,
+            propertyIds: [],
+            skuId: item.skuId
+          })),
+          kdtSessionId: this.config.kdt_session_id,
+          needAppRedirect: false,
+          orderType: 0,
+          platform: 'weixin',
+          salesman: '',
+          userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1',
+          orderMark: '',
+          bizPlatform: ''
+        },
+        config: {
+          bosWorkFlow: false,
+          containsUnavailableItems: false,
+          fissionActivity: { fissionTicketNum: 0 },
+          isFromItemDetail: true,
+          paymentExpiry: 0,
+          receiveMsg: true,
+          usePoints: false,
+          useWxpay: false,
+          buyerMsg: '',
+          disableStoredDiscount: false,
+          storedDiscountRechargeGuide: true,
+          isWholesaleOrder: false,
+          valueCardsExtContext: '{"IS_RELOAD":false,"CUSTOMER_SELECT_CARD_LIST":false,"SELECTED_RECHARGE_FREE_PRODUCT":false,"DIY_SELECT_CARDS":"0"}'
+        },
+        usePayAsset: {},
+        items: items.map(item => ({
+          activityId: item.activityId,
+          activityType: item.activityType,
+          deliverTime: 0,
+          extensions: { OUTER_ITEM_ID: '10000' },
+          goodsId: item.goodsId,
+          isSevenDayUnconditionalReturn: true,
+          itemFissionTicketsNum: 0,
+          itemMessage: '{}',
+          kdtId: this.config.kdt_id,
+          num: item.num,
+          pointsPrice: 0,
+          price: item.price,
+          propertyIds: [],
+          skuId: item.skuId,
+          storeId: 0,
+          umpSkuId: 0
+        })),
+        seller: { kdtId: this.config.kdt_id, storeId: 0 },
+        ump: {
+          activities: items.map(item => ({
+            activityAlias: '',
+            activityId: item.activityId,
+            activityType: item.activityType,
+            externalPointId: 0,
+            goodsId: item.goodsId,
+            kdtId: this.config.kdt_id,
+            pointsPrice: 0,
+            propertyIds: [],
+            skuId: item.skuId,
+            usePoints: false
+          })),
+          coupon: {},
+          multiCoupon: { coupons: [], deliveryCoupons: [] },
+          useCustomerCardInfo: { specified: false },
+          costPoints: { kdtId: this.config.kdt_id, usePointDeduction: false, costPoints: 0, defaultPointDeductEffect: true }
+        },
+        newCouponProcess: true,
+        unavailableItems: [],
+        asyncOrder: false,
+        delivery: {
+          hasFreightInsurance: true,
+          address: shippingAddress,
+          expressType: 'express',
+          expressTypeChoice: 0
+        },
+        cloudOrderExt: { extension: {} },
+        bookKeyCloudExtension: { umpExt: '' },
+        confirmTotalPrice: items.reduce((r1, item) => (r1 += item.confirmTotalPrice), 0),
+        extensions: {
+          CONFIRM_TRADE_RISK_DIALOG: 'false',
+          TRADE_PAGE_TYPE: 'TRADE_BUY_PAGE',
+          NEW_MEMBER_FLOW: 'true',
+          IS_OPTIMAL_SOLUTION: 'true',
+          ATTR_SUPPORT_TIMESPAN_DELIVERY_FEE: '1',
+          IS_OVERLYING_COUPON: 'true',
+          IS_SELECT_PRESENT: '0',
+          NOT_SALE_SINGLE: '1',
+          SELECTED_PRESENTS: '[]',
+          BIZ_ORDER_ATTRIBUTE: '{"RISK_GOODS_TAX_INFOS":"0"}',
+          ATTR_SOURCE_PAGE: 'goods_detail',
+          USE_OPTIMAL_CALCULATE: '1'
+        },
+        behaviorOrderInfo: { bizType: 158, token: '' }
+      }
+    };
   }
   /**
    * 构建提交订单请求参数
