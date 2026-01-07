@@ -2,4 +2,4 @@
 脚本定点抢购
 
 # jenkins
-curl -u zhoukaidong:11c869d74b9836f1fde287dc5261a7a2f4 https://cloud.jiuwusan.cn:36443/jenkins-api/job/life/build?token=6dced82bc41c4737bec9848328186ef5
+curl -u zhoukaidong:11d3db647b16c4e8488f40bac6190f7304 https://cloud.jiuwusan.cn:36443/jenkins-api/job/senior-buyer/build?token=610f2dcb-87c2-4176-bc15-13bca77b0c4b
