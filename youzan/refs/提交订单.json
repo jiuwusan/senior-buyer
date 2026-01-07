@@ -1,0 +1,192 @@
+{
+  "version": 2,
+  "source": {
+    "bookKey": "70937ad1-03d0-481d-987d-170575cc24b9",
+    "clientIp": "116.237.45.183",
+    "fromThirdApp": false,
+    "isWeapp": false,
+    "itemSources": [
+      {
+        "activityId": 0,
+        "activityType": 1,
+        "bizTracePointExt": "{\"atr_uuid\":\"\",\"yzk_ex\":\"\",\"page_type\":\"\",\"tui_platform\":\"\",\"tui_click\":\"\",\"wecom_uuid\":\"\",\"from_source\":\"\",\"pv_id\":\"/v2/showcase/homepage~ce2462ee-fa92-4487-a00f-0cdcd6ec88c0\",\"banner_id\":\"cart.118622541~recService.1~1~j9NzLTY4\",\"st\":\"js\",\"sv\":\"1.1.49\",\"yai\":\"wsc_c\",\"uuid\":\"6a3b3b3f-3607-7659-bed3-08e4b81bb087\",\"userId\":\"\",\"platform\":\"web\",\"alg\":\"common_by_shop.store_ctr_30d_1000.0:20251225,common_by_shop.inner_hot.2:20251224,common_by_shop.inner_price_hot.0:20251224,common_by_shop.inner_7d_hot.0:20251224,common_by_shop.inner_1d_hot.0:20251224,cold_simple_rank,0.0.0.0.0.0.0.0.0_2b0e9eebd35d486c8a6927189f3850d7\",\"alias\":\"3ex44eto5dcbx6i\"}",
+        "cartCreateTime": 1766665775,
+        "cartUpdateTime": 1766665984,
+        "goodsId": 4372016492,
+        "propertyIds": [],
+        "skuId": 14925742705
+      }
+    ],
+    "kdtSessionId": "YZ1417824510206132224YZttlOyJY4",
+    "needAppRedirect": false,
+    "orderFrom": "cart",
+    "orderType": 0,
+    "platform": "weixin",
+    "salesman": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+    "bizPlatform": ""
+  },
+  "config": {
+    "containsUnavailableItems": false,
+    "paymentExpiry": 0,
+    "receiveMsg": true,
+    "usePoints": false,
+    "useWxpay": false,
+    "buyerMsg": "",
+    "disableStoredDiscount": false,
+    "storedDiscountRechargeGuide": true,
+    "yzGuaranteeInfo": {
+      "displayTag": { "IS_YZ_SECURED": "0", "FREIGHT_INSURANCE_FREE": "0", "IS_UPGRADE_FREIGHT_TAG": "0", "IS_FREIGHT_INSURANCE": "0" },
+      "freightInsurance": true,
+      "freightInsuranceContent": "商家赠送",
+      "freightInsuranceDesc": "商家为你购买的商品提供退货包运费服务，退换货成功后可补贴首重运费，实际赠送情况以订单详情页为准(仅限补贴普通快递运费，不含同城配送费)",
+      "mainSupportContent": [],
+      "securedItemSnapshotList": [],
+      "hideYzGuarantee": false,
+      "page": "order"
+    },
+    "isWholesaleOrder": false,
+    "valueCardsExtContext": "{\"IS_RELOAD\":false,\"CUSTOMER_SELECT_CARD_LIST\":false,\"SELECTED_RECHARGE_FREE_PRODUCT\":false,\"DIY_SELECT_CARDS\":\"0\"}"
+  },
+  "usePayAsset": {},
+  "items": [
+    {
+      "activityId": 0,
+      "activityType": 1,
+      "deliverTime": 0,
+      "extensions": {
+        "RELATION_BLESSING": "",
+        "RELATION_TYPE_NAME": "",
+        "OUTER_ITEM_ID": "10000",
+        "tpps": "",
+        "CART_ID": "2305843017215684336",
+        "BIRTHDAY_RELATION_NET_ORDER_MARK": "false",
+        "RELATION_TYPE_ID": ""
+      },
+      "goodsId": 4372016492,
+      "isSevenDayUnconditionalReturn": true,
+      "itemFissionTicketsNum": 0,
+      "itemMessage": "{}",
+      "kdtId": 118622541,
+      "num": 1,
+      "pointsPrice": 0,
+      "price": 99900,
+      "propertyIds": [],
+      "skuId": 14925742705,
+      "storeId": 0,
+      "umpSkuId": 0
+    }
+  ],
+  "seller": { "kdtId": 118622541, "storeId": 0 },
+  "ump": {
+    "activities": [
+      {
+        "activityAlias": "",
+        "activityId": 0,
+        "activityType": 1,
+        "externalPointId": 0,
+        "goodsId": 4372016492,
+        "kdtId": 118622541,
+        "pointsPrice": 0,
+        "propertyIds": [],
+        "skuId": 14925742705,
+        "usePoints": false
+      }
+    ],
+    "coupon": {},
+    "multiCoupon": { "coupons": [], "deliveryCoupons": [] },
+    "useCustomerCardInfo": { "specified": false },
+    "costPoints": { "kdtId": 118622541, "usePointDeduction": false, "costPoints": 0, "defaultPointDeductEffect": true }
+  },
+  "newCouponProcess": true,
+  "unavailableItems": [],
+  "asyncOrder": false,
+  "delivery": {
+    "hasFreightInsurance": true,
+    "address": {
+      "addressDetail": "昆明路739号文通大厦 1209室",
+      "areaCode": "310110",
+      "city": "上海市",
+      "community": "",
+      "country": "中国",
+      "countryType": 1,
+      "county": "杨浦区",
+      "id": 802436767,
+      "isDefault": 1,
+      "label": "公司",
+      "lat": "31.269380917634845",
+      "location": "文通大厦",
+      "lon": "121.52226118225269",
+      "poiId": "3576878784852167275",
+      "poiType": 1,
+      "postalCode": "",
+      "province": "上海市",
+      "source": 1,
+      "tel": "15330368781",
+      "type": 2,
+      "userId": 11803567576,
+      "userName": "九五三",
+      "recipients": "九五三",
+      "addressId": 802436767
+    },
+    "expressType": "express",
+    "expressTypeChoice": 0
+  },
+  "confirmTotalPrice": 99900,
+  "extensions": {
+    "CONFIRM_TRADE_RISK_DIALOG": "false",
+    "TRADE_PAGE_TYPE": "TRADE_BUY_PAGE",
+    "NEW_MEMBER_FLOW": "true",
+    "SELECTED_PRESENTS": "[]",
+    "IS_OPTIMAL_SOLUTION": "true",
+    "ATTR_SUPPORT_TIMESPAN_DELIVERY_FEE": "1",
+    "IS_SELECT_PRESENT": "0",
+    "IS_OVERLYING_COUPON": "true",
+    "NOT_SALE_SINGLE": "1",
+    "BIZ_ORDER_ATTRIBUTE": "{\"RISK_GOODS_TAX_INFOS\":\"0\"}",
+    "ATTR_SOURCE_PAGE": "",
+    "ATTR_DISPATCHER_WAREHOUSE_IDS": "{\"request\":{\"buyer\":{\"buyerLat\":\"31.269380917634845\",\"buyerLng\":\"121.52226118225269\"}},\"response\":{}}",
+    "GUIDE_GLOBAL_FROM_PARAMS": ""
+  },
+  "behaviorOrderInfo": { "bizType": 158, "token": "" }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------商品详情页 提交-------------------------------------
+
+fetch("https://cashier.youzan.com/pay/wsctrade/order/buy/v2/bill-fast.json?kdt_id=118622541", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "zh-CN,zh;q=0.9,zh-TW;q=0.8",
+    "content-type": "application/json",
+    "extra-data": "{\"sid\":\"\",\"version\":\"\",\"bizEnv\":\"\"}",
+    "page-path": "https://tuicashier.youzan.com/pay/wscgoods_order",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "cookie": "KDTSESSIONID=YZ1417824510206132224YZttlOyJY4; yz_log_ftime=1758077305580; yz_log_uuid=6a3b3b3f-3607-7659-bed3-08e4b81bb087; Hm_lvt_7bec91b798a11b6f175b22039b5e7bdd=1758077306; nobody_sign=YZ1417824510206132224YZttlOyJY4; captcha_sid=YZ1453847287538872320YZsLlyJSNM; Hm_lvt_679ede9eb28bacfc763976b10973577b=1766665823; HMACCOUNT=BF9AFFA7E3B94A26; _canwebp=1; _kdt_id_=118622541; yz_log_seqb=1766756260323; trace_sdk_context_pv_id=/v2/showcase/homepage~085945c9-cdce-430c-9eae-22fd427310d2; acw_tc=7c56a6553f664f3c144da2d208617644909fc3cb6626844134056478f78a6e5c; mark-map={\"p_i\":{\"st\":1766758293283},\"usercenter\":{\"st\":1766750622755}}; Hm_lpvt_679ede9eb28bacfc763976b10973577b=1766758295; yz_fp_hash=rWPVN17667587070U9k9w7nZeb; dfp=8935cf7aa89206943387588ff5ae4e8211f7e9eb; yz_log_seqn=416",
+    "Referer": "https://tuicashier.youzan.com/pay/wscgoods_order?alias=2oknqq9yxogu5tq"
+  },
+  "body": "{\"version\":2,\"source\":{\"bookKey\":\"c961ea17-56b5-4e33-b471-3db48a1e0593\",\"clientIp\":\"124.78.34.230\",\"fromThirdApp\":false,\"isWeapp\":false,\"itemSources\":[{\"activityId\":0,\"activityType\":0,\"bizTracePointExt\":\"{\\\"yai\\\":\\\"wsc_c\\\",\\\"st\\\":\\\"js\\\",\\\"sv\\\":\\\"1.1.49\\\",\\\"atr_uuid\\\":\\\"\\\",\\\"page_type\\\":\\\"\\\",\\\"yzk_ex\\\":\\\"\\\",\\\"tui_platform\\\":\\\"\\\",\\\"tui_click\\\":\\\"\\\",\\\"uuid\\\":\\\"6a3b3b3f-3607-7659-bed3-08e4b81bb087\\\",\\\"userId\\\":11803567576,\\\"platform\\\":\\\"web\\\",\\\"from_source\\\":\\\"\\\",\\\"pv_id\\\":\\\"/v2/showcase/homepage~085945c9-cdce-430c-9eae-22fd427310d2\\\",\\\"alias\\\":\\\"2oknqq9yxogu5tq\\\",\\\"wecom_uuid\\\":\\\"\\\"}\",\"cartCreateTime\":0,\"cartUpdateTime\":0,\"gdtId\":\"\",\"goodsId\":4082141737,\"pageSource\":\"\",\"skuId\":14864732375}],\"kdtSessionId\":\"YZ1417824510206132224YZttlOyJY4\",\"needAppRedirect\":false,\"orderType\":0,\"platform\":\"weixin\",\"salesman\":\"\",\"userAgent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1\",\"orderMark\":\"\",\"bizPlatform\":\"\"},\"config\":{\"bosWorkFlow\":false,\"containsUnavailableItems\":false,\"fissionActivity\":{\"fissionTicketNum\":0},\"isFromItemDetail\":true,\"paymentExpiry\":0,\"receiveMsg\":true,\"usePoints\":false,\"useWxpay\":false,\"buyerMsg\":\"\",\"disableStoredDiscount\":false,\"storedDiscountRechargeGuide\":true,\"isWholesaleOrder\":false,\"valueCardsExtContext\":\"{\\\"IS_RELOAD\\\":false,\\\"CUSTOMER_SELECT_CARD_LIST\\\":false,\\\"SELECTED_RECHARGE_FREE_PRODUCT\\\":false,\\\"DIY_SELECT_CARDS\\\":\\\"0\\\"}\"},\"usePayAsset\":{},\"items\":[{\"activityId\":0,\"activityType\":0,\"deliverTime\":0,\"extensions\":{\"OUTER_ITEM_ID\":\"10000\"},\"fCode\":\"\",\"goodsId\":4082141737,\"isSevenDayUnconditionalReturn\":true,\"itemFissionTicketsNum\":0,\"kdtId\":118622541,\"num\":1,\"pointsPrice\":0,\"price\":39900,\"skuId\":14864732375,\"storeId\":0,\"umpSkuId\":0}],\"seller\":{\"kdtId\":118622541,\"storeId\":0},\"ump\":{\"activities\":[{\"activityId\":0,\"activityType\":0,\"externalPointId\":0,\"goodsId\":4082141737,\"kdtId\":118622541,\"pointsPrice\":0,\"skuId\":14864732375,\"usePoints\":false}],\"coupon\":{},\"multiCoupon\":{\"coupons\":[],\"deliveryCoupons\":[]},\"useCustomerCardInfo\":{\"specified\":false},\"costPoints\":{\"kdtId\":118622541,\"usePointDeduction\":false,\"costPoints\":0,\"defaultPointDeductEffect\":true}},\"newCouponProcess\":true,\"unavailableItems\":[],\"asyncOrder\":false,\"delivery\":{\"hasFreightInsurance\":true,\"address\":{\"addressDetail\":\"昆明路739号文通大厦 1209室\",\"areaCode\":\"310110\",\"city\":\"上海市\",\"community\":\"\",\"country\":\"中国\",\"countryType\":1,\"county\":\"杨浦区\",\"id\":802436767,\"isDefault\":1,\"label\":\"公司\",\"lat\":\"31.269380917634845\",\"location\":\"文通大厦\",\"lon\":\"121.52226118225269\",\"poiId\":\"3576878784852167275\",\"poiType\":1,\"postalCode\":\"\",\"province\":\"上海市\",\"source\":1,\"tel\":\"15330368781\",\"type\":2,\"userId\":11803567576,\"userName\":\"九五三\",\"recipients\":\"九五三\",\"addressId\":802436767},\"expressType\":\"express\",\"expressTypeChoice\":0},\"cloudOrderExt\":{\"extension\":{}},\"bookKeyCloudExtension\":{\"umpExt\":\"\"},\"confirmTotalPrice\":39900,\"extensions\":{\"CONFIRM_TRADE_RISK_DIALOG\":\"false\",\"TRADE_PAGE_TYPE\":\"TRADE_BUY_PAGE\",\"NEW_MEMBER_FLOW\":\"true\",\"IS_OPTIMAL_SOLUTION\":\"true\",\"ATTR_SUPPORT_TIMESPAN_DELIVERY_FEE\":\"1\",\"IS_OVERLYING_COUPON\":\"true\",\"IS_SELECT_PRESENT\":\"0\",\"NOT_SALE_SINGLE\":\"1\",\"SELECTED_PRESENTS\":\"[]\",\"BIZ_ORDER_ATTRIBUTE\":\"{\\\"RISK_GOODS_TAX_INFOS\\\":\\\"0\\\"}\",\"ATTR_SOURCE_PAGE\":\"goods_detail\",\"USE_OPTIMAL_CALCULATE\":\"1\"},\"behaviorOrderInfo\":{\"bizType\":158,\"token\":\"\"}}",
+  "method": "POST"
+});
+
+{"version":2,"source":{"bookKey":"c961ea17-56b5-4e33-b471-3db48a1e0593","clientIp":"124.78.34.230","fromThirdApp":false,"isWeapp":false,"itemSources":[{"activityId":0,"activityType":0,"bizTracePointExt":"{\"yai\":\"wsc_c\",\"st\":\"js\",\"sv\":\"1.1.49\",\"atr_uuid\":\"\",\"page_type\":\"\",\"yzk_ex\":\"\",\"tui_platform\":\"\",\"tui_click\":\"\",\"uuid\":\"6a3b3b3f-3607-7659-bed3-08e4b81bb087\",\"userId\":11803567576,\"platform\":\"web\",\"from_source\":\"\",\"pv_id\":\"/v2/showcase/homepage~085945c9-cdce-430c-9eae-22fd427310d2\",\"alias\":\"2oknqq9yxogu5tq\",\"wecom_uuid\":\"\"}","cartCreateTime":0,"cartUpdateTime":0,"gdtId":"","goodsId":4082141737,"pageSource":"","skuId":14864732375}],"kdtSessionId":"YZ1417824510206132224YZttlOyJY4","needAppRedirect":false,"orderType":0,"platform":"weixin","salesman":"","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1","orderMark":"","bizPlatform":""},"config":{"bosWorkFlow":false,"containsUnavailableItems":false,"fissionActivity":{"fissionTicketNum":0},"isFromItemDetail":true,"paymentExpiry":0,"receiveMsg":true,"usePoints":false,"useWxpay":false,"buyerMsg":"","disableStoredDiscount":false,"storedDiscountRechargeGuide":true,"isWholesaleOrder":false,"valueCardsExtContext":"{\"IS_RELOAD\":false,\"CUSTOMER_SELECT_CARD_LIST\":false,\"SELECTED_RECHARGE_FREE_PRODUCT\":false,\"DIY_SELECT_CARDS\":\"0\"}"},"usePayAsset":{},"items":[{"activityId":0,"activityType":0,"deliverTime":0,"extensions":{"OUTER_ITEM_ID":"10000"},"fCode":"","goodsId":4082141737,"isSevenDayUnconditionalReturn":true,"itemFissionTicketsNum":0,"kdtId":118622541,"num":1,"pointsPrice":0,"price":39900,"skuId":14864732375,"storeId":0,"umpSkuId":0}],"seller":{"kdtId":118622541,"storeId":0},"ump":{"activities":[{"activityId":0,"activityType":0,"externalPointId":0,"goodsId":4082141737,"kdtId":118622541,"pointsPrice":0,"skuId":14864732375,"usePoints":false}],"coupon":{},"multiCoupon":{"coupons":[],"deliveryCoupons":[]},"useCustomerCardInfo":{"specified":false},"costPoints":{"kdtId":118622541,"usePointDeduction":false,"costPoints":0,"defaultPointDeductEffect":true}},"newCouponProcess":true,"unavailableItems":[],"asyncOrder":false,"delivery":{"hasFreightInsurance":true,"address":{"addressDetail":"昆明路739号文通大厦 1209室","areaCode":"310110","city":"上海市","community":"","country":"中国","countryType":1,"county":"杨浦区","id":802436767,"isDefault":1,"label":"公司","lat":"31.269380917634845","location":"文通大厦","lon":"121.52226118225269","poiId":"3576878784852167275","poiType":1,"postalCode":"","province":"上海市","source":1,"tel":"15330368781","type":2,"userId":11803567576,"userName":"九五三","recipients":"九五三","addressId":802436767},"expressType":"express","expressTypeChoice":0},"cloudOrderExt":{"extension":{}},"bookKeyCloudExtension":{"umpExt":""},"confirmTotalPrice":39900,"extensions":{"CONFIRM_TRADE_RISK_DIALOG":"false","TRADE_PAGE_TYPE":"TRADE_BUY_PAGE","NEW_MEMBER_FLOW":"true","IS_OPTIMAL_SOLUTION":"true","ATTR_SUPPORT_TIMESPAN_DELIVERY_FEE":"1","IS_OVERLYING_COUPON":"true","IS_SELECT_PRESENT":"0","NOT_SALE_SINGLE":"1","SELECTED_PRESENTS":"[]","BIZ_ORDER_ATTRIBUTE":"{\"RISK_GOODS_TAX_INFOS\":\"0\"}","ATTR_SOURCE_PAGE":"goods_detail","USE_OPTIMAL_CALCULATE":"1"},"behaviorOrderInfo":{"bizType":158,"token":""}}

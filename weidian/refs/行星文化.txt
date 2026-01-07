@@ -1,0 +1,8 @@
+param
+{"channel":"bjh5","source_id":"6df14f35dae7e6e49e1a944cd2ad4adf","q_pv_id":"08680000019af7b6dfdd0a20e466454d","biz_type":1,"buyer":{"buyer_id":"1974187814","eat_in_table_name":"","address_id":502458475,"agreement_type_list":[5]},"shop_list":[{"shop_id":"1711911458","f_shop_id":"","sup_id":"","item_list":[{"item_id":"7536741112","quantity":1,"item_sku_id":"0","ori_price":"45.00","price":"45.00","extend":{},"price_type":1,"discount_list":[],"item_convey_info":{}}],"order_type":3,"ori_price":"45.00","price":"45.00","express_fee":"0.00","express_type":4,"discount_list":[],"invalid_item_list":[]}],"deliver_type":0,"is_no_ship_addr":0,"total_pay_price":"45.00","total_vjifen":"","wfr":"wxBuyerShare","appid":"","discount_list":[],"invalid_shop_list":[],"pay_type":0}
+context
+{"shopping_center":"1711911458","pageChannel":"shop_menu_cart","subChannel":"browser","thirdSubchannel":"safari"}
+udc
+H4sIAAAAAAAAA%2BVUiZXdIAxsSaC7HMxRRYrPCP99ye5LB4FnjBEajQ6LPCZhLCHqBxuhO9zpx5hGoy5Qa3FfqUlDYs3nyhtNtggOXqc9ulzanttPs7GH7pOxf0IWyOb4rMzTqQXQO1G4LDs%2BLG1itn5Y%2B2aIelgqWdixbcpPJ2El1U5%2Fn%2BP0KHfixqGlS0BJe65kWTP%2BuqHRE%2Fvm5HVH1U2ty2PpAqvGdC23egqnhzwSKrJk9vkNtzQZ%2B1OIaqbenSEFIyCBCTBe%2B8f69UzvuYpiFchJGdzMmkP%2BsS5lmeB6R6D7IsrKzVASEbt2Epa8rFVAgZ7G0D%2BwfczgBYmamBfHf2tVxMUqu2xYAhO5ha%2BtS9duvfiDCbuQdmUNfWyHRMaIlS05LSNnrtx5Bo02eOjwMR9%2FYsbMie2cc622bPmKNdbcbftOcgFP1%2FL4sgmB%2F8ihK99cOqUEIju9IirlnTVSZKgh4%2FgGwtaK81J2tU32fl2t%2FPr6yLQ0bAGJqfxP28xcMchvsb%2BVQw9yejD95ooEt1E5qOr%2FvBpDduUCeLgBpko%2F%2FlfEs7h%2FRVf%2FsKHgDhz87lzxIH47TVL7dIRxHMVlA5X37aTNLFDU1ejj1ug7R0cH6dAXoXYMbcxRuAbg%2FXkODBG6zwS1zDAJtzjPAApUuK183r6HSu2%2F6FbDO369xp0i6TcDMJanKwUAAA%3D%3D
+wdtoken
+1f9f4737

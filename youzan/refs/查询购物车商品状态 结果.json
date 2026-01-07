@@ -1,0 +1,14 @@
+{
+  "code": 0,
+  "msg": "ok",
+  "data": {
+    "certStatus": 4,
+    "currentTime": 1766667844392,
+    "kdtId": 118622541,
+    "lifecycleStatus": "valid",
+    "validBeginTime": 1731324478000,
+    "isWsc": false,
+    "supportShopVisibleDialog": true,
+    "certDialogEffectiveTime": 1640966400000
+  }
+}

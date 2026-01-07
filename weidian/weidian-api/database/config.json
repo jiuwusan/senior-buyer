@@ -1,0 +1,71 @@
+[
+  {
+    "targetTime": "2025/12/12 16:03:00",
+    "advanceTimestamps": 1000,
+    "advancePostInterval": 200,
+    "postDuration": 1000,
+    "postInterval": 50,
+    "buyers": [
+      {
+        "disabled": false,
+        "buyer_name": "九五三_15330368781",
+        "buyer_id": "1960486402",
+        "address_id": "495767721",
+        "source_id": "6df14f35dae7e6e49e1a944cd2ad4adf",
+        "shop_name": "行星文化 PlanetCulture",
+        "shopid": "1711911458",
+        "wdtoken": "15c198ec",
+        "cookie": "wdtoken=15c198ec; __spider__sessionid=ac2a885e4bf41263; __spider__visitorid=db8faccf6e7b1c81; v-components/clean-up-advert@private_domain=1711911458; v-components/clean-up-advert@wx_app=1711911458; visitor_id=f1c570c8-1fe7-4f49-99f8-05e16053c0f5; login_token=_EwWqqVIQWa6p_voan4UqujoG3X9RIW5kwCfJM1VD8iT2cUvhN9Vz9dXKW1DdNz3LyV-vc5BHziqa2wqjPv3xNCQaIZo6vVw_P5bVBf0ehT8oJwzfrTyK1Ibe3pPY7lzb80-u_YJU7d5P5FtP6y4hpN3Ne6ZiWUiu8JPmTqIau1y8ppgXFIpMdaH4SdYXCG5aIIKtNFanP5WE1KZuNKx25W3rE2yAowSEzP1ddr9-mCdZG8etpkjEWr-4fkC2lz28adGbGDfd; is_login=true; login_type=LOGIN_USER_TYPE_MASTER; login_source=LOGIN_USER_SOURCE_MASTER; uid=1960486402; duid=1960486402; sid=1807352637; smart_login_type=0",
+        "udc": ""
+      },
+      {
+        "disabled": false,
+        "buyer_name": "九五三_13193253846",
+        "buyer_id": "1974187814",
+        "address_id": "502458475",
+        "source_id": "6df14f35dae7e6e49e1a944cd2ad4adf",
+        "shop_name": "行星文化 PlanetCulture",
+        "shopid": "1711911458",
+        "wdtoken": "270cde4d",
+        "cookie": "wdtoken=270cde4d; __spider__sessionid=ac2a885e4bf41263; __spider__visitorid=db8faccf6e7b1c81; v-components/clean-up-advert@private_domain=1711911458; v-components/clean-up-advert@wx_app=1711911458; visitor_id=f7639df4-6ebb-4f9b-95c4-27e54c90474d; login_token=_EwWqqVIQGUArmw3VDQ4gKDfT8spkir79M6vWDFJQRqfXyMJWZa78N-3jJICdcjrHlDIeczTXJx_6boi560VU61e6j_BxKAkQtfqx1OPC-RfEPsP1B6csyHqVYjYLVd25jg0vxl7yVZsQt71y0nF77jRM8J273riHY7BovrJObrEopQ98NgEfea_BoklwZEwIDQci2tz8fTcyCGn3JX4q3cpErGG794TmLBftTptr7iOa8cLOwt-YbjosZrxKzfdyHxlPIW6l; is_login=true; login_type=LOGIN_USER_TYPE_MASTER; login_source=LOGIN_USER_SOURCE_MASTER; uid=1974187814; duid=1974187814; sid=1635402371; smart_login_type=0",
+        "udc": ""
+      },
+      {
+        "disabled": false,
+        "buyer_name": "胡章容_19145658798",
+        "buyer_id": "1970106867",
+        "address_id": "501300486",
+        "source_id": "6df14f35dae7e6e49e1a944cd2ad4adf",
+        "shop_name": "行星文化 PlanetCulture",
+        "shopid": "1711911458",
+        "wdtoken": "9f5e2cbc",
+        "cookie": "wdtoken=9f5e2cbc; __spider__sessionid=ac2a885e4bf41263; __spider__visitorid=db8faccf6e7b1c81; v-components/clean-up-advert@private_domain=1711911458; v-components/clean-up-advert@wx_app=1711911458; visitor_id=878af571-2087-439c-b141-65f96929604f; login_token=_EwWqqVIQEMO-qGZX7qr_1_ZlqX4KxUZ9F-8QZ51Byw2EEm1wWM9gLEvoHw22-UUkxC4LOAzrHCEjgBmBNAS0cGetnftU7kKvPXqwi41Ym5cZaoTa5Rw1VdFCGVp_LrRCYHnLtRWp-suCT_ig2_TVJCvMvRV_aQyABVkRYF1X1hrw_C5w571bELJ5v02rWcgxT_7nBFjHCLhSPS-PaqeqiOHGhLldLn-qUTJ0LJDSUal3gB1H4iJWAKaI9a2yBz5On7Ybqlyx; is_login=true; login_type=LOGIN_USER_TYPE_MASTER; login_source=LOGIN_USER_SOURCE_MASTER; uid=1970106867; duid=1970106867; sid=1809303549; smart_login_type=0",
+        "udc": ""
+      },
+      {
+        "disabled": false,
+        "buyer_name": "胡蜂_15827569745",
+        "buyer_id": "1968836770",
+        "address_id": "501196186",
+        "source_id": "6df14f35dae7e6e49e1a944cd2ad4adf",
+        "shop_name": "行星文化 PlanetCulture",
+        "shopid": "1711911458",
+        "wdtoken": "e4a3818a",
+        "cookie": "wdtoken=e4a3818a; __spider__sessionid=ac2a885e4bf41263; __spider__visitorid=db8faccf6e7b1c81; v-components/clean-up-advert@private_domain=1711911458; v-components/clean-up-advert@wx_app=1711911458; visitor_id=c02b7988-66cd-45d3-bb29-20b8fc91632a; login_token=_EwWqqVIQFMGSpK5YQ1J7tNuCXUyxN0uxnCBNNr-WsmoOx4g1IsLim9gfOX1oU9o55XhBe3M1poBSvfJQLCSzRaHrOpKmOGca78pz2ZuoZAPJHxIFOsXlYa298Rdl3drE5-AE2WEyVY-IyDEN97mkkVUN9n8xVpeJRxa39l3BFfncvmB4GHhap2un_pGENa4iKNYzy-KGH59STwFvtQsgcr9wfvYT5FT92F-vld74rAPaI9xBiNdVTrAh9zZW0SJhsRGlXI2B; is_login=true; login_type=LOGIN_USER_TYPE_MASTER; login_source=LOGIN_USER_SOURCE_MASTER; uid=1968836770; duid=1968836770; sid=1864417021; smart_login_type=0",
+        "udc": ""
+      },
+      {
+        "disabled": false,
+        "buyer_name": "大露露_18732833182",
+        "buyer_id": "1872712550",
+        "address_id": "488430513",
+        "source_id": "6df14f35dae7e6e49e1a944cd2ad4adf",
+        "shop_name": "行星文化 PlanetCulture",
+        "shopid": "1711911458",
+        "wdtoken": "424a4f93",
+        "cookie": "wdtoken=424a4f93; __spider__sessionid=9daec495a8c74d46; __spider__visitorid=1217dbf59690f7bb; v-components/clean-up-advert@private_domain=1711911458; v-components/clean-up-advert@wx_app=1711911458; visitor_id=0c48a884-ced4-4e3b-83c5-c99a44378caf; login_token=_EwWqqVIQNbJaCNlqmdnOUzP0mWi8jmNHSqhh3DKZ-4q3WjHUKEJmoxihtr2dkFIjPtpiEsqZbHBJwNcP_kFrg1_epR2Oexp7ubHcVfE1Rs49XI4NhVLERFmgpLayuV2nTF95YBqx7qAqogdfgiz4FGWx8929gnWQ7-JNeBd6Et-sm7RHzqYNb29YeYOOE3mLfPkJx_aIOwWr5SQ8x3HcY76KSm6xCJRFEtaflilKx7ueIuMcC2WxCdygfI2PcmD-PX2pqQtc; is_login=true; login_type=LOGIN_USER_TYPE_MASTER; login_source=LOGIN_USER_SOURCE_MASTER; uid=1872712550; duid=1872712550; sid=1819136901; smart_login_type=0",
+        "udc": ""
+      }
+    ]
+  }
+]

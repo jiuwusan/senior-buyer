@@ -1,0 +1,658 @@
+{
+    "code": 0,
+    "msg": "success",
+    "data": [
+        {
+            "activities": [],
+            "goods_group_list": [
+                {
+                    "goods_list": [
+                        {
+                            "activity_alias": "",
+                            "activity_id": 0,
+                            "activity_type": "1",
+                            "alias": "2oknqq9yxogu5tq",
+                            "attachment_url": "https://img.yzcdn.cn/upload_files/2025/05/16/FsS62h6YX7EKBrH6639pQ9YAbHAV.png",
+                            "birthday_relation": {
+                                "birthday_relation_net_order_mark": "false",
+                                "relation_blessing": "",
+                                "relation_type_id": "",
+                                "relation_type_name": ""
+                            },
+                            "biz_extension": {
+                                "cart_biz_mark": {
+                                    "_i_s__p_r_e_s_c_r_i_p_t_i_o_n__d_r_u_g": "0",
+                                    "_b_i_r_t_h_d_a_y__r_e_l_a_t_i_o_n__n_e_t__o_r_d_e_r__m_a_r_k": "false"
+                                }
+                            },
+                            "cart_id": "2305843017215783171",
+                            "channel_id": 0,
+                            "created_time": 1766667584,
+                            "disable_select": false,
+                            "extra_attribute": "{\"bizData\":\"{\\\"atr_uuid\\\":\\\"\\\",\\\"yzk_ex\\\":\\\"\\\",\\\"page_type\\\":\\\"\\\",\\\"tui_platform\\\":\\\"\\\",\\\"tui_click\\\":\\\"\\\",\\\"wecom_uuid\\\":\\\"\\\",\\\"from_source\\\":\\\"\\\",\\\"pv_id\\\":\\\"/wscshop/showcase/homepage~900f97b6-e5df-456b-a5fb-71c5cb77be24\\\",\\\"slg\\\":\\\"tagGoodList-default,OpSortBottom,11803567576,abTraceId\\\",\\\"banner_id\\\":\\\"f.107920094~tag_list_top.6~1.24~coA2Htin\\\",\\\"st\\\":\\\"js\\\",\\\"sv\\\":\\\"1.1.49\\\",\\\"yai\\\":\\\"wsc_c\\\",\\\"uuid\\\":\\\"6a3b3b3f-3607-7659-bed3-08e4b81bb087\\\",\\\"userId\\\":11803567576,\\\"platform\\\":\\\"web\\\",\\\"components_style_layout\\\":\\\"undefined\\\",\\\"reft\\\":\\\"1766667565823\\\",\\\"spm\\\":\\\"g.4679698546_f.107920094\\\",\\\"alias\\\":\\\"2oknqq9yxogu5tq\\\"}\",\"addPricePromotion\":\"{\\\"price\\\":39900}\",\"externalPlatformCoupon\":\"null\"}",
+                            "goods_id": 4082141737,
+                            "goods_type": 0,
+                            "group_id_list": [
+                                286431062,
+                                315275958
+                            ],
+                            "has_multi_sku": false,
+                            "is_installment": false,
+                            "is_seven_day_unconditional_return": true,
+                            "is_show_stock_num": false,
+                            "is_show_stock_short": false,
+                            "kdt_id": 118622541,
+                            "limit_num": 0,
+                            "logistics_type_list": [
+                                "NORMAL_EXPRESS"
+                            ],
+                            "num": 1,
+                            "origin_price": 39900,
+                            "pay_price": 39900,
+                            "revive": false,
+                            "select_state": 1,
+                            "settlement_rule": {
+                                "cross_store": true,
+                                "settlement_mark": "COMMON"
+                            },
+                            "sku": "[]",
+                            "sku_id": 14864732375,
+                            "start_sale_num": 1,
+                            "start_sold_time": 0,
+                            "stock_num": 205,
+                            "store_id": 0,
+                            "strickthrough_price": "",
+                            "title": "【2025新品】李宁乒乓球系列王楚钦款桶包ABSV257-1",
+                            "updated_time": 1766667584,
+                            "weight": 50,
+                            "yz_guarantee": false,
+                            "hide_guarantee": false
+                        }
+                    ],
+                    "latest_add_cart_time": 1766667584
+                },
+                {
+                    "goods_list": [
+                        {
+                            "activity_alias": "",
+                            "activity_id": 0,
+                            "activity_type": "1",
+                            "alias": "35x6yvxsl11rxuu",
+                            "attachment_url": "https://img.yzcdn.cn/upload_files/2025/06/26/Fq4sR2CA_wXA_KxVYFedeDWaAKqO.jpg",
+                            "birthday_relation": {
+                                "birthday_relation_net_order_mark": "false",
+                                "relation_blessing": "",
+                                "relation_type_id": "",
+                                "relation_type_name": ""
+                            },
+                            "biz_extension": {
+                                "cart_biz_mark": {
+                                    "_i_s__p_r_e_s_c_r_i_p_t_i_o_n__d_r_u_g": "0",
+                                    "_b_i_r_t_h_d_a_y__r_e_l_a_t_i_o_n__n_e_t__o_r_d_e_r__m_a_r_k": "false"
+                                }
+                            },
+                            "cart_id": "2305843015179403636",
+                            "channel_id": 0,
+                            "created_time": 1766667546,
+                            "disable_select": false,
+                            "extra_attribute": "{\"bizData\":\"{\\\"atr_uuid\\\":\\\"\\\",\\\"yzk_ex\\\":\\\"\\\",\\\"page_type\\\":\\\"\\\",\\\"tui_platform\\\":\\\"\\\",\\\"tui_click\\\":\\\"\\\",\\\"wecom_uuid\\\":\\\"\\\",\\\"from_source\\\":\\\"\\\",\\\"pv_id\\\":\\\"/wscshop/showcase/homepage~9e61029c-74de-4799-81fe-19a4f76059bd\\\",\\\"banner_id\\\":\\\"g.4082144634~addcart_discounts.1~2~m1tycvoM\\\",\\\"st\\\":\\\"js\\\",\\\"sv\\\":\\\"1.1.49\\\",\\\"yai\\\":\\\"wsc_c\\\",\\\"uuid\\\":\\\"6a3b3b3f-3607-7659-bed3-08e4b81bb087\\\",\\\"userId\\\":11803567576,\\\"platform\\\":\\\"web\\\",\\\"alg\\\":\\\"0.0.0.0.0_80b4a35b9b6347f5b121cd112a457c95\\\",\\\"alias\\\":\\\"35x6yvxsl11rxuu\\\"}\",\"addPricePromotion\":\"{\\\"price\\\":44900}\",\"externalPlatformCoupon\":\"null\"}",
+                            "goods_id": 4679698546,
+                            "goods_type": 0,
+                            "group_id_list": [
+                                259878911,
+                                286431062
+                            ],
+                            "has_multi_sku": true,
+                            "is_installment": false,
+                            "is_seven_day_unconditional_return": true,
+                            "is_show_stock_num": false,
+                            "is_show_stock_short": true,
+                            "kdt_id": 118622541,
+                            "limit_num": 1,
+                            "logistics_type_list": [
+                                "NORMAL_EXPRESS"
+                            ],
+                            "num": 1,
+                            "origin_price": 44900,
+                            "pay_price": 44900,
+                            "quota_cycle": 1,
+                            "revive": false,
+                            "select_state": 1,
+                            "settlement_rule": {
+                                "cross_store": true,
+                                "settlement_mark": "COMMON"
+                            },
+                            "sku": "[{\"k\":\"尺寸\",\"k_id\":2,\"k_s\":\"s1\",\"v\":\"3XL\",\"v_id\":1252}]",
+                            "sku_id": 25903594390,
+                            "start_sale_num": 1,
+                            "start_sold_time": 0,
+                            "stock_num": 28,
+                            "store_id": 0,
+                            "strickthrough_price": "",
+                            "title": "【2025新品】李宁乒乓球系列王楚钦同款超轻风衣防晒服AFDVG77-1",
+                            "updated_time": 1766667546,
+                            "weight": 50,
+                            "yz_guarantee": false,
+                            "hide_guarantee": false
+                        }
+                    ],
+                    "latest_add_cart_time": 1766667546
+                },
+                {
+                    "goods_list": [
+                        {
+                            "activity_alias": "",
+                            "activity_id": 0,
+                            "activity_type": "1",
+                            "alias": "3nm1gkdyl1g197a",
+                            "attachment_url": "https://img.yzcdn.cn/upload_files/2025/05/16/FkaqcZTX1jE74xsUL8Np5RSpsrp4.png",
+                            "birthday_relation": {
+                                "birthday_relation_net_order_mark": "false",
+                                "relation_blessing": "",
+                                "relation_type_id": "",
+                                "relation_type_name": ""
+                            },
+                            "biz_extension": {
+                                "cart_biz_mark": {
+                                    "_i_s__p_r_e_s_c_r_i_p_t_i_o_n__d_r_u_g": "0",
+                                    "_b_i_r_t_h_d_a_y__r_e_l_a_t_i_o_n__n_e_t__o_r_d_e_r__m_a_r_k": "false"
+                                }
+                            },
+                            "cart_id": "2305843015179405475",
+                            "channel_id": 0,
+                            "created_time": 1766667537,
+                            "disable_select": false,
+                            "extra_attribute": "{\"bizData\":\"{\\\"atr_uuid\\\":\\\"\\\",\\\"yzk_ex\\\":\\\"\\\",\\\"page_type\\\":\\\"\\\",\\\"tui_platform\\\":\\\"\\\",\\\"tui_click\\\":\\\"\\\",\\\"wecom_uuid\\\":\\\"\\\",\\\"from_source\\\":\\\"\\\",\\\"pv_id\\\":\\\"/wscshop/showcase/homepage~9e61029c-74de-4799-81fe-19a4f76059bd\\\",\\\"slg\\\":\\\"tagGoodList-default,OpSortBottom,11803567576,abTraceId\\\",\\\"banner_id\\\":\\\"f.107920094~tag_list_top.6~1.20~0adnFUmV\\\",\\\"st\\\":\\\"js\\\",\\\"sv\\\":\\\"1.1.49\\\",\\\"yai\\\":\\\"wsc_c\\\",\\\"uuid\\\":\\\"6a3b3b3f-3607-7659-bed3-08e4b81bb087\\\",\\\"userId\\\":11803567576,\\\"platform\\\":\\\"web\\\",\\\"components_style_layout\\\":\\\"undefined\\\",\\\"reft\\\":\\\"1766667519575\\\",\\\"spm\\\":\\\"f.107920094\\\",\\\"alias\\\":\\\"3nm1gkdyl1g197a\\\"}\",\"addPricePromotion\":\"{\\\"price\\\":79900}\",\"externalPlatformCoupon\":\"null\"}",
+                            "goods_id": 4082144634,
+                            "goods_type": 0,
+                            "group_id_list": [
+                                259878911,
+                                286431062
+                            ],
+                            "has_multi_sku": false,
+                            "is_installment": false,
+                            "is_seven_day_unconditional_return": true,
+                            "is_show_stock_num": false,
+                            "is_show_stock_short": false,
+                            "kdt_id": 118622541,
+                            "limit_num": 0,
+                            "logistics_type_list": [
+                                "NORMAL_EXPRESS"
+                            ],
+                            "num": 1,
+                            "origin_price": 79900,
+                            "pay_price": 79900,
+                            "revive": false,
+                            "select_state": 1,
+                            "settlement_rule": {
+                                "cross_store": true,
+                                "settlement_mark": "COMMON"
+                            },
+                            "sku": "[]",
+                            "sku_id": 14864736318,
+                            "start_sale_num": 1,
+                            "start_sold_time": 0,
+                            "stock_num": 722,
+                            "store_id": 0,
+                            "strickthrough_price": "",
+                            "title": "【多哈限定】李宁乒乓球系列王楚钦款多哈世乒赛礼盒AQCV001-1",
+                            "updated_time": 1766667537,
+                            "weight": 2000,
+                            "yz_guarantee": false,
+                            "hide_guarantee": false
+                        }
+                    ],
+                    "latest_add_cart_time": 1766667537
+                },
+                {
+                    "goods_list": [
+                        {
+                            "activity_id": 0,
+                            "activity_type": "1",
+                            "alias": "1y3a5xkkprswdgo",
+                            "attachment_url": "https://img.yzcdn.cn/upload_files/2024/04/15/FtJUFnYlNS8YknGHIXDfbU9i8qwf.png",
+                            "birthday_relation": {},
+                            "biz_extension": {
+                                "cart_biz_mark": {
+                                    "_i_s__p_r_e_s_c_r_i_p_t_i_o_n__d_r_u_g": "0"
+                                }
+                            },
+                            "cart_id": "2305843017194177098",
+                            "channel_id": 0,
+                            "created_time": 1766072486,
+                            "disable_select": false,
+                            "extra_attribute": "{\"deliverTime\":0,\"addPricePromotion\":\"{\\\"price\\\":2900}\",\"externalPlatformCoupon\":\"null\"}",
+                            "goods_id": 3047331906,
+                            "goods_type": 0,
+                            "group_id_list": [
+                                286431062,
+                                315275958
+                            ],
+                            "has_multi_sku": false,
+                            "is_installment": false,
+                            "is_seven_day_unconditional_return": true,
+                            "is_show_stock_num": false,
+                            "is_show_stock_short": false,
+                            "kdt_id": 118622541,
+                            "limit_num": 0,
+                            "logistics_type_list": [
+                                "NORMAL_EXPRESS"
+                            ],
+                            "num": 1,
+                            "origin_price": 2900,
+                            "pay_price": 2900,
+                            "revive": false,
+                            "select_state": 0,
+                            "settlement_rule": {
+                                "cross_store": true,
+                                "settlement_mark": "COMMON"
+                            },
+                            "sku": "[]",
+                            "sku_id": 14737908083,
+                            "start_sale_num": 1,
+                            "start_sold_time": 0,
+                            "stock_num": 1118,
+                            "store_id": 0,
+                            "strickthrough_price": "",
+                            "title": "【“钦”尽全力】乓乓球系列运动发带 AQAU043-1",
+                            "updated_time": 1766666248,
+                            "weight": 43,
+                            "yz_guarantee": false,
+                            "hide_guarantee": false
+                        }
+                    ],
+                    "latest_add_cart_time": 1766072486
+                }
+            ],
+            "items": [
+                {
+                    "activity_alias": "",
+                    "activity_id": 0,
+                    "activity_type": "1",
+                    "alias": "2oknqq9yxogu5tq",
+                    "attachment_url": "https://img.yzcdn.cn/upload_files/2025/05/16/FsS62h6YX7EKBrH6639pQ9YAbHAV.png",
+                    "biz_extension": {
+                        "cart_biz_mark": {
+                            "_i_s__p_r_e_s_c_r_i_p_t_i_o_n__d_r_u_g": "0",
+                            "_b_i_r_t_h_d_a_y__r_e_l_a_t_i_o_n__n_e_t__o_r_d_e_r__m_a_r_k": "false"
+                        }
+                    },
+                    "biz_mark": "{\"code\":\"000000000000\"}",
+                    "cart_id": "2305843017215783171",
+                    "channel_id": 0,
+                    "created_time": 1766667584,
+                    "dcps": "",
+                    "disable_select": false,
+                    "ext": "{\"alias\":\"2oknqq9yxogu5tq\",\"activity_alias\":\"\"}",
+                    "extra_attribute": "{\"bizData\":\"{\\\"atr_uuid\\\":\\\"\\\",\\\"yzk_ex\\\":\\\"\\\",\\\"page_type\\\":\\\"\\\",\\\"tui_platform\\\":\\\"\\\",\\\"tui_click\\\":\\\"\\\",\\\"wecom_uuid\\\":\\\"\\\",\\\"from_source\\\":\\\"\\\",\\\"pv_id\\\":\\\"/wscshop/showcase/homepage~900f97b6-e5df-456b-a5fb-71c5cb77be24\\\",\\\"slg\\\":\\\"tagGoodList-default,OpSortBottom,11803567576,abTraceId\\\",\\\"banner_id\\\":\\\"f.107920094~tag_list_top.6~1.24~coA2Htin\\\",\\\"st\\\":\\\"js\\\",\\\"sv\\\":\\\"1.1.49\\\",\\\"yai\\\":\\\"wsc_c\\\",\\\"uuid\\\":\\\"6a3b3b3f-3607-7659-bed3-08e4b81bb087\\\",\\\"userId\\\":11803567576,\\\"platform\\\":\\\"web\\\",\\\"components_style_layout\\\":\\\"undefined\\\",\\\"reft\\\":\\\"1766667565823\\\",\\\"spm\\\":\\\"g.4679698546_f.107920094\\\",\\\"alias\\\":\\\"2oknqq9yxogu5tq\\\"}\",\"addPricePromotion\":\"{\\\"price\\\":39900}\",\"externalPlatformCoupon\":\"null\"}",
+                    "goods_id": 4082141737,
+                    "goods_type": 0,
+                    "group_id_list": [
+                        286431062,
+                        315275958
+                    ],
+                    "has_multi_sku": false,
+                    "is_installment": false,
+                    "is_seven_day_unconditional_return": true,
+                    "kdt_id": 118622541,
+                    "limit_num": 0,
+                    "logistics_type_list": [
+                        "NORMAL_EXPRESS"
+                    ],
+                    "nobody": "YZ1417824510206132224YZttlOyJY4",
+                    "num": 1,
+                    "origin_price": 39900,
+                    "pay_price": 39900,
+                    "plan_stock_num": 0,
+                    "platform": "wsc",
+                    "platform_scene_id": "",
+                    "revive": false,
+                    "select_state": 1,
+                    "settlement_rule": {
+                        "cross_store": true,
+                        "settlement_mark": "COMMON"
+                    },
+                    "sku": "[]",
+                    "sku_id": 14864732375,
+                    "spot_stock_num": 205,
+                    "spot_stock_oversold": false,
+                    "start_sale_num": 1,
+                    "start_sold_time": 0,
+                    "stock_num": 205,
+                    "store_id": 0,
+                    "strickthrough_price": "",
+                    "thumb_url": "https://img.yzcdn.cn/upload_files/2025/05/16/FsS62h6YX7EKBrH6639pQ9YAbHAV.png?imageView2/2/w/100/h/100/q/100",
+                    "title": "【2025新品】李宁乒乓球系列王楚钦款桶包ABSV257-1",
+                    "updated_time": 1766667584,
+                    "weight": 50,
+                    "yz_guarantee": false
+                },
+                {
+                    "activity_alias": "",
+                    "activity_id": 0,
+                    "activity_type": "1",
+                    "alias": "35x6yvxsl11rxuu",
+                    "attachment_url": "https://img.yzcdn.cn/upload_files/2025/06/26/Fq4sR2CA_wXA_KxVYFedeDWaAKqO.jpg",
+                    "biz_extension": {
+                        "cart_biz_mark": {
+                            "_i_s__p_r_e_s_c_r_i_p_t_i_o_n__d_r_u_g": "0",
+                            "_b_i_r_t_h_d_a_y__r_e_l_a_t_i_o_n__n_e_t__o_r_d_e_r__m_a_r_k": "false"
+                        }
+                    },
+                    "biz_mark": "{\"code\":\"000000000000\"}",
+                    "cart_id": "2305843015179403636",
+                    "channel_id": 0,
+                    "created_time": 1766667546,
+                    "dcps": "",
+                    "disable_select": false,
+                    "ext": "{\"alias\":\"35x6yvxsl11rxuu\",\"activity_alias\":\"\"}",
+                    "extra_attribute": "{\"bizData\":\"{\\\"atr_uuid\\\":\\\"\\\",\\\"yzk_ex\\\":\\\"\\\",\\\"page_type\\\":\\\"\\\",\\\"tui_platform\\\":\\\"\\\",\\\"tui_click\\\":\\\"\\\",\\\"wecom_uuid\\\":\\\"\\\",\\\"from_source\\\":\\\"\\\",\\\"pv_id\\\":\\\"/wscshop/showcase/homepage~9e61029c-74de-4799-81fe-19a4f76059bd\\\",\\\"banner_id\\\":\\\"g.4082144634~addcart_discounts.1~2~m1tycvoM\\\",\\\"st\\\":\\\"js\\\",\\\"sv\\\":\\\"1.1.49\\\",\\\"yai\\\":\\\"wsc_c\\\",\\\"uuid\\\":\\\"6a3b3b3f-3607-7659-bed3-08e4b81bb087\\\",\\\"userId\\\":11803567576,\\\"platform\\\":\\\"web\\\",\\\"alg\\\":\\\"0.0.0.0.0_80b4a35b9b6347f5b121cd112a457c95\\\",\\\"alias\\\":\\\"35x6yvxsl11rxuu\\\"}\",\"addPricePromotion\":\"{\\\"price\\\":44900}\",\"externalPlatformCoupon\":\"null\"}",
+                    "goods_id": 4679698546,
+                    "goods_type": 0,
+                    "group_id_list": [
+                        259878911,
+                        286431062
+                    ],
+                    "has_multi_sku": true,
+                    "is_installment": false,
+                    "is_seven_day_unconditional_return": true,
+                    "kdt_id": 118622541,
+                    "limit_num": 1,
+                    "logistics_type_list": [
+                        "NORMAL_EXPRESS"
+                    ],
+                    "nobody": "YZ1417824510206132224YZttlOyJY4",
+                    "num": 1,
+                    "origin_price": 44900,
+                    "pay_price": 44900,
+                    "plan_stock_num": 0,
+                    "platform": "wsc",
+                    "platform_scene_id": "",
+                    "quota_cycle": 1,
+                    "revive": false,
+                    "select_state": 1,
+                    "settlement_rule": {
+                        "cross_store": true,
+                        "settlement_mark": "COMMON"
+                    },
+                    "sku": "[{\"k\":\"尺寸\",\"k_id\":2,\"k_s\":\"s1\",\"v\":\"3XL\",\"v_id\":1252}]",
+                    "sku_id": 25903594390,
+                    "spot_stock_num": 28,
+                    "spot_stock_oversold": false,
+                    "start_sale_num": 1,
+                    "start_sold_time": 0,
+                    "stock_num": 28,
+                    "store_id": 0,
+                    "strickthrough_price": "",
+                    "thumb_url": "https://img.yzcdn.cn/upload_files/2025/06/26/Fq4sR2CA_wXA_KxVYFedeDWaAKqO.jpg?imageView2/2/w/100/h/100/q/100",
+                    "title": "【2025新品】李宁乒乓球系列王楚钦同款超轻风衣防晒服AFDVG77-1",
+                    "updated_time": 1766667546,
+                    "weight": 50,
+                    "yz_guarantee": false
+                },
+                {
+                    "activity_alias": "",
+                    "activity_id": 0,
+                    "activity_type": "1",
+                    "alias": "3nm1gkdyl1g197a",
+                    "attachment_url": "https://img.yzcdn.cn/upload_files/2025/05/16/FkaqcZTX1jE74xsUL8Np5RSpsrp4.png",
+                    "biz_extension": {
+                        "cart_biz_mark": {
+                            "_i_s__p_r_e_s_c_r_i_p_t_i_o_n__d_r_u_g": "0",
+                            "_b_i_r_t_h_d_a_y__r_e_l_a_t_i_o_n__n_e_t__o_r_d_e_r__m_a_r_k": "false"
+                        }
+                    },
+                    "biz_mark": "{\"code\":\"000000000000\"}",
+                    "cart_id": "2305843015179405475",
+                    "channel_id": 0,
+                    "created_time": 1766667537,
+                    "dcps": "",
+                    "disable_select": false,
+                    "ext": "{\"alias\":\"3nm1gkdyl1g197a\",\"activity_alias\":\"\"}",
+                    "extra_attribute": "{\"bizData\":\"{\\\"atr_uuid\\\":\\\"\\\",\\\"yzk_ex\\\":\\\"\\\",\\\"page_type\\\":\\\"\\\",\\\"tui_platform\\\":\\\"\\\",\\\"tui_click\\\":\\\"\\\",\\\"wecom_uuid\\\":\\\"\\\",\\\"from_source\\\":\\\"\\\",\\\"pv_id\\\":\\\"/wscshop/showcase/homepage~9e61029c-74de-4799-81fe-19a4f76059bd\\\",\\\"slg\\\":\\\"tagGoodList-default,OpSortBottom,11803567576,abTraceId\\\",\\\"banner_id\\\":\\\"f.107920094~tag_list_top.6~1.20~0adnFUmV\\\",\\\"st\\\":\\\"js\\\",\\\"sv\\\":\\\"1.1.49\\\",\\\"yai\\\":\\\"wsc_c\\\",\\\"uuid\\\":\\\"6a3b3b3f-3607-7659-bed3-08e4b81bb087\\\",\\\"userId\\\":11803567576,\\\"platform\\\":\\\"web\\\",\\\"components_style_layout\\\":\\\"undefined\\\",\\\"reft\\\":\\\"1766667519575\\\",\\\"spm\\\":\\\"f.107920094\\\",\\\"alias\\\":\\\"3nm1gkdyl1g197a\\\"}\",\"addPricePromotion\":\"{\\\"price\\\":79900}\",\"externalPlatformCoupon\":\"null\"}",
+                    "goods_id": 4082144634,
+                    "goods_type": 0,
+                    "group_id_list": [
+                        259878911,
+                        286431062
+                    ],
+                    "has_multi_sku": false,
+                    "is_installment": false,
+                    "is_seven_day_unconditional_return": true,
+                    "kdt_id": 118622541,
+                    "limit_num": 0,
+                    "logistics_type_list": [
+                        "NORMAL_EXPRESS"
+                    ],
+                    "nobody": "YZ1417824510206132224YZttlOyJY4",
+                    "num": 1,
+                    "origin_price": 79900,
+                    "pay_price": 79900,
+                    "plan_stock_num": 0,
+                    "platform": "wsc",
+                    "platform_scene_id": "",
+                    "revive": false,
+                    "select_state": 1,
+                    "settlement_rule": {
+                        "cross_store": true,
+                        "settlement_mark": "COMMON"
+                    },
+                    "sku": "[]",
+                    "sku_id": 14864736318,
+                    "spot_stock_num": 722,
+                    "spot_stock_oversold": false,
+                    "start_sale_num": 1,
+                    "start_sold_time": 0,
+                    "stock_num": 722,
+                    "store_id": 0,
+                    "strickthrough_price": "",
+                    "thumb_url": "https://img.yzcdn.cn/upload_files/2025/05/16/FkaqcZTX1jE74xsUL8Np5RSpsrp4.png?imageView2/2/w/100/h/100/q/100",
+                    "title": "【多哈限定】李宁乒乓球系列王楚钦款多哈世乒赛礼盒AQCV001-1",
+                    "updated_time": 1766667537,
+                    "weight": 2000,
+                    "yz_guarantee": false
+                },
+                {
+                    "activity_id": 0,
+                    "activity_type": "1",
+                    "alias": "1y3a5xkkprswdgo",
+                    "attachment_url": "https://img.yzcdn.cn/upload_files/2024/04/15/FtJUFnYlNS8YknGHIXDfbU9i8qwf.png",
+                    "biz_extension": {
+                        "cart_biz_mark": {
+                            "_i_s__p_r_e_s_c_r_i_p_t_i_o_n__d_r_u_g": "0"
+                        }
+                    },
+                    "biz_mark": "{\"code\":\"000000000000\"}",
+                    "cart_id": "2305843017194177098",
+                    "channel_id": 0,
+                    "created_time": 1766072486,
+                    "dcps": "",
+                    "deliver_time": 0,
+                    "disable_select": false,
+                    "ext": "{\"alias\":\"1y3a5xkkprswdgo\"}",
+                    "extra_attribute": "{\"deliverTime\":0,\"addPricePromotion\":\"{\\\"price\\\":2900}\",\"externalPlatformCoupon\":\"null\"}",
+                    "goods_id": 3047331906,
+                    "goods_type": 0,
+                    "group_id_list": [
+                        286431062,
+                        315275958
+                    ],
+                    "has_multi_sku": false,
+                    "is_installment": false,
+                    "is_seven_day_unconditional_return": true,
+                    "kdt_id": 118622541,
+                    "limit_num": 0,
+                    "logistics_type_list": [
+                        "NORMAL_EXPRESS"
+                    ],
+                    "nobody": "YZ1451347239867953152YZa5924z7Q",
+                    "num": 1,
+                    "origin_price": 2900,
+                    "pay_price": 2900,
+                    "plan_stock_num": 0,
+                    "platform": "wsc",
+                    "platform_scene_id": "",
+                    "revive": false,
+                    "select_state": 0,
+                    "settlement_rule": {
+                        "cross_store": true,
+                        "settlement_mark": "COMMON"
+                    },
+                    "sku": "[]",
+                    "sku_id": 14737908083,
+                    "spot_stock_num": 1118,
+                    "spot_stock_oversold": false,
+                    "start_sale_num": 1,
+                    "start_sold_time": 0,
+                    "stock_num": 1118,
+                    "store_id": 0,
+                    "strickthrough_price": "",
+                    "thumb_url": "https://img.yzcdn.cn/upload_files/2024/04/15/FtJUFnYlNS8YknGHIXDfbU9i8qwf.png?imageView2/2/w/100/h/100/q/100",
+                    "title": "【“钦”尽全力】乓乓球系列运动发带 AQAU043-1",
+                    "updated_time": 1766666248,
+                    "weight": 43,
+                    "yz_guarantee": false
+                }
+            ],
+            "kdt_id": 118622541,
+            "latest_add_cart_time": 1766667584,
+            "promotion_details": [],
+            "recommend_promotion_info_list": [],
+            "shop_name": "李宁乒乓嘉年华专卖店",
+            "show_promotion_detail": true,
+            "store_name": "",
+            "unavailable_items": [
+                {
+                    "activity_alias": "",
+                    "activity_id": 0,
+                    "activity_type": "1",
+                    "alias": "3evwgwwr00ee5v7",
+                    "attachment_url": "https://img.yzcdn.cn/upload_files/2024/10/30/FkQZJZ0e43zAZw2W01mK7wTA7zeI.jpg",
+                    "biz_extension": {
+                        "cart_biz_mark": {
+                            "_p_r_e__s_a_l_e__t_y_p_e": "0",
+                            "_p_r_e__s_a_l_e__d_a_t_e": "付款15天后发货",
+                            "_i_s__p_r_e_s_c_r_i_p_t_i_o_n__d_r_u_g": "0",
+                            "_p_r_e__s_a_l_e__s_e_n_d__t_y_p_e": "1",
+                            "_b_i_r_t_h_d_a_y__r_e_l_a_t_i_o_n__n_e_t__o_r_d_e_r__m_a_r_k": "false",
+                            "_p_r_e__s_a_l_e__s_e_n_d__d_a_t_e": "15"
+                        }
+                    },
+                    "biz_mark": "{\"code\":\"010000000002\"}",
+                    "cart_id": "2305843014723515332",
+                    "channel_id": 0,
+                    "created_time": 1742013365,
+                    "dcps": "",
+                    "disable_select": false,
+                    "error_code": 2,
+                    "error_msg": "商品未上架",
+                    "ext": "{\"alias\":\"3evwgwwr00ee5v7\",\"activity_alias\":\"\"}",
+                    "extra_attribute": "{\"bizData\":\"{\\\"atr_uuid\\\":\\\"\\\",\\\"yzk_ex\\\":\\\"\\\",\\\"page_type\\\":\\\"\\\",\\\"tui_platform\\\":\\\"\\\",\\\"tui_click\\\":\\\"\\\",\\\"wecom_uuid\\\":\\\"\\\",\\\"from_source\\\":\\\"\\\",\\\"pv_id\\\":\\\"/wscshop/showcase/homepage~56006b18-8d5c-48bc-931b-18116f47abcb\\\",\\\"is_share\\\":\\\"1\\\",\\\"st\\\":\\\"js\\\",\\\"sv\\\":\\\"1.1.49\\\",\\\"yai\\\":\\\"wsc_c\\\",\\\"uuid\\\":\\\"21025076754\\\",\\\"userId\\\":11803567576,\\\"platform\\\":\\\"web\\\",\\\"kdt_id\\\":\\\"118622541\\\",\\\"alias\\\":\\\"3evwgwwr00ee5v7\\\",\\\"shopAutoEnter\\\":\\\"1\\\",\\\"from_uuid\\\":\\\"20902282040\\\"}\",\"addPricePromotion\":\"{\\\"price\\\":49900}\",\"externalPlatformCoupon\":\"null\"}",
+                    "goods_id": 3479835460,
+                    "goods_type": 0,
+                    "group_id_list": [
+                        259878911,
+                        286431062
+                    ],
+                    "has_multi_sku": true,
+                    "is_installment": false,
+                    "is_seven_day_unconditional_return": true,
+                    "kdt_id": 118622541,
+                    "limit_num": 1,
+                    "logistics_type_list": [],
+                    "nobody": "YZ1349352138656264192YZ34q9DpLx",
+                    "num": 1,
+                    "origin_price": 49900,
+                    "pay_price": 49900,
+                    "plan_stock_num": 0,
+                    "platform": "wsc",
+                    "platform_scene_id": "",
+                    "quota_cycle": 1,
+                    "revive": false,
+                    "select_state": 0,
+                    "sku": "[{\"k\":\"尺码\",\"k_id\":12,\"k_s\":\"s1\",\"v\":\"M\",\"v_id\":34}]",
+                    "sku_id": 14788233962,
+                    "spot_stock_num": 33,
+                    "spot_stock_oversold": false,
+                    "start_sale_num": 1,
+                    "start_sold_time": 1762948800,
+                    "stock_num": 33,
+                    "store_id": 0,
+                    "strickthrough_price": "",
+                    "thumb_url": "https://img.yzcdn.cn/upload_files/2024/10/30/FkQZJZ0e43zAZw2W01mK7wTA7zeI.jpg?imageView2/2/w/100/h/100/q/100",
+                    "title": "【2024新品】王楚钦同款李宁乒乓球系列男女同款开衫连帽卫衣AWDUJ03-1",
+                    "updated_time": 1766072486,
+                    "weight": 50,
+                    "yz_guarantee": false
+                },
+                {
+                    "activity_alias": "",
+                    "activity_id": 0,
+                    "activity_type": "1",
+                    "alias": "364jtf7nhzie5rj",
+                    "attachment_url": "https://img.yzcdn.cn/upload_files/2023/09/16/FtpoHbTB_qOc57tVKr-NQDKktUmG.jpg",
+                    "biz_extension": {
+                        "cart_biz_mark": {
+                            "_p_r_e__s_a_l_e__t_y_p_e": "0",
+                            "_p_r_e__s_a_l_e__d_a_t_e": "付款15天后发货",
+                            "_i_s__p_r_e_s_c_r_i_p_t_i_o_n__d_r_u_g": "0",
+                            "_p_r_e__s_a_l_e__s_e_n_d__t_y_p_e": "1",
+                            "_b_i_r_t_h_d_a_y__r_e_l_a_t_i_o_n__n_e_t__o_r_d_e_r__m_a_r_k": "false",
+                            "_p_r_e__s_a_l_e__s_e_n_d__d_a_t_e": "15"
+                        }
+                    },
+                    "biz_mark": "{\"code\":\"010000000002\"}",
+                    "cart_id": "2305843016302577152",
+                    "channel_id": 0,
+                    "created_time": 1742013355,
+                    "dcps": "",
+                    "disable_select": false,
+                    "error_code": 2,
+                    "error_msg": "商品未上架",
+                    "ext": "{\"alias\":\"364jtf7nhzie5rj\",\"activity_alias\":\"\"}",
+                    "extra_attribute": "{\"bizData\":\"{\\\"atr_uuid\\\":\\\"\\\",\\\"yzk_ex\\\":\\\"\\\",\\\"page_type\\\":\\\"\\\",\\\"tui_platform\\\":\\\"\\\",\\\"tui_click\\\":\\\"\\\",\\\"wecom_uuid\\\":\\\"\\\",\\\"from_source\\\":\\\"\\\",\\\"pv_id\\\":\\\"/wscshop/showcase/homepage~56006b18-8d5c-48bc-931b-18116f47abcb\\\",\\\"is_share\\\":\\\"1\\\",\\\"st\\\":\\\"js\\\",\\\"sv\\\":\\\"1.1.49\\\",\\\"yai\\\":\\\"wsc_c\\\",\\\"uuid\\\":\\\"21025076754\\\",\\\"userId\\\":11803567576,\\\"platform\\\":\\\"web\\\",\\\"kdt_id\\\":\\\"118622541\\\",\\\"alias\\\":\\\"364jtf7nhzie5rj\\\",\\\"shopAutoEnter\\\":\\\"1\\\",\\\"from_uuid\\\":\\\"20902282040\\\"}\",\"addPricePromotion\":\"{\\\"price\\\":39900}\",\"externalPlatformCoupon\":\"null\"}",
+                    "goods_id": 2705645094,
+                    "goods_type": 0,
+                    "group_id_list": [
+                        259878911,
+                        286431062
+                    ],
+                    "has_multi_sku": true,
+                    "is_installment": false,
+                    "is_seven_day_unconditional_return": true,
+                    "kdt_id": 118622541,
+                    "limit_num": 1,
+                    "logistics_type_list": [],
+                    "nobody": "YZ1349352138656264192YZ34q9DpLx",
+                    "num": 1,
+                    "origin_price": 39900,
+                    "pay_price": 39900,
+                    "plan_stock_num": 0,
+                    "platform": "wsc",
+                    "platform_scene_id": "",
+                    "quota_cycle": 1,
+                    "revive": false,
+                    "select_state": 0,
+                    "sku": "[{\"k\":\"尺码\",\"k_id\":12,\"k_s\":\"s1\",\"v\":\"M\",\"v_id\":34}]",
+                    "sku_id": 14320530657,
+                    "spot_stock_num": 5,
+                    "spot_stock_oversold": false,
+                    "start_sale_num": 1,
+                    "start_sold_time": 1760875200,
+                    "stock_num": 5,
+                    "store_id": 0,
+                    "strickthrough_price": "",
+                    "thumb_url": "https://img.yzcdn.cn/upload_files/2023/09/16/FtpoHbTB_qOc57tVKr-NQDKktUmG.jpg?imageView2/2/w/100/h/100/q/100",
+                    "title": "【Hope无限潜能】王楚钦专属套头连帽卫衣AWDTF07-1",
+                    "updated_time": 1766072486,
+                    "weight": 400,
+                    "yz_guarantee": false
+                }
+            ],
+            "is_new_hope_shop": false,
+            "is_goods_img_cover": false,
+            "is_show_estimated_price": false,
+            "points_name": "积分"
+        }
+    ]
+}

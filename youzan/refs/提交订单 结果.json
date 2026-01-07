@@ -1,0 +1,46 @@
+{
+  "code": 0,
+  "msg": "ok",
+  "data": {
+    "extra": {},
+    "mergePrepayOrderNo": "E20251225205710047200111",
+    "orderNo": "E20251225205710047200111",
+    "orderNos": ["E20251225205710047200111"],
+    "paymentPreparation": {
+      "bizAction": "PAY",
+      "bizExt": "{\"forceConsignmentMode\":\"0\",\"PAY_TYPE\":\"MIXED\",\"IS_SECURED_TRANSACTIONS\":\"true\",\"ASSOCIATED_ORDER_NO\":\"E20251225205710047200111\",\"WEAPP_TRADE_MODULE_STATUS\":\"0\",\"WEAPP_TRADE_MODULE_TICKET\":\"0\",\"ORDER_NO\":\"E20251225205710047200111\",\"MERCHANDISE_CODE\":\"0\",\"MALL_GROUP_BUY_ORDER\":false,\"FEE_MIGRATE_CHARGE_BY_TC\":\"true\",\"IS_SPOTLIGHT_FEE_CHARGE_ORDER\":\"false\",\"SOURCE_CHANNEL\":\"0\",\"goodsTypes\":\"普通类型商品\",\"ORDER_CREATE_TIME\":1766667431691,\"IS_KUAI_SHOU_ORDER\":false,\"market_channel\":\"1\",\"payTools\":\"CASH_ON_DELIVERY,NOW_PAY,OFFLINE_CASH\",\"orderPhone\":\"15330368781\",\"pay_ext_fast_fail\":false,\"KDT_ID\":118622541,\"CROSS_BORDER_ORDER\":\"0\"}",
+      "bizMode": 1,
+      "bizProd": 1,
+      "currencyCodel": "CNY",
+      "discountableAmount": 0,
+      "excludePayTools": "PF_OFFLINE_PAY,INSTALMENT,PRIOR_USE",
+      "expiredAt": "2025-12-25 21:07:11",
+      "fromPlatform": "trade-core",
+      "mchId": "230113133341000000",
+      "outBizNo": "E20251225205710047200111",
+      "partnerId": "820000000147",
+      "partnerReturnUrl": "https://h5.youzan.com/wsctrade/order/payresult?request_no=E20251225205710047200111&kdt_id=118622541",
+      "payAmount": 99900,
+      "payTools": "CASH_ON_DELIVERY,NOW_PAY,OFFLINE_CASH",
+      "payerId": 11803567576,
+      "sign": "409C289DF95073FF99AE74D05ECB1E7B",
+      "signType": "MD5",
+      "tradeDesc": "【2025新品】李宁乒乓球系列孙颖莎同款羽绒服AYMV809-1",
+      "undiscountableAmount": 99900
+    },
+    "paymentPreparationExtra": { "kdtOrdernosRelation": [] },
+    "prePaymentPreparation": {
+      "bizExt": "{\"forceConsignmentMode\":\"0\",\"PAY_TYPE\":\"MIXED\",\"IS_SECURED_TRANSACTIONS\":\"true\",\"ASSOCIATED_ORDER_NO\":\"E20251225205710047200111\",\"PAY_DISCOUNT\":\"0\",\"WEAPP_TRADE_MODULE_STATUS\":\"0\",\"WEAPP_TRADE_MODULE_TICKET\":\"0\",\"ORDER_NO\":\"E20251225205710047200111\",\"MERCHANDISE_CODE\":\"0\",\"MALL_GROUP_BUY_ORDER\":false,\"FEE_MIGRATE_CHARGE_BY_TC\":\"true\",\"IS_SPOTLIGHT_FEE_CHARGE_ORDER\":\"false\",\"SOURCE_CHANNEL\":\"0\",\"goodsTypes\":\"普通类型商品\",\"ORDER_CREATE_TIME\":1766667431691,\"IS_KUAI_SHOU_ORDER\":false,\"market_channel\":\"1\",\"payTools\":\"CASH_ON_DELIVERY,NOW_PAY,OFFLINE_CASH\",\"orderPhone\":\"15330368781\",\"pay_ext_fast_fail\":false,\"KDT_ID\":118622541,\"CROSS_BORDER_ORDER\":\"0\"}",
+      "cashierSalt": "1766667431954",
+      "cashierSign": "71759FFF4F43EF0659935AAEE903DAE8",
+      "ignorePrePayForTest": false,
+      "partnerId": "820000000147",
+      "prepay": true,
+      "prepayId": "PT1852485068128267",
+      "prepaySuccess": true
+    },
+    "showPayResult": false,
+    "yzGuarantee": false,
+    "zeroOrder": false
+  }
+}

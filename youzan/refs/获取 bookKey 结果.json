@@ -1,0 +1,9 @@
+{
+  "code": 0,
+  "msg": "ok",
+  "data": {
+    "bookKey": "a6ea5d0b-e2dc-4afd-a059-2eb7db99987e",
+    "buyUrl": "https://cashier.youzan.com/pay/wsctrade_buy?book_key=a6ea5d0b-e2dc-4afd-a059-2eb7db99987e",
+    "url": "/wxpay/new_order"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "cashierBizExt": {
+    "BANK_CARD_PAY": "v1",
+    "ASYNC": "v1",
+    "ALIPAY_FLOWER_PAY": "v1",
+    "ALIPAY_AGREEMENT_PAY": "v1",
+    "WX_APP_PAY": "v1",
+    "ALIPAY_JS": "v1",
+    "BANK_TRANSFER_LARGE_PAY": "v1",
+    "PF_OFFLINE_PAY": "v1",
+    "ALIPAY_APPLET_PAY": "v1",
+    "CHANGE_PAY": "v1",
+    "PRIOR_USE_PAY": "v1",
+    "cashierType": "A"
+  },
+  "cashierSalt": "1766666265059",
+  "cashierSign": "6E31D7F4CD82617055D72817628BA40B",
+  "partnerId": "820000000147",
+  "prepayId": "PT1852483845488641",
+  "orderNo": "E20251225203743047206231",
+  "wxSubOpenId": "",
+  "wxSelfOpenId": "",
+  "scene": "VALUE_COMMON",
+  "cashierType": "A",
+  "packageVersion": "4.0.29"
+}

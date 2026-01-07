@@ -1,0 +1,63 @@
+curl 'https://cashier.youzan.com/assets/api/union/retail_trade_order/unknown_webview/pure/pay/channels?kdt_id=118622541' \
+  -H 'accept: application/json, text/plain, */*' \
+  -H 'accept-language: zh-CN,zh;q=0.9,zh-TW;q=0.8' \
+  -H 'content-type: application/json' \
+  -b 'KDTSESSIONID=YZ1417824510206132224YZttlOyJY4; yz_log_ftime=1758077305580; yz_log_uuid=6a3b3b3f-3607-7659-bed3-08e4b81bb087; Hm_lvt_7bec91b798a11b6f175b22039b5e7bdd=1758077306; _kdt_id_=118622541; yz_log_seqb=1766664518072; trace_sdk_context_pv_id=/v2/showcase/homepage~ce2462ee-fa92-4487-a00f-0cdcd6ec88c0; nobody_sign=YZ1417824510206132224YZttlOyJY4; trace_sdk_context_banner_id=cart.118622541~recService.1~1~j9NzLTY4; acw_tc=ff0ad38fdb7316a2db339f3a007f4ed215cfadba4fec46f53cfd6bb0f037d5b0; captcha_sid=YZ1453847287538872320YZsLlyJSNM; Hm_lvt_679ede9eb28bacfc763976b10973577b=1766665823; HMACCOUNT=BF9AFFA7E3B94A26; _canwebp=1; mark-map={"p_i":{"st":1766666251286}}; Hm_lpvt_679ede9eb28bacfc763976b10973577b=1766666253; yz_fp_hash=qWPVh1766666254ydoRB7bLQ7b; dfp=9af214a8059a2e242515c7dfd269e9d4ca1fa456; yz_log_seqn=245' \
+  -H 'csrf-token;' \
+  -H 'extra-data: {"sid":"","version":"","bizEnv":""}' \
+  -H 'origin: https://cashier.youzan.com' \
+  -H 'page-path: https://cashier.youzan.com/pay/wsctrade_buy' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://cashier.youzan.com/pay/wsctrade_buy?book_key=57fb56b1-ecac-4081-a8d7-a99f416c337c&showwxpaytitle=1&kdt_id=118622541&address_id=802436767' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1' \
+  -H 'x-yz-action-id: wsc-h5-trade-0ad9191d-1766666252109-726609' \
+  --data-raw '{"cashierBizExt":{"BANK_CARD_PAY":"v1","ASYNC":"v1","ALIPAY_FLOWER_PAY":"v1","ALIPAY_AGREEMENT_PAY":"v1","WX_APP_PAY":"v1","ALIPAY_JS":"v1","BANK_TRANSFER_LARGE_PAY":"v1","PF_OFFLINE_PAY":"v1","ALIPAY_APPLET_PAY":"v1","CHANGE_PAY":"v1","PRIOR_USE_PAY":"v1","cashierType":"A"},"cashierSalt":"1766666265059","cashierSign":"6E31D7F4CD82617055D72817628BA40B","partnerId":"820000000147","prepayId":"PT1852483845488641","orderNo":"E20251225203743047206231","wxSubOpenId":"","wxSelfOpenId":"","scene":"VALUE_COMMON","cashierType":"A","packageVersion":"4.0.29"}'
+
+
+
+
+  fetch("https://cashier.youzan.com/assets/api/union/retail_trade_order/unknown_webview/pure/pay/channels?kdt_id=118622541", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "zh-CN,zh;q=0.9,zh-TW;q=0.8",
+    "content-type": "application/json",
+    "csrf-token": "",
+    "extra-data": "{\"sid\":\"\",\"version\":\"\",\"bizEnv\":\"\"}",
+    "page-path": "https://cashier.youzan.com/pay/wsctrade_buy",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "x-yz-action-id": "wsc-h5-trade-0ad9191d-1766666252109-726609"
+  },
+  "referrer": "https://cashier.youzan.com/pay/wsctrade_buy?book_key=57fb56b1-ecac-4081-a8d7-a99f416c337c&showwxpaytitle=1&kdt_id=118622541&address_id=802436767",
+  "body": "{\"cashierBizExt\":{\"BANK_CARD_PAY\":\"v1\",\"ASYNC\":\"v1\",\"ALIPAY_FLOWER_PAY\":\"v1\",\"ALIPAY_AGREEMENT_PAY\":\"v1\",\"WX_APP_PAY\":\"v1\",\"ALIPAY_JS\":\"v1\",\"BANK_TRANSFER_LARGE_PAY\":\"v1\",\"PF_OFFLINE_PAY\":\"v1\",\"ALIPAY_APPLET_PAY\":\"v1\",\"CHANGE_PAY\":\"v1\",\"PRIOR_USE_PAY\":\"v1\",\"cashierType\":\"A\"},\"cashierSalt\":\"1766666265059\",\"cashierSign\":\"6E31D7F4CD82617055D72817628BA40B\",\"partnerId\":\"820000000147\",\"prepayId\":\"PT1852483845488641\",\"orderNo\":\"E20251225203743047206231\",\"wxSubOpenId\":\"\",\"wxSelfOpenId\":\"\",\"scene\":\"VALUE_COMMON\",\"cashierType\":\"A\",\"packageVersion\":\"4.0.29\"}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});
+
+
+
+fetch("https://cashier.youzan.com/assets/api/union/retail_trade_order/unknown_webview/pure/pay/channels?kdt_id=118622541", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "zh-CN,zh;q=0.9,zh-TW;q=0.8",
+    "content-type": "application/json",
+    "csrf-token": "",
+    "extra-data": "{\"sid\":\"\",\"version\":\"\",\"bizEnv\":\"\"}",
+    "page-path": "https://cashier.youzan.com/pay/wsctrade_buy",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "x-yz-action-id": "wsc-h5-trade-0ad9191d-1766666252109-726609",
+    "cookie": "KDTSESSIONID=YZ1417824510206132224YZttlOyJY4; yz_log_ftime=1758077305580; yz_log_uuid=6a3b3b3f-3607-7659-bed3-08e4b81bb087; Hm_lvt_7bec91b798a11b6f175b22039b5e7bdd=1758077306; _kdt_id_=118622541; yz_log_seqb=1766664518072; trace_sdk_context_pv_id=/v2/showcase/homepage~ce2462ee-fa92-4487-a00f-0cdcd6ec88c0; nobody_sign=YZ1417824510206132224YZttlOyJY4; trace_sdk_context_banner_id=cart.118622541~recService.1~1~j9NzLTY4; acw_tc=ff0ad38fdb7316a2db339f3a007f4ed215cfadba4fec46f53cfd6bb0f037d5b0; captcha_sid=YZ1453847287538872320YZsLlyJSNM; Hm_lvt_679ede9eb28bacfc763976b10973577b=1766665823; HMACCOUNT=BF9AFFA7E3B94A26; _canwebp=1; mark-map={\"p_i\":{\"st\":1766666251286}}; Hm_lpvt_679ede9eb28bacfc763976b10973577b=1766666253; yz_fp_hash=qWPVh1766666254ydoRB7bLQ7b; dfp=9af214a8059a2e242515c7dfd269e9d4ca1fa456; yz_log_seqn=245",
+    "Referer": "https://cashier.youzan.com/pay/wsctrade_buy?book_key=57fb56b1-ecac-4081-a8d7-a99f416c337c&showwxpaytitle=1&kdt_id=118622541&address_id=802436767"
+  },
+  "body": "{\"cashierBizExt\":{\"BANK_CARD_PAY\":\"v1\",\"ASYNC\":\"v1\",\"ALIPAY_FLOWER_PAY\":\"v1\",\"ALIPAY_AGREEMENT_PAY\":\"v1\",\"WX_APP_PAY\":\"v1\",\"ALIPAY_JS\":\"v1\",\"BANK_TRANSFER_LARGE_PAY\":\"v1\",\"PF_OFFLINE_PAY\":\"v1\",\"ALIPAY_APPLET_PAY\":\"v1\",\"CHANGE_PAY\":\"v1\",\"PRIOR_USE_PAY\":\"v1\",\"cashierType\":\"A\"},\"cashierSalt\":\"1766666265059\",\"cashierSign\":\"6E31D7F4CD82617055D72817628BA40B\",\"partnerId\":\"820000000147\",\"prepayId\":\"PT1852483845488641\",\"orderNo\":\"E20251225203743047206231\",\"wxSubOpenId\":\"\",\"wxSelfOpenId\":\"\",\"scene\":\"VALUE_COMMON\",\"cashierType\":\"A\",\"packageVersion\":\"4.0.29\"}",
+  "method": "POST"
+});

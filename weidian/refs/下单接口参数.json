@@ -1,0 +1,47 @@
+{
+  "param": {
+    "channel": "bjh5",
+    "source_id": "6df14f35dae7e6e49e1a944cd2ad4adf",
+    "q_pv_id": "08680000019af7b6dfdd0a20e466454d",
+    "biz_type": 1,
+    "buyer": { "buyer_id": "1974187814", "eat_in_table_name": "", "address_id": 502458475, "agreement_type_list": [5] },
+    "shop_list": [
+      {
+        "shop_id": "1711911458",
+        "f_shop_id": "",
+        "sup_id": "",
+        "item_list": [
+          {
+            "item_id": "7536741112",
+            "quantity": 1,
+            "item_sku_id": "0",
+            "ori_price": "45.00",
+            "price": "45.00",
+            "extend": {},
+            "price_type": 1,
+            "discount_list": [],
+            "item_convey_info": {}
+          }
+        ],
+        "order_type": 3,
+        "ori_price": "45.00",
+        "price": "45.00",
+        "express_fee": "0.00",
+        "express_type": 4,
+        "discount_list": [],
+        "invalid_item_list": []
+      }
+    ],
+    "deliver_type": 0,
+    "is_no_ship_addr": 0,
+    "total_pay_price": "45.00",
+    "total_vjifen": "",
+    "wfr": "wxBuyerShare",
+    "appid": "",
+    "discount_list": [],
+    "invalid_shop_list": [],
+    "pay_type": 0
+  },
+  "context": { "shopping_center": "340902190", "subChannel": "browser", "thirdSubchannel": "safari" },
+  "wdtoken": "f9537f01"
+}

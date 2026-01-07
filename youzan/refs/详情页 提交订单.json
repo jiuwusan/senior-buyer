@@ -1,0 +1,127 @@
+{
+  "version": 2,
+  "source": {
+    "bookKey": "c961ea17-56b5-4e33-b471-3db48a1e0593",
+    "clientIp": "124.78.34.230",
+    "fromThirdApp": false,
+    "isWeapp": false,
+    "itemSources": [
+      {
+        "activityId": 0,
+        "activityType": 0,
+        "bizTracePointExt": "{\"yai\":\"wsc_c\",\"st\":\"js\",\"sv\":\"1.1.49\",\"atr_uuid\":\"\",\"page_type\":\"\",\"yzk_ex\":\"\",\"tui_platform\":\"\",\"tui_click\":\"\",\"uuid\":\"6a3b3b3f-3607-7659-bed3-08e4b81bb087\",\"userId\":11803567576,\"platform\":\"web\",\"from_source\":\"\",\"pv_id\":\"/v2/showcase/homepage~085945c9-cdce-430c-9eae-22fd427310d2\",\"alias\":\"2oknqq9yxogu5tq\",\"wecom_uuid\":\"\"}",
+        "cartCreateTime": 0,
+        "cartUpdateTime": 0,
+        "gdtId": "",
+        "goodsId": 4082141737,
+        "pageSource": "",
+        "skuId": 14864732375
+      }
+    ],
+    "kdtSessionId": "YZ1417824510206132224YZttlOyJY4",
+    "needAppRedirect": false,
+    "orderType": 0,
+    "platform": "weixin",
+    "salesman": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+    "orderMark": "",
+    "bizPlatform": ""
+  },
+  "config": {
+    "bosWorkFlow": false,
+    "containsUnavailableItems": false,
+    "fissionActivity": { "fissionTicketNum": 0 },
+    "isFromItemDetail": true,
+    "paymentExpiry": 0,
+    "receiveMsg": true,
+    "usePoints": false,
+    "useWxpay": false,
+    "buyerMsg": "",
+    "disableStoredDiscount": false,
+    "storedDiscountRechargeGuide": true,
+    "isWholesaleOrder": false,
+    "valueCardsExtContext": "{\"IS_RELOAD\":false,\"CUSTOMER_SELECT_CARD_LIST\":false,\"SELECTED_RECHARGE_FREE_PRODUCT\":false,\"DIY_SELECT_CARDS\":\"0\"}"
+  },
+  "usePayAsset": {},
+  "items": [
+    {
+      "activityId": 0,
+      "activityType": 0,
+      "deliverTime": 0,
+      "extensions": { "OUTER_ITEM_ID": "10000" },
+      "fCode": "",
+      "goodsId": 4082141737,
+      "isSevenDayUnconditionalReturn": true,
+      "itemFissionTicketsNum": 0,
+      "kdtId": 118622541,
+      "num": 1,
+      "pointsPrice": 0,
+      "price": 39900,
+      "skuId": 14864732375,
+      "storeId": 0,
+      "umpSkuId": 0
+    }
+  ],
+  "seller": { "kdtId": 118622541, "storeId": 0 },
+  "ump": {
+    "activities": [
+      { "activityId": 0, "activityType": 0, "externalPointId": 0, "goodsId": 4082141737, "kdtId": 118622541, "pointsPrice": 0, "skuId": 14864732375, "usePoints": false }
+    ],
+    "coupon": {},
+    "multiCoupon": { "coupons": [], "deliveryCoupons": [] },
+    "useCustomerCardInfo": { "specified": false },
+    "costPoints": { "kdtId": 118622541, "usePointDeduction": false, "costPoints": 0, "defaultPointDeductEffect": true }
+  },
+  "newCouponProcess": true,
+  "unavailableItems": [],
+  "asyncOrder": false,
+  "delivery": {
+    "hasFreightInsurance": true,
+    "address": {
+      "addressDetail": "昆明路739号文通大厦 1209室",
+      "areaCode": "310110",
+      "city": "上海市",
+      "community": "",
+      "country": "中国",
+      "countryType": 1,
+      "county": "杨浦区",
+      "id": 802436767,
+      "isDefault": 1,
+      "label": "公司",
+      "lat": "31.269380917634845",
+      "location": "文通大厦",
+      "lon": "121.52226118225269",
+      "poiId": "3576878784852167275",
+      "poiType": 1,
+      "postalCode": "",
+      "province": "上海市",
+      "source": 1,
+      "tel": "15330368781",
+      "type": 2,
+      "userId": 11803567576,
+      "userName": "九五三",
+      "recipients": "九五三",
+      "addressId": 802436767
+    },
+    "expressType": "express",
+    "expressTypeChoice": 0
+  },
+  "cloudOrderExt": { "extension": {} },
+  "bookKeyCloudExtension": { "umpExt": "" },
+  "confirmTotalPrice": 39900,
+  "extensions": {
+    "CONFIRM_TRADE_RISK_DIALOG": "false",
+    "TRADE_PAGE_TYPE": "TRADE_BUY_PAGE",
+    "NEW_MEMBER_FLOW": "true",
+    "IS_OPTIMAL_SOLUTION": "true",
+    "ATTR_SUPPORT_TIMESPAN_DELIVERY_FEE": "1",
+    "IS_OVERLYING_COUPON": "true",
+    "IS_SELECT_PRESENT": "0",
+    "NOT_SALE_SINGLE": "1",
+    "SELECTED_PRESENTS": "[]",
+    "BIZ_ORDER_ATTRIBUTE": "{\"RISK_GOODS_TAX_INFOS\":\"0\"}",
+    "ATTR_SOURCE_PAGE": "goods_detail",
+    "USE_OPTIMAL_CALCULATE": "1"
+  },
+  "behaviorOrderInfo": { "bizType": 158, "token": "" }
+}

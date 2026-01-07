@@ -1,0 +1,59 @@
+curl 'https://shop118814709.youzan.com/wsctrade/order/goodsBook.json?kdt_id=118622541' \
+  -H 'accept: application/json, text/plain, */*' \
+  -H 'accept-language: zh-CN,zh;q=0.9,zh-TW;q=0.8' \
+  -H 'content-type: application/json' \
+  -b 'KDTSESSIONID=YZ1417824510206132224YZttlOyJY4; yz_log_ftime=1758077305580; yz_log_uuid=6a3b3b3f-3607-7659-bed3-08e4b81bb087; Hm_lvt_7bec91b798a11b6f175b22039b5e7bdd=1758077306; nobody_sign=YZ1417824510206132224YZttlOyJY4; captcha_sid=YZ1453847287538872320YZsLlyJSNM; Hm_lvt_679ede9eb28bacfc763976b10973577b=1766667489; HMACCOUNT=1568DE905B4E6BE4; _canwebp=1; _kdt_id_=118622541; trace_sdk_context_pv_id=/v2/showcase/homepage~085945c9-cdce-430c-9eae-22fd427310d2; mark-map={"p_i":{"st":1766758293283},"usercenter":{"st":1766750622755}}; yz_log_seqb=1766761074256; acw_tc=6d5b2b84964cbe2141f5bce23751cbe2e2ab5317e36f3fbfd7e5695aa02a84af; Hm_lpvt_679ede9eb28bacfc763976b10973577b=1766761079; open_token={"accessToken":"b8d9823c82f2723b268e7b45a71654","expires":604799,"scope":"item trade user utility shop item_category user_advanced trade_virtual pay_qrcode coupon present_advanced reviews courier notice_center","expiresRemind":604799}; yz_fp_hash=sWPV01766761079x4pTHwJqN8f; dfp=e52b6fe1800a517811834eac9247f9de848eaa49; yz_log_seqn=56' \
+  -H 'extra-data: {"sid":"","version":"","bizEnv":""}' \
+  -H 'origin: https://tuicashier.youzan.com' \
+  -H 'page-path: https://tuicashier.youzan.com/pay/wscgoods_order' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://tuicashier.youzan.com/pay/wscgoods_order?alias=2oknqq9yxogu5tq' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-site' \
+  -H 'user-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1' \
+  --data-raw '{"goodsList":"[{\"goods_id\":4082141737,\"num\":1,\"sku_id\":14864732375,\"price\":39900,\"extra\":{},\"dcPs\":\"\",\"biz_trace_point_ext\":\"{\\\"atr_uuid\\\":\\\"\\\",\\\"yzk_ex\\\":\\\"\\\",\\\"page_type\\\":\\\"\\\",\\\"tui_platform\\\":\\\"\\\",\\\"tui_click\\\":\\\"\\\",\\\"wecom_uuid\\\":\\\"\\\",\\\"from_source\\\":\\\"\\\",\\\"pv_id\\\":\\\"/v2/showcase/homepage~085945c9-cdce-430c-9eae-22fd427310d2\\\",\\\"st\\\":\\\"js\\\",\\\"sv\\\":\\\"1.1.49\\\",\\\"yai\\\":\\\"wsc_c\\\",\\\"uuid\\\":\\\"6a3b3b3f-3607-7659-bed3-08e4b81bb087\\\",\\\"userId\\\":11803567576,\\\"platform\\\":\\\"web\\\",\\\"alias\\\":\\\"2oknqq9yxogu5tq\\\"}\",\"qr\":\"\",\"tpps\":\"\",\"fcode\":\"\",\"isSevenDayUnconditionalReturn\":true}]","common":"{\"kdt_id\":118622541,\"store_id\":0,\"store_name\":\"\",\"postage\":0,\"activity_alias\":\"\",\"activity_id\":0,\"activity_type\":0,\"use_wxpay\":0,\"from\":\"\",\"bosWorkFlow\":false,\"isFromItemDetail\":false,\"source\":\"goods_detail\"}"}'
+
+
+
+
+
+  fetch("https://shop118814709.youzan.com/wsctrade/order/goodsBook.json?kdt_id=118622541", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "zh-CN,zh;q=0.9,zh-TW;q=0.8",
+    "content-type": "application/json",
+    "extra-data": "{\"sid\":\"\",\"version\":\"\",\"bizEnv\":\"\"}",
+    "page-path": "https://tuicashier.youzan.com/pay/wscgoods_order",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "cookie": "KDTSESSIONID=YZ1417824510206132224YZttlOyJY4; yz_log_ftime=1758077305580; yz_log_uuid=6a3b3b3f-3607-7659-bed3-08e4b81bb087; Hm_lvt_7bec91b798a11b6f175b22039b5e7bdd=1758077306; nobody_sign=YZ1417824510206132224YZttlOyJY4; captcha_sid=YZ1453847287538872320YZsLlyJSNM; Hm_lvt_679ede9eb28bacfc763976b10973577b=1766667489; HMACCOUNT=1568DE905B4E6BE4; _canwebp=1; _kdt_id_=118622541; trace_sdk_context_pv_id=/v2/showcase/homepage~085945c9-cdce-430c-9eae-22fd427310d2; mark-map={\"p_i\":{\"st\":1766758293283},\"usercenter\":{\"st\":1766750622755}}; yz_log_seqb=1766761074256; acw_tc=6d5b2b84964cbe2141f5bce23751cbe2e2ab5317e36f3fbfd7e5695aa02a84af; Hm_lpvt_679ede9eb28bacfc763976b10973577b=1766761079; open_token={\"accessToken\":\"b8d9823c82f2723b268e7b45a71654\",\"expires\":604799,\"scope\":\"item trade user utility shop item_category user_advanced trade_virtual pay_qrcode coupon present_advanced reviews courier notice_center\",\"expiresRemind\":604799}; yz_fp_hash=sWPV01766761079x4pTHwJqN8f; dfp=e52b6fe1800a517811834eac9247f9de848eaa49; yz_log_seqn=56",
+    "Referer": "https://tuicashier.youzan.com/pay/wscgoods_order?alias=2oknqq9yxogu5tq"
+  },
+  "body": "{\"goodsList\":\"[{\\\"goods_id\\\":4082141737,\\\"num\\\":1,\\\"sku_id\\\":14864732375,\\\"price\\\":39900,\\\"extra\\\":{},\\\"dcPs\\\":\\\"\\\",\\\"biz_trace_point_ext\\\":\\\"{\\\\\\\"atr_uuid\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"yzk_ex\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"page_type\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"tui_platform\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"tui_click\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"wecom_uuid\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"from_source\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"pv_id\\\\\\\":\\\\\\\"/v2/showcase/homepage~085945c9-cdce-430c-9eae-22fd427310d2\\\\\\\",\\\\\\\"st\\\\\\\":\\\\\\\"js\\\\\\\",\\\\\\\"sv\\\\\\\":\\\\\\\"1.1.49\\\\\\\",\\\\\\\"yai\\\\\\\":\\\\\\\"wsc_c\\\\\\\",\\\\\\\"uuid\\\\\\\":\\\\\\\"6a3b3b3f-3607-7659-bed3-08e4b81bb087\\\\\\\",\\\\\\\"userId\\\\\\\":11803567576,\\\\\\\"platform\\\\\\\":\\\\\\\"web\\\\\\\",\\\\\\\"alias\\\\\\\":\\\\\\\"2oknqq9yxogu5tq\\\\\\\"}\\\",\\\"qr\\\":\\\"\\\",\\\"tpps\\\":\\\"\\\",\\\"fcode\\\":\\\"\\\",\\\"isSevenDayUnconditionalReturn\\\":true}]\",\"common\":\"{\\\"kdt_id\\\":118622541,\\\"store_id\\\":0,\\\"store_name\\\":\\\"\\\",\\\"postage\\\":0,\\\"activity_alias\\\":\\\"\\\",\\\"activity_id\\\":0,\\\"activity_type\\\":0,\\\"use_wxpay\\\":0,\\\"from\\\":\\\"\\\",\\\"bosWorkFlow\\\":false,\\\"isFromItemDetail\\\":false,\\\"source\\\":\\\"goods_detail\\\"}\"}",
+  "method": "POST"
+});
+
+
+
+
+fetch("https://shop118814709.youzan.com/wsctrade/order/goodsBook.json?kdt_id=118622541", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "zh-CN,zh;q=0.9,zh-TW;q=0.8",
+    "content-type": "application/json",
+    "extra-data": "{\"sid\":\"\",\"version\":\"\",\"bizEnv\":\"\"}",
+    "page-path": "https://tuicashier.youzan.com/pay/wscgoods_order",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site"
+  },
+  "referrer": "https://tuicashier.youzan.com/pay/wscgoods_order?alias=2oknqq9yxogu5tq",
+  "body": "{\"goodsList\":\"[{\\\"goods_id\\\":4082141737,\\\"num\\\":1,\\\"sku_id\\\":14864732375,\\\"price\\\":39900,\\\"extra\\\":{},\\\"dcPs\\\":\\\"\\\",\\\"biz_trace_point_ext\\\":\\\"{\\\\\\\"atr_uuid\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"yzk_ex\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"page_type\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"tui_platform\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"tui_click\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"wecom_uuid\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"from_source\\\\\\\":\\\\\\\"\\\\\\\",\\\\\\\"pv_id\\\\\\\":\\\\\\\"/v2/showcase/homepage~085945c9-cdce-430c-9eae-22fd427310d2\\\\\\\",\\\\\\\"st\\\\\\\":\\\\\\\"js\\\\\\\",\\\\\\\"sv\\\\\\\":\\\\\\\"1.1.49\\\\\\\",\\\\\\\"yai\\\\\\\":\\\\\\\"wsc_c\\\\\\\",\\\\\\\"uuid\\\\\\\":\\\\\\\"6a3b3b3f-3607-7659-bed3-08e4b81bb087\\\\\\\",\\\\\\\"userId\\\\\\\":11803567576,\\\\\\\"platform\\\\\\\":\\\\\\\"web\\\\\\\",\\\\\\\"alias\\\\\\\":\\\\\\\"2oknqq9yxogu5tq\\\\\\\"}\\\",\\\"qr\\\":\\\"\\\",\\\"tpps\\\":\\\"\\\",\\\"fcode\\\":\\\"\\\",\\\"isSevenDayUnconditionalReturn\\\":true}]\",\"common\":\"{\\\"kdt_id\\\":118622541,\\\"store_id\\\":0,\\\"store_name\\\":\\\"\\\",\\\"postage\\\":0,\\\"activity_alias\\\":\\\"\\\",\\\"activity_id\\\":0,\\\"activity_type\\\":0,\\\"use_wxpay\\\":0,\\\"from\\\":\\\"\\\",\\\"bosWorkFlow\\\":false,\\\"isFromItemDetail\\\":false,\\\"source\\\":\\\"goods_detail\\\"}\"}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});
