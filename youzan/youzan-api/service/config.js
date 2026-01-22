@@ -45,7 +45,7 @@ module.exports = [
         user_id: 11803567576,
         shop_name: '素龙 15330368781',
         kdt_id: 149228828,
-        kdt_session_id: 'YZ1417824510206132224YZttlOyJY4',
+        kdt_session_id: 'YZ1463508797505495040YZjcVjhfd6',
         address: {
           addressDetail: '昆明路739号文通大厦 1209室',
           areaCode: '310110',
