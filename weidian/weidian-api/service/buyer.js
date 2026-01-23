@@ -13,6 +13,7 @@ class Buyer {
   };
   orderList = [];
   succeedIds = [];
+  combineOrder = {};
   constructor(config) {
     this.config = config;
   }
@@ -121,7 +122,7 @@ class Buyer {
     // 生成下单参数
     Array.isArray(list) &&
       list.length > 0 &&
-      (this.orderList = this.generateOrderParamsFromCart(list, {
+      ((this.orderList = this.generateOrderParamsFromCart(list, {
         param: {
           channel: 'bjh5',
           source_id: this.config.source_id,
@@ -147,7 +148,30 @@ class Buyer {
         },
         udc: this.config.udc || '',
         wdtoken: this.config.wdtoken || ''
-      }));
+      })),
+      (this.combineOrder = this.generateCombineOrder(list, {
+        param: {
+          channel: 'bjh5',
+          source_id: this.config.source_id,
+          q_pv_id: this.uuid(),
+          biz_type: 1,
+          buyer: { buyer_id: this.config.buyer_id, eat_in_table_name: '', address_id: this.config.address_id, agreement_type_list: [5] },
+          deliver_type: 0,
+          is_no_ship_addr: 0,
+          total_vjifen: '',
+          wfr: 'wxBuyerShare',
+          appid: '',
+          discount_list: [],
+          invalid_shop_list: [],
+          pay_type: 0
+        },
+        context: {
+          subChannel: 'browser',
+          thirdSubchannel: 'safari'
+        },
+        udc: this.config.udc || '',
+        wdtoken: this.config.wdtoken || ''
+      })));
 
     return {
       buyer_name: this.config.buyer_name,
@@ -160,11 +184,21 @@ class Buyer {
     return {
       buyer_name: this.config.buyer_name,
       order_total: this.orderList?.length,
-      order_list: this.orderList
+      order_list: this.orderList,
+      combine_order: this.combineOrder
     };
   }
 
-  async orderCart() {
+  async orderCart({ combine }) {
+    if (this.orderList?.length < 1) {
+      return '购物车为空';
+    }
+    if (this.succeedIds.includes('combine')) {
+      return '已下单成功';
+    }
+    if (combine) {
+      return this.creatOrder(this.combineOrder);
+    }
     console.log('购物车结算...');
     const batchSize = 2;
     const results = [];
@@ -320,6 +354,119 @@ class Buyer {
     }
 
     return orderParamsList;
+  }
+
+  /**
+   * 生成合并订单参数（所有商品合并为一个订单）
+   * @param {Array<Object>} cartData 购物车接口返回的数据
+   * @param {Object} baseParamsTemplate 下单参数的基础模板
+   * @returns {Object} 合并订单参数
+   */
+  generateCombineOrder(cartData, baseParamsTemplate) {
+    // 1. 提取基础参数
+    const { param: baseParam = {}, context: baseContext = {}, wdtoken, udc = '' } = baseParamsTemplate;
+    const { buyer: buyerInfo = {}, channel, source_id, q_pv_id, biz_type, deliver_type, is_no_ship_addr, wfr, appid, pay_type } = baseParam;
+
+    // 2. 动态设置 context.shopping_center
+    const firstShopGroupId = cartData[0]?.groupId;
+    const finalContext = {
+      ...baseContext,
+      shopping_center: firstShopGroupId || baseContext.shopping_center
+    };
+
+    // 3. 构建合并订单的 shop_list（包含所有商品）
+    const shopListMap = new Map(); // 使用 Map 按店铺分组
+
+    // 4. 遍历购物车数据，按店铺分组收集商品
+    for (const shopGroup of cartData) {
+      const shopId = shopGroup.shopId;
+      if (!shopListMap.has(shopId)) {
+        shopListMap.set(shopId, {
+          shop_id: shopId,
+          f_shop_id: '',
+          sup_id: '',
+          item_list: [],
+          order_type: 3,
+          ori_price: '0.00',
+          price: '0.00',
+          express_fee: '0.00',
+          express_type: 4,
+          discount_list: [],
+          invalid_item_list: []
+        });
+      }
+
+      const shopListItem = shopListMap.get(shopId);
+
+      // 遍历店铺中的分区
+      for (const partition of shopGroup.partitions || []) {
+        // 遍历分区中的每个商品项
+        for (const item of partition.itemList || []) {
+          const itemId = item.itemId;
+          const skuId = String(item.skuId || 0);
+          const count = item.count || 1;
+          const price = item.price || '0';
+          const oriPrice = item.oriPrice || price;
+
+          // 累加价格
+          shopListItem.ori_price = (parseFloat(shopListItem.ori_price) + parseFloat(oriPrice) * count).toFixed(2);
+          shopListItem.price = (parseFloat(shopListItem.price) + parseFloat(price) * count).toFixed(2);
+
+          // 添加商品到 item_list
+          shopListItem.item_list.push({
+            item_id: itemId,
+            quantity: count,
+            item_sku_id: skuId,
+            ori_price: parseFloat(oriPrice).toFixed(2),
+            price: parseFloat(price).toFixed(2),
+            extend: {},
+            price_type: 1,
+            discount_list: [],
+            item_convey_info: {}
+          });
+        }
+      }
+    }
+
+    // 5. 将 Map 转换为数组
+    const shopList = Array.from(shopListMap.values());
+
+    // 6. 计算总支付价格
+    const totalPayPrice = shopList.reduce((sum, shop) => (parseFloat(sum) + parseFloat(shop.price)).toFixed(2), '0.00');
+
+    // 7. 构建完整的订单参数 param
+    const newParam = {
+      channel,
+      source_id,
+      q_pv_id,
+      biz_type,
+      buyer: buyerInfo,
+      shop_list: shopList,
+      deliver_type,
+      is_no_ship_addr,
+      total_pay_price: totalPayPrice,
+      total_vjifen: '',
+      wfr,
+      appid,
+      discount_list: [],
+      invalid_shop_list: [],
+      pay_type
+    };
+
+    // 8. 构建最终的提交结构
+    const orderSubmission = {
+      param: JSON.stringify(newParam),
+      context: JSON.stringify(finalContext),
+      wdtoken,
+      udc
+    };
+
+    // 9. 返回合并订单参数（与单个订单格式保持一致）
+    return {
+      submitId: 'combine',
+      itemName: '合并订单',
+      orderParam: orderSubmission
+    };
   }
 }
 

@@ -21,8 +21,8 @@ class Order {
     return await Promise.all(this.orderTasks.map(task => task.queryCart()));
   }
 
-  async createOrder() {
-    return await Promise.all(this.orderTasks.map(task => task.createOrder()));
+  async createOrder({ combine }) {
+    return await Promise.all(this.orderTasks.map(task => task.createOrder({ combine })));
   }
 
   async queryPreOrder() {
@@ -49,7 +49,7 @@ class Order {
           const currentStart = Date.now();
 
           try {
-            await this.createOrder();
+            await this.createOrder({ combine: currentStart - pollingStart < 3000 });
           } catch (error) {
             console.error('下单异常:', error);
           }
