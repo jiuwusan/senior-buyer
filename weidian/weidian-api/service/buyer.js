@@ -120,40 +120,11 @@ class Buyer {
     }
 
     // 生成下单参数
-    Array.isArray(list) &&
-      list.length > 0 &&
-      ((this.orderList = this.generateOrderParamsFromCart(list, {
+    if (Array.isArray(list) && list.length > 0) {
+      this.orderList = this.generateOrderParamsFromCart(list, {
         param: {
           channel: 'bjh5',
           source_id: this.config.source_id,
-          // q_pv_id: this.uuid(),
-          biz_type: 1,
-          buyer: { buyer_id: this.config.buyer_id, eat_in_table_name: '', address_id: this.config.address_id, agreement_type_list: [5] },
-          // shop_list: [],
-          deliver_type: 0,
-          is_no_ship_addr: 0,
-          // total_pay_price: '',
-          total_vjifen: '',
-          wfr: 'wxBuyerShare',
-          appid: '',
-          discount_list: [],
-          invalid_shop_list: [],
-          pay_type: 0
-        },
-        context: {
-          // shopping_center: '',
-          // pageChannel: 'shop_menu_cart',
-          subChannel: 'browser',
-          thirdSubchannel: 'safari'
-        },
-        udc: this.config.udc || '',
-        wdtoken: this.config.wdtoken || ''
-      })),
-      (this.combineOrder = this.generateCombineOrder(list, {
-        param: {
-          channel: 'bjh5',
-          source_id: this.config.source_id,
-          q_pv_id: this.uuid(),
           biz_type: 1,
           buyer: { buyer_id: this.config.buyer_id, eat_in_table_name: '', address_id: this.config.address_id, agreement_type_list: [5] },
           deliver_type: 0,
@@ -171,7 +142,31 @@ class Buyer {
         },
         udc: this.config.udc || '',
         wdtoken: this.config.wdtoken || ''
-      })));
+      });
+
+      this.combineOrder = this.generateCombineOrder(list, {
+        param: {
+          channel: 'bjh5',
+          source_id: this.config.source_id,
+          biz_type: 1,
+          buyer: { buyer_id: this.config.buyer_id, eat_in_table_name: '', address_id: this.config.address_id, agreement_type_list: [5] },
+          deliver_type: 0,
+          is_no_ship_addr: 0,
+          total_vjifen: '',
+          wfr: 'wxBuyerShare',
+          appid: '',
+          discount_list: [],
+          invalid_shop_list: [],
+          pay_type: 0
+        },
+        context: {
+          subChannel: 'browser',
+          thirdSubchannel: 'safari'
+        },
+        udc: this.config.udc || '',
+        wdtoken: this.config.wdtoken || ''
+      });
+    }
 
     return {
       buyer_name: this.config.buyer_name,

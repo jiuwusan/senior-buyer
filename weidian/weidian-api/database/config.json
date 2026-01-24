@@ -7,6 +7,18 @@
     "postInterval": 50,
     "buyers": [
       {
+        "disabled": true,
+        "buyer_name": "胡章容_15923649848",
+        "buyer_id": "1960486402",
+        "address_id": "495767721",
+        "source_id": "6df14f35dae7e6e49e1a944cd2ad4adf",
+        "shop_name": "行星文化 PlanetCulture",
+        "shopid": "1711911458",
+        "wdtoken": "319ac43a",
+        "cookie": "wdtoken=319ac43a; __spider__sessionid=a16b95b17a6cacfa; __spider__visitorid=db8faccf6e7b1c81; v-components/clean-up-advert@private_domain=1711911458; v-components/clean-up-advert@wx_app=1711911458; visitor_id=da79995e-4d51-433a-b560-30b8f46975d4; login_token=_EwWqqVIQUdxz4NyAcW2WBp2uLefkr-t6LdQqtLQZOykU1lQ10e8gbnCjw9L1drhBNg3B6hSlT_vb6VhOo-Pm2f-p-b5OQkB56Zu5lMAdOqJwI7eNcbn9Ve9UQ0eaJvJFpTjX9oj6GgdUpcfWmsyCew8JPdF3iz6SjxUBPfeEhY_qdx5-4IpnpJxL7Y24zrnh6-BEihNxHUZNfsDheaVVetlzdnmdrYo1Q2RQEq2xt7kF5-ioCUEavlxHcAwp4PGkihxFxlCQ; is_login=true; login_type=LOGIN_USER_TYPE_MASTER; login_source=LOGIN_USER_SOURCE_MASTER; uid=1960486402; duid=1960486402; sid=1807352637; smart_login_type=0",
+        "udc": ""
+      },
+      {
         "disabled": false,
         "buyer_name": "九五三_15330368781",
         "buyer_id": "1960486402",
