@@ -42,14 +42,14 @@ class Order {
       (async () => {
         console.log('开始轮询下单');
         const pollingStart = Date.now();
-        const TIMEOUT = 10000;
+        const TIMEOUT = 15000;
 
         // 使用同步循环 + await 补偿
         while (this.polling && Date.now() - pollingStart < TIMEOUT) {
           const currentStart = Date.now();
 
           try {
-            await this.createOrder({ combine: currentStart - pollingStart < 3000 });
+            await this.createOrder({ combine: currentStart - pollingStart < 8000 });
           } catch (error) {
             console.error('下单异常:', error);
           }
