@@ -57,69 +57,96 @@ platform/
 │   ├── service/         # Business logic layer
 │   ├── database/        # Configuration storage (JSON)
 │   ├── public/          # Static assets
-│   ├── app.js           # Koa application entry
-│   └── index.js         # Server startup
-└── refs/                # API documentation/reference
+│   └── index.js         # Server startup (Koa app initialization)
 ```
 
-### Core Service Classes
+### Service Layer Hierarchy
 
-**Order** (`service/order.js`): Manages multiple OrderTask instances, implements polling mechanism, coordinates parallel orders across buyers.
+The service layer implements a three-tier hierarchy for order management:
 
-**OrderTask** (`service/order_task.js`): Represents a timed purchasing task with target time configuration, contains multiple Buyer instances.
+1. **Order** (`service/order.js`): Top-level orchestrator
+   - Manages multiple OrderTask instances
+   - Implements polling mechanism with configurable interval
+   - Coordinates parallel order execution across all tasks
+   - Polling runs for fixed duration (Weidian: 15s, Youzan: 10s)
 
-**Buyer** (`service/buyer.js`): Handles individual buyer operations - cart queries, order parameter generation, order creation.
+2. **OrderTask** (`service/order_task.js`): Per-task coordinator
+   - Represents a timed purchasing task with target time configuration
+   - Contains multiple Buyer instances (one per account)
+   - Implements advance timing logic: waits until `advancePostInterval` before target, then posts at `postInterval` for `postDuration`
+   - Tracks running state to prevent concurrent execution
+
+3. **Buyer** (`service/buyer.js`): Individual account operations
+   - Handles cart queries, order parameter generation, order creation
+   - Tracks `succeedIds` to prevent duplicate orders
+   - For Weidian: generates separate orders per cart item (one-product-one-order)
+   - For Youzan: supports combined orders via `combine` parameter
 
 ### Authentication
 
-Both platforms use cookie-based session authentication:
-- **Weidian:** `wdtoken`, `cookie`, `udc` fields
-- **Youzan:** `kdt_session_id`, `cookie`, `user_id`
+Both platforms use cookie-based session authentication (no OAuth):
 
-No OAuth - authentication credentials stored in platform configuration files.
+- **Weidian:** `wdtoken`, `cookie`, `udc` fields stored in `database/config.json`
+- **Youzan:** `kdt_session_id`, `cookie`, `user_id` stored in `service/config.js`
 
-### Order Creation Strategy
-
-- **Weidian:** One-product-one-order (each cart item becomes separate order)
-- **Youzan:** Supports combined orders (all items in single order via `combine` parameter)
+Buyers can be disabled via `disabled: true` in configuration.
 
 ### Configuration Storage
 
-- **Weidian:** `weidian/weidian-api/database/config.json`
-- **Youzan:** `youzan/youzan-api/service/config.js`
+- **Weidian:** `weidian/weidian-api/database/config.json` (JSON file)
+- **Youzan:** `youzan/youzan-api/service/config.js` (JS module exporting array)
 
-Configuration includes target time, advance timing parameters, and buyer credentials.
+Configuration structure per task:
+```javascript
+{
+  targetTime: "2025/12/12 16:03:00",   // Target purchase time
+  advanceTimestamps: 1000,              // Max advance time (ms)
+  advancePostInterval: 200,             // Interval during advance phase (ms)
+  postDuration: 1000,                   // Duration of post-target phase (ms)
+  postInterval: 50,                     // Interval during post phase (ms)
+  buyers: [...]                         // Array of buyer credentials
+}
+```
 
-## API Endpoints
+### API Endpoints
 
 Both platforms expose similar REST APIs under `/weidian/api/*` and `/youzan/api/*`:
 
-- `GET /timestamp` - Server timestamp
-- `GET /order/query/config` - Current configuration
-- `GET /order/query/cart` - Shopping cart query
-- `GET /order/query/preOrder` - Pre-order information
-- `POST /order/create` - Create orders
-- `POST /order/polling/create` - Start/stop polling orders
-- `POST /order/target/create` - Execute target-time order
+- `GET /timestamp` - Server timestamp for time synchronization
+- `GET /order/query/config` - Current configuration (all tasks and buyers)
+- `GET /order/query/cart` - Query shopping carts (must call before creating orders)
+- `GET /order/query/preOrder` - Preview order parameters without submitting
+- `POST /order/create` - Create orders (body: `{ combine: boolean }`)
+- `POST /order/polling/create` - Start/stop polling orders (body: `{ polling: boolean, interval: number }`)
+- `POST /order/target/create` - Execute target-time order (checks if within advance window)
 
-## Code Style
+### Order Flow
+
+1. **Query Cart:** Call `/order/query/cart` to fetch cart contents and generate order parameters
+2. **Preview Orders:** Call `/order/query/preOrder` to review generated order parameters
+3. **Create Orders:** Call `/order/create` with `combine` flag
+   - `combine: true`: Single order with all items (Youzan only)
+   - `combine: false`: Separate orders per item (Weidian default)
+
+### Code Style
 
 Prettier configuration (`.prettierrc`):
 - Single quotes
 - 180 character line width
-- 2-space tabs
+- 2-space indentation
 - Semicolons required
 - No trailing commas
 
-## Important Patterns
+### Important Patterns
 
-1. **Response Middleware:** Global `ctx.success()` and `ctx.fail()` for standardized API responses
-2. **Error Handling:** Global try-catch middleware in Koa
-3. **Success Tracking:** Buyers track `succeedIds` to prevent duplicate orders
-4. **HTML Parsing:** Weidian uses Cheerio to extract data from HTML cart pages
-5. **UUID Generation:** Custom UUID v4 implementation for request tracking
+1. **Response Middleware:** Global `ctx.success(data, msg)` and `ctx.fail(code, msg, data)` for standardized API responses
+2. **Error Handling:** Global try-catch gateway middleware in `index.js`
+3. **Success Tracking:** Buyers track `succeedIds` array to prevent duplicate orders
+4. **HTML Parsing:** Weidian uses Cheerio to extract cart data from `__rocker-render-inject__` script tag
+5. **UUID Generation:** Custom UUID v4 implementation in `Buyer.uuid()` for request tracking
+6. **Async Polling:** Order.pollingOrder uses IIFE pattern for non-blocking async loop with timeout
 
-## Production Paths (via Jenkins)
+### Production Paths (via Jenkins)
 
 Remote server: `10.10.0.139`, PM2 Docker container
 - Weidian: `/app/services/senior-buyer/weidian/weidian-api`

@@ -8,8 +8,11 @@ const load = async () => {
   return await fs.readJson(configPath);
 };
 
-const update = async () => {
-  // 更新用户信息
+const update = async (data) => {
+  const configPath = path.join(__dirname, '../database', 'config.json');
+  console.log('更新配置文件:', configPath);
+  await fs.writeJson(configPath, data, { spaces: 2 });
+  return data;
 };
 
 module.exports = {
