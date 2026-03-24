@@ -1,5 +1,80 @@
 let configData = [];
 let selectedBuyers = {};
+const apiDefinitions = [
+  {
+    key: 'timestamp',
+    name: '获取时间戳',
+    method: 'GET',
+    path: '/weidian/api/timestamp',
+    description: '获取服务端当前时间戳。',
+    defaultParams: () => ({})
+  },
+  {
+    key: 'queryConfig',
+    name: '查询配置',
+    method: 'GET',
+    path: '/weidian/api/order/query/config',
+    description: '获取当前任务配置。',
+    defaultParams: () => ({})
+  },
+  {
+    key: 'queryCart',
+    name: '查询购物车',
+    method: 'GET',
+    path: '/weidian/api/order/query/cart',
+    description: '查询所有启用买家的购物车。',
+    defaultParams: () => ({})
+  },
+  {
+    key: 'queryPreOrder',
+    name: '查询预下单',
+    method: 'GET',
+    path: '/weidian/api/order/query/preOrder',
+    description: '查询预下单参数。',
+    defaultParams: () => ({})
+  },
+  {
+    key: 'splitOrder',
+    name: '拆单下单',
+    method: 'POST',
+    path: '/weidian/api/order/create',
+    description: '对全部任务按商品拆单发起下单。',
+    defaultParams: () => ({ combine: false })
+  },
+  {
+    key: 'combineOrder',
+    name: '聚合下单',
+    method: 'POST',
+    path: '/weidian/api/order/create',
+    description: '对全部任务按聚合订单发起下单。',
+    defaultParams: () => ({ combine: true })
+  },
+  {
+    key: 'pollingCreate',
+    name: '轮询下单',
+    method: 'POST',
+    path: '/weidian/api/order/polling/create',
+    description: '开启或停止轮询下单。',
+    defaultParams: () => ({ polling: true, interval: 50 })
+  },
+  {
+    key: 'targetCreate',
+    name: '目标时间下单',
+    method: 'POST',
+    path: '/weidian/api/order/target/create',
+    description: '检查目标时间并触发任务。',
+    defaultParams: () => ({})
+  },
+  {
+    key: 'updateConfig',
+    name: '更新配置',
+    method: 'POST',
+    path: '/weidian/api/order/update/config',
+    description: '将当前页面配置提交到后端。',
+    defaultParams: () => configData
+  }
+];
+let activeApiKey = apiDefinitions[0].key;
 
 function showMessage(msg, type = 'success') {
   const messageEl = document.getElementById('message');
@@ -57,10 +132,12 @@ function renderConfig() {
         <button class="btn btn-primary" onclick="addTask()">添加任务</button>
       </div>
     `;
+    syncApiDebugger(false);
     return;
   }
 
   container.innerHTML = configData.map((task, taskIndex) => renderTask(task, taskIndex)).join('');
+  syncApiDebugger(false);
 }
 
 function renderTask(task, taskIndex) {
@@ -275,6 +352,213 @@ function toggleBuyer(taskIndex, buyerIndex) {
 function updateBuyer(taskIndex, buyerIndex, field, value) {
   configData[taskIndex].buyers[buyerIndex][field] = value;
 }
+
+function getApiDefinition(apiKey = activeApiKey) {
+  return apiDefinitions.find(api => api.key === apiKey) || apiDefinitions[0];
+}
+
+function formatJson(value) {
+  return JSON.stringify(value, null, 2);
+}
+
+function getDefaultApiParams(api) {
+  return api.defaultParams ? api.defaultParams() : {};
+}
+
+function getApiParamsInput() {
+  return document.getElementById('apiParamsInput');
+}
+
+function getApiResultElement() {
+  return document.getElementById('apiResult');
+}
+
+function getApiRequestUrlElement() {
+  return document.getElementById('apiRequestUrl');
+}
+
+function openApiModal() {
+  document.getElementById('apiModal').classList.add('show');
+  document.body.classList.add('modal-open');
+  syncApiDebugger(true);
+}
+
+function closeApiModal() {
+  document.getElementById('apiModal').classList.remove('show');
+  document.body.classList.remove('modal-open');
+}
+
+function handleModalOverlayClick(event) {
+  if (event.target.id === 'apiModal') {
+    closeApiModal();
+  }
+}
+
+function handleApiSelectionChange(apiKey) {
+  activeApiKey = apiKey;
+  syncApiDebugger(true);
+}
+
+function fillApiDefaultParams() {
+  const api = getApiDefinition();
+  getApiParamsInput().value = formatJson(getDefaultApiParams(api));
+  updateApiRequestPreview();
+}
+
+function renderApiOptions() {
+  const select = document.getElementById('apiSelect');
+  const apiList = document.getElementById('apiList');
+
+  select.innerHTML = apiDefinitions
+    .map(api => `<option value="${api.key}" ${api.key === activeApiKey ? 'selected' : ''}>${api.method} ${api.name}</option>`)
+    .join('');
+
+  apiList.innerHTML = apiDefinitions
+    .map(
+      api => `
+        <button class="api-list-item ${api.key === activeApiKey ? 'active' : ''}" onclick="handleApiSelectionChange('${api.key}')">
+          <span class="api-list-method api-list-method-${api.method.toLowerCase()}">${api.method}</span>
+          <span class="api-list-name">${api.name}</span>
+        </button>
+      `
+    )
+    .join('');
+}
+
+function syncApiDebugger(resetParams = false) {
+  const api = getApiDefinition();
+  const modal = document.getElementById('apiModal');
+  const paramsInput = getApiParamsInput();
+
+  if (!modal || !paramsInput) {
+    return;
+  }
+
+  renderApiOptions();
+  document.getElementById('apiMethod').textContent = api.method;
+  document.getElementById('apiMethod').className = `api-method api-method-${api.method.toLowerCase()}`;
+  document.getElementById('apiPath').textContent = api.path;
+  document.getElementById('apiDescription').textContent = api.description;
+  document.getElementById('apiParamsLabel').textContent = api.method === 'GET' ? '查询参数 (JSON)' : '请求 Body (JSON)';
+
+  if (resetParams || !paramsInput.value.trim()) {
+    paramsInput.value = formatJson(getDefaultApiParams(api));
+  }
+
+  updateApiRequestPreview();
+}
+
+function parseApiParams() {
+  const raw = getApiParamsInput().value.trim();
+  if (!raw) {
+    return {};
+  }
+  return JSON.parse(raw);
+}
+
+function appendQueryParam(url, key, value) {
+  if (value === undefined || value === null || value === '') {
+    return;
+  }
+  if (Array.isArray(value)) {
+    value.forEach(item => appendQueryParam(url, key, item));
+    return;
+  }
+  if (typeof value === 'object') {
+    url.searchParams.set(key, JSON.stringify(value));
+    return;
+  }
+  url.searchParams.set(key, String(value));
+}
+
+function buildApiRequestPreview() {
+  const api = getApiDefinition();
+  const params = parseApiParams();
+  const url = new URL(api.path, window.location.origin);
+
+  if (api.method === 'GET') {
+    Object.entries(params || {}).forEach(([key, value]) => appendQueryParam(url, key, value));
+    url.searchParams.set('_t', String(Date.now()));
+  }
+
+  return {
+    api,
+    params,
+    url
+  };
+}
+
+function updateApiRequestPreview() {
+  try {
+    const { api, url } = buildApiRequestPreview();
+    const preview = api.method === 'POST' ? `${url.toString()} [body]` : url.toString();
+    getApiRequestUrlElement().value = preview;
+  } catch (error) {
+    getApiRequestUrlElement().value = '参数 JSON 无法解析';
+  }
+}
+
+async function invokeSelectedApi() {
+  const resultEl = getApiResultElement();
+
+  try {
+    const { api, params, url } = buildApiRequestPreview();
+    resultEl.textContent = '请求中...';
+
+    const options = {
+      method: api.method,
+      headers: {}
+    };
+
+    if (api.method === 'POST') {
+      options.headers['Content-Type'] = 'application/json';
+      options.body = JSON.stringify(params);
+    }
+
+    const response = await fetch(url.toString(), options);
+    const contentType = response.headers.get('content-type') || '';
+    const responseData = contentType.includes('application/json') ? await response.json() : await response.text();
+
+    resultEl.textContent = formatJson({
+      request: {
+        method: api.method,
+        url: url.toString(),
+        ...(api.method === 'POST' ? { body: params } : {})
+      },
+      response: {
+        status: response.status,
+        ok: response.ok,
+        data: responseData
+      }
+    });
+
+    if (response.ok) {
+      showMessage(`${api.name} 调用成功`);
+      if (api.key === 'updateConfig' || api.key === 'queryConfig') {
+        await loadConfig();
+      }
+    } else {
+      showMessage(`${api.name} 调用失败`, 'error');
+    }
+  } catch (error) {
+    resultEl.textContent = formatJson({
+      error: error.message
+    });
+    showMessage(`接口调用失败: ${error.message}`, 'error');
+  }
+}
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    closeApiModal();
+  }
+});
+
+document.addEventListener('input', event => {
+  if (event.target && event.target.id === 'apiParamsInput') {
+    updateApiRequestPreview();
+  }
+});
 
 // Load config on page load
 loadConfig();
