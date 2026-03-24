@@ -12,15 +12,18 @@ COPY weidian/weidian-api/package.json /app/weidian/weidian-api/package.json
 COPY weidian/weidian-api/yarn.lock /app/weidian/weidian-api/yarn.lock
 COPY youzan/youzan-api/package.json /app/youzan/youzan-api/package.json
 COPY youzan/youzan-api/yarn.lock /app/youzan/youzan-api/yarn.lock
+COPY taobao/taobao-api/package.json /app/taobao/taobao-api/package.json
+COPY taobao/taobao-api/yarn.lock /app/taobao/taobao-api/yarn.lock
 
 RUN cd /app/weidian/weidian-api && yarn install --frozen-lockfile --production=true
 RUN cd /app/youzan/youzan-api && yarn install --frozen-lockfile --production=true
+RUN cd /app/taobao/taobao-api && yarn install --frozen-lockfile --production=true
 
 COPY . .
 
 ENV NODE_ENV=production
 ENV PM2_HOME=/app/.pm2
 
-EXPOSE 37071 37072
+EXPOSE 37071 37072 37073
 
 CMD ["pm2-runtime", "start", "ecosystem.config.js"]
