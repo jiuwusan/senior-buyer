@@ -1,0 +1,15 @@
+services:
+  senior-buyer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: senior-buyer
+    environment:
+      NODE_ENV: production
+    ports:
+      - '37071:37071'
+      - '37072:37072'
+    restart: always
+    volumes:
+      - ./weidian/weidian-api/database:/app/weidian/weidian-api/database
+      - ./logs:/app/logs
