@@ -1,7 +1,21 @@
 # senior-buyer
+
 脚本定点抢购 微店 有赞
 
-# koa
+# 店铺地址
+
+微店 行星文化：https://shop1711911458.v.weidian.com/?userid=1711911458
+有赞 素龙 https://shop149420996.m.youzan.com/wscshop/showcase/homepage?kdt_id=149228828
+
+# 定时任务
+
+```bash
+crontab -l
+crontab -e
+
+20 12 * * * curl -X POST http://127.0.0.1:37071/weidian/api/order/polling/create -H "Content-Type: application/json" -d '{"polling": true, "interval": 50}' >> /tmp/weidian_curl.log 2>&1
+00 12 * * * curl -X POST http://127.0.0.1:37072/youzan/api/order/polling/create -H "Content-Type: application/json" -d '{"polling": true, "interval": 50}' >> /tmp/youzan_curl.log 2>&1
+```
 
 # Docker Compose 启动
 
@@ -11,6 +25,7 @@
 
 ```bash
 docker compose up --build -d
+docker-compose up --build -d
 ```
 
 ## 2. 服务端口
@@ -45,4 +60,5 @@ docker compose logs -f
 - 服务日志目录: `./logs`
 
 # jenkins
+
 curl -u zhoukaidong:11d3db647b16c4e8488f40bac6190f7304 https://cloud.jiuwusan.cn:36443/jenkins-api/job/senior-buyer/build?token=610f2dcb-87c2-4176-bc15-13bca77b0c4b
