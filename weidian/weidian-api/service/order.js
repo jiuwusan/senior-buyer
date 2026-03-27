@@ -50,7 +50,7 @@ class Order {
       (async () => {
         console.log('开始轮询下单');
         const pollingStart = Date.now();
-        const TIMEOUT = 15000;
+        const TIMEOUT = 35000;
 
         // 使用同步循环 + await 补偿
         while (this.polling && Date.now() - pollingStart < TIMEOUT) {
