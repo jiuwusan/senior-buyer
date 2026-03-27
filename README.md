@@ -33,7 +33,6 @@ docker-compose up -d --build --force-recreate
 
 - 微店服务: `http://localhost:37071`
 - 有赞服务: `http://localhost:37072`
-- 淘宝服务: `http://localhost:37073`
 
 ## 3. 停止服务
 
@@ -49,8 +48,6 @@ docker compose down
 - 微店错误日志: `logs/weidian-api-error.log`
 - 有赞标准输出: `logs/youzan-api-out.log`
 - 有赞错误日志: `logs/youzan-api-error.log`
-- 淘宝标准输出: `logs/taobao-api-out.log`
-- 淘宝错误日志: `logs/taobao-api-error.log`
 
 也可以直接查看容器日志：
 
@@ -61,7 +58,6 @@ docker compose logs -f
 ## 5. 持久化目录
 
 - 微店配置文件目录: `./weidian/weidian-api/database`
-- 淘宝配置文件目录: `./taobao/taobao-api/database`
 - 服务日志目录: `./logs`
 
 # jenkins
