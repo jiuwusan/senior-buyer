@@ -26,6 +26,7 @@ crontab -e
 ```bash
 docker compose up --build -d
 docker-compose up --build -d
+docker-compose up -d --build --force-recreate
 ```
 
 ## 2. 服务端口
