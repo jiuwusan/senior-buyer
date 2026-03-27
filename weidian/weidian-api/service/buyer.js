@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const fs = require('fs-extra');
+const { createOrderLimiter } = require('./create_order_limiter');
 const { runSequential } = require('./sequential');
 
 class Buyer {
@@ -215,6 +216,10 @@ class Buyer {
       };
     }
     console.log('开始下单...', submitId);
+    const waitedMs = await createOrderLimiter.waitTurn();
+    if (waitedMs > 0) {
+      console.log(`CreateOrder限流等待 ${waitedMs} ms:`, submitId);
+    }
     const result = await this.fetchWeidianAPI('https://thor.weidian.com/vbuy/CreateOrder/1.0', {
       method: 'POST',
       data: orderParam

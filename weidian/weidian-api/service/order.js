@@ -5,7 +5,6 @@ const { runSequential } = require('./sequential');
 class Order {
   orderTasks = [];
   polling = false;
-  interval = 100;
   constructor() {
     this.updateTasks().catch(error => {
       this.orderTasks = [];
@@ -38,11 +37,10 @@ class Order {
     return await runSequential(this.orderTasks, task => task.queryPreOrder());
   }
 
-  pollingOrder({ polling = false, interval = 50 } = {}) {
+  pollingOrder({ polling = false } = {}) {
     const isStarting = polling && !this.polling; // 记录是否是从“关”到“开”
     const isStopping = !polling && this.polling; // 记录是否是从“开”到“关”
 
-    this.interval = interval;
     this.polling = polling;
 
     isStopping && console.log('用户手动触发：停止轮询');
@@ -55,22 +53,10 @@ class Order {
 
         // 使用同步循环 + await 补偿
         while (this.polling && Date.now() - pollingStart < TIMEOUT) {
-          const currentStart = Date.now();
-
           try {
-            await this.createOrder({ combine: currentStart - pollingStart < 5000 });
+            await this.createOrder({ combine: Date.now() - pollingStart < 5000 });
           } catch (error) {
             console.error('下单异常:', error);
-          }
-
-          // 计算剩余需要等待的时间
-          const executionTime = Date.now() - currentStart;
-          const delay = this.interval - executionTime;
-
-          // 二次确认：如果在请求期间手动停止了，就没必要 sleep 了
-          if (this.polling && delay > 0) {
-            console.log(`等待 ${delay} ms`);
-            await new Promise(resolve => setTimeout(resolve, delay));
           }
         }
 
