@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const fs = require('fs-extra');
+const { runSequential } = require('./sequential');
 
 class Buyer {
   config = {
@@ -195,14 +196,7 @@ class Buyer {
       return this.creatOrder(this.combineOrder);
     }
     console.log('购物车结算...');
-    const batchSize = 2;
-    const results = [];
-    for (let i = 0; i < this.orderList.length; i += batchSize) {
-      const batchOrder = this.orderList.slice(i, i + batchSize);
-      const batchResults = await Promise.all(batchOrder.map(order => this.creatOrder(order)));
-      results.push(...batchResults);
-    }
-    return results;
+    return await runSequential(this.orderList, order => this.creatOrder(order));
   }
 
   async creatOrder(orderInfo) {

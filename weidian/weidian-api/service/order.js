@@ -1,5 +1,6 @@
 const config = require('./config');
 const { OrderTask } = require('./order_task');
+const { runSequential } = require('./sequential');
 
 class Order {
   orderTasks = [];
@@ -26,15 +27,15 @@ class Order {
     return this.orderTasks.map(item => item.getConfig());
   }
   async queryCart() {
-    return await Promise.all(this.orderTasks.map(task => task.queryCart()));
+    return await runSequential(this.orderTasks, task => task.queryCart());
   }
 
   async createOrder({ combine }) {
-    return await Promise.all(this.orderTasks.map(task => task.createOrder({ combine })));
+    return await runSequential(this.orderTasks, task => task.createOrder({ combine }));
   }
 
   async queryPreOrder() {
-    return await Promise.all(this.orderTasks.map(task => task.queryPreOrder()));
+    return await runSequential(this.orderTasks, task => task.queryPreOrder());
   }
 
   pollingOrder({ polling = false, interval = 50 } = {}) {
@@ -57,7 +58,7 @@ class Order {
           const currentStart = Date.now();
 
           try {
-            await this.createOrder({ combine: currentStart - pollingStart < 8000 });
+            await this.createOrder({ combine: currentStart - pollingStart < 5000 });
           } catch (error) {
             console.error('下单异常:', error);
           }
@@ -83,7 +84,7 @@ class Order {
 
   async targetOrder() {
     const currentTimestamp = Date.now();
-    return await Promise.all(this.orderTasks.map(task => task.checkTargetTime(currentTimestamp)));
+    return await runSequential(this.orderTasks, task => task.checkTargetTime(currentTimestamp));
   }
 }
 

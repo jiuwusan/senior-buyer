@@ -1,4 +1,5 @@
 const Buyer = require('./buyer');
+const { runSequential } = require('./sequential');
 
 class OrderTask {
   config = {};
@@ -16,15 +17,15 @@ class OrderTask {
   }
 
   async queryCart() {
-    return await Promise.all(this.buyers.map(buyer => buyer.queryCart()));
+    return await runSequential(this.buyers, buyer => buyer.queryCart());
   }
 
   async createOrder({ combine }) {
-    return await Promise.all(this.buyers.map(buyer => buyer.orderCart({ combine })));
+    return await runSequential(this.buyers, buyer => buyer.orderCart({ combine }));
   }
 
   async queryPreOrder() {
-    return await Promise.all(this.buyers.map(buyer => buyer.queryPreOrder()));
+    return await runSequential(this.buyers, buyer => buyer.queryPreOrder());
   }
 
   async startTask(diffTimestamp) {
