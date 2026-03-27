@@ -14,3 +14,9 @@ services:
       - ./weidian/weidian-api/database:/app/weidian/weidian-api/database
       - ./taobao/taobao-api/database:/app/taobao/taobao-api/database
       - ./logs:/app/logs
+    networks:
+      - wk
+
+networks:
+  wk:
+    external: true
