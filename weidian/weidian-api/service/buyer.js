@@ -206,7 +206,7 @@ class Buyer {
     // return await new Promise(async resolve => setTimeout(resolve, parseInt(Math.random() * 5 + 5)));
     const { submitId, itemName, orderParam } = orderInfo;
     if (this.succeedIds.includes(submitId)) {
-      console.log('已下单成功，跳过...', submitId);
+      console.log('跳过...', submitId);
       return {
         buyerName: this.config.buyer_name,
         submitId,
@@ -227,6 +227,7 @@ class Buyer {
     console.log('下单结果:', result);
     if (result?.status?.code === 0 && result?.status?.message === 'OK') {
       // 下单成功
+      console.log('下单成功:', { buyerName: this.config.buyer_name, submitId, itemName });
       this.succeedIds.push(orderInfo.submitId);
       orderInfo.succeed = true;
     }
