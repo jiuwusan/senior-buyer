@@ -1,6 +1,6 @@
 services:
   senior-buyer:
-    image: jiuwusan/senior-buyer:latest
+    image: jiuwusan/z-senior-buyer:latest
     container_name: senior-buyer
     environment:
       NODE_ENV: production

@@ -1,4 +1,4 @@
-# senior-buyer
+# z-senior-buyer
 
 脚本定点抢购 微店 有赞
 
@@ -19,7 +19,7 @@ crontab -e
 
 # GitHub Actions 构建与 Docker Hub 发布
 
-推送到 GitHub `master` 后，GitHub Actions 会先运行配置读取测试，再构建 `linux/amd64` 和 `linux/arm64` 镜像并发布到 `jiuwusan/senior-buyer:latest`。也可以在 Actions 页面手动运行工作流。
+推送到 GitHub `master` 后，GitHub Actions 会先运行配置读取测试，再构建 `linux/amd64` 和 `linux/arm64` 镜像并发布到 `jiuwusan/z-senior-buyer:latest`。也可以在 Actions 页面手动运行工作流。
 
 在 GitHub 仓库的 **Settings → Secrets and variables → Actions** 中配置仓库密钥 `DOCKERHUB_TOKEN`，值为 Docker Hub 账户 `jiuwusan` 的访问令牌。发布工作流不会把令牌写入镜像。
 
