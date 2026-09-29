@@ -3,3 +3,14 @@ node_modules
 **/node_modules
 **/npm-debug.log
 **/yarn-error.log
+.github
+.gitignore
+Jenkinsfile
+README.md
+docs
+logs
+**/database
+**/refs
+**/service/mock.json
+**/*.test.js
+*.yml

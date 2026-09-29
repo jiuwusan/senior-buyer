@@ -1,8 +1,6 @@
 services:
   senior-buyer:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: jiuwusan/senior-buyer:latest
     container_name: senior-buyer
     environment:
       NODE_ENV: production
@@ -12,6 +10,7 @@ services:
     restart: always
     volumes:
       - ./weidian/weidian-api/database:/app/weidian/weidian-api/database
+      - ./youzan/youzan-api/database:/app/youzan/youzan-api/database
       - ./logs:/app/logs
     networks:
       - wk

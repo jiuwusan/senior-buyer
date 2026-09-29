@@ -17,6 +17,14 @@ crontab -e
 00 12 * * * curl -X POST http://127.0.0.1:37072/youzan/api/order/polling/create -H "Content-Type: application/json" -d '{"polling": true, "interval": 50}' >> /tmp/youzan_curl.log 2>&1
 ```
 
+# GitHub Actions 构建与 Docker Hub 发布
+
+推送到 GitHub `master` 后，GitHub Actions 会先运行配置读取测试，再构建 `linux/amd64` 和 `linux/arm64` 镜像并发布到 `jiuwusan/senior-buyer:latest`。也可以在 Actions 页面手动运行工作流。
+
+在 GitHub 仓库的 **Settings → Secrets and variables → Actions** 中配置仓库密钥 `DOCKERHUB_TOKEN`，值为 Docker Hub 账户 `jiuwusan` 的访问令牌。发布工作流不会把令牌写入镜像。
+
+微店和有赞的账户配置分别保存在 `weidian/weidian-api/database/config.json` 与 `youzan/youzan-api/database/config.json`。它们不会进入 Git 或镜像；部署前请在服务器上准备好这两个文件。若文件不存在，服务会初始化为空数组 `[]`。
+
 # Docker Compose 启动
 
 ## 1. 启动服务
@@ -24,9 +32,8 @@ crontab -e
 在项目根目录执行：
 
 ```bash
-docker compose up --build -d
-docker-compose up --build -d
-docker-compose up -d --build --force-recreate
+docker compose pull
+docker compose up -d
 ```
 
 ## 2. 服务端口
@@ -58,8 +65,5 @@ docker compose logs -f
 ## 5. 持久化目录
 
 - 微店配置文件目录: `./weidian/weidian-api/database`
+- 有赞配置文件目录: `./youzan/youzan-api/database`
 - 服务日志目录: `./logs`
-
-# jenkins
-
-curl -u zhoukaidong:11d3db647b16c4e8488f40bac6190f7304 https://cloud.jiuwusan.cn:36443/jenkins-api/job/senior-buyer/build?token=610f2dcb-87c2-4176-bc15-13bca77b0c4b

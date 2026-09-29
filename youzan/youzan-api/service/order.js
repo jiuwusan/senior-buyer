@@ -1,4 +1,4 @@
-const cfg = require('./config');
+const config = require('./config');
 const { OrderTask } = require('./order_task');
 
 class Order {
@@ -6,10 +6,14 @@ class Order {
   polling = false;
   interval = 100;
   constructor() {
-    this.updateTasks();
+    this.updateTasks().catch(error => {
+      this.orderTasks = [];
+      console.error('初始化任务失败:', error);
+    });
   }
 
   async updateTasks() {
+    const cfg = await config.load();
     cfg.forEach((item, index) => console.log(`配置文件 ${index + 1}：`, item));
     this.orderTasks = cfg.map(task => new OrderTask(task));
   }
