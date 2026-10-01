@@ -28,7 +28,7 @@ jobs:
           node-version: 22
 
       - name: Run tests
-        run: node --test youzan/youzan-api/service/config.test.js
+        run: node --test
 
   publish:
     name: Build and publish image
