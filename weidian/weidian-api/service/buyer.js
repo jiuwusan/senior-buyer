@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
-const fs = require('fs-extra');
 const { createOrderLimiter } = require('./create_order_limiter');
 const { runSequential } = require('./sequential');
+const { loginAndResolveBuyer } = require('./session');
 
 class Buyer {
   config = {
@@ -16,8 +16,10 @@ class Buyer {
   orderList = [];
   succeedIds = [];
   combineOrder = {};
-  constructor(config) {
-    this.config = config;
+  constructor({ source_id, username, password }, sessionLoader = loginAndResolveBuyer) {
+    this.credentials = { username, password };
+    this.sessionLoader = sessionLoader;
+    this.config = { source_id, buyer_name: username };
   }
 
   uuid() {
@@ -30,7 +32,6 @@ class Buyer {
   }
 
   async fetchWeidianAPI(url, options) {
-    console.log('接口请求 原始参数:', url, options);
     // 判断是否为 HTML 页面
     const isHtmlPage = /.*\.(html|php)$/.test(url);
     // 处理参数
@@ -69,14 +70,12 @@ class Buyer {
     };
     let response;
     try {
-      console.log('接口请求:', url, options);
       response = await fetch(url, options);
-      console.log('接口响应:', response);
+      if (!response.ok) throw new Error(`微店请求失败 (${response.status})`);
       return isHtmlPage ? await response.text() : await response.json();
     } catch (error) {
-      console.log('请求异常:', error);
+      throw new Error(`微店接口请求异常：${error.message}`);
     }
-    return response;
   }
 
   extractDataObjFromHtml(htmlText) {
@@ -98,11 +97,16 @@ class Buyer {
   }
 
   async authorization() {
+    const session = await this.sessionLoader(this.credentials);
+    this.config = { ...this.config, ...session };
     return '登录成功';
   }
 
   async queryCart() {
     console.log('查询购物车...');
+    await this.authorization();
+    this.orderList = [];
+    this.combineOrder = {};
     let list = [];
     try {
       const htmlText = await this.fetchWeidianAPI('https://weidian.com/new-cart/index.php', {
@@ -118,7 +122,8 @@ class Buyer {
       list = JSON.parse(dataStr)?.cart?.result?.shops || [];
       console.log('查询购物车 结果:', list);
     } catch (error) {
-      console.log('查询购物车时出错:', error);
+      console.error('查询购物车时出错:', error);
+      throw error;
     }
 
     // 生成下单参数

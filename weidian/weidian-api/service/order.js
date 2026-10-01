@@ -15,15 +15,14 @@ class Order {
   async updateTasks() {
     try {
       const cfg = await config.load();
-      cfg.forEach((item, index) => console.log(`配置文件 ${index + 1}：`, item));
-      this.orderTasks = cfg.map(task => new OrderTask(task));
+      this.orderTasks = [new OrderTask(cfg)];
     } catch (error) {
       this.orderTasks = [];
       throw error;
     }
   }
   queryConfig() {
-    return this.orderTasks.map(item => item.getConfig());
+    return this.orderTasks[0]?.getConfig() || { source_id: '', users: [] };
   }
   async queryCart() {
     return await runSequential(this.orderTasks, task => task.queryCart());
@@ -38,6 +37,9 @@ class Order {
   }
 
   pollingOrder({ polling = false } = {}) {
+    if (polling && !this.orderTasks.some(task => task.buyers.length > 0)) {
+      return '没有可下单的用户';
+    }
     const isStarting = polling && !this.polling; // 记录是否是从“关”到“开”
     const isStopping = !polling && this.polling; // 记录是否是从“开”到“关”
 
@@ -68,9 +70,9 @@ class Order {
     return polling ? '开始轮询...' : '取消轮询...';
   }
 
-  async targetOrder() {
+  async targetOrder(options = {}) {
     const currentTimestamp = Date.now();
-    return await runSequential(this.orderTasks, task => task.checkTargetTime(currentTimestamp));
+    return await runSequential(this.orderTasks, task => task.checkTargetTime(currentTimestamp, options));
   }
 }
 

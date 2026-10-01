@@ -27,6 +27,13 @@ jobs:
         with:
           node-version: 22
 
+      - name: Install Weidian dependencies
+        working-directory: weidian/weidian-api
+        run: |
+          corepack enable
+          corepack prepare yarn@1.22.22 --activate
+          yarn install --frozen-lockfile --non-interactive
+
       - name: Run tests
         run: node --test
 

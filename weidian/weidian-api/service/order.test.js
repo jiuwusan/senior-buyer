@@ -33,6 +33,7 @@ test('polling runs for 15 seconds and combines orders in the first 3 seconds', a
     calls.push(combine);
     elapsedMs += 1000;
   };
+  order.orderTasks = [{ buyers: [{}] }];
 
   try {
     order.pollingOrder({ polling: true });
@@ -44,6 +45,40 @@ test('polling runs for 15 seconds and combines orders in the first 3 seconds', a
   } finally {
     Date.now = originalNow;
     order.createOrder = originalCreateOrder;
+    order.polling = false;
+  }
+});
+
+test('polling does not start when no users are configured', async () => {
+  const originalLoad = Module._load;
+  const orderPath = path.join(__dirname, 'order.js');
+  Module._load = function (request, parent, isMain) {
+    if (parent?.filename === orderPath && request === './config') {
+      return { load: async () => ({ source_id: '', users: [] }) };
+    }
+    if (parent?.filename === orderPath && request === './order_task') {
+      return { OrderTask: class { buyers = []; } };
+    }
+    return originalLoad.call(this, request, parent, isMain);
+  };
+
+  let order;
+  try {
+    delete require.cache[require.resolve('./order')];
+    order = require('./order');
+    await order.updateTasks();
+  } finally {
+    Module._load = originalLoad;
+  }
+
+  const originalNow = Date.now;
+  let now = 0;
+  Date.now = () => (now += 15000);
+  try {
+    assert.equal(order.pollingOrder({ polling: true }), '没有可下单的用户');
+    assert.equal(order.polling, false);
+  } finally {
+    Date.now = originalNow;
     order.polling = false;
   }
 });
