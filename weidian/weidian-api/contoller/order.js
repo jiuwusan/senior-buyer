@@ -7,6 +7,7 @@ const router = new Router();
 router.get('/timestamp', ctx => ctx.success(Date.now()));
 router.get('/order/query/config', async ctx => ctx.success(await order.queryConfig()));
 router.get('/order/query/cart', async ctx => ctx.success(await order.queryCart()));
+router.post('/order/cookies/refresh', async ctx => ctx.success(await order.refreshCookies()));
 router.get('/order/query/preOrder', async ctx => ctx.success(await order.queryPreOrder()));
 router.post('/order/create', async ctx => ctx.success(await order.createOrder(ctx.request.body || {})));
 router.post('/order/polling/create', async ctx => ctx.success(await order.pollingOrder(ctx.request.body || {})));

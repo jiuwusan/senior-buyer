@@ -96,15 +96,24 @@ class Buyer {
     return null;
   }
 
-  async authorization() {
+  async refreshSession() {
     const session = await this.sessionLoader(this.credentials);
     this.config = { ...this.config, ...session };
+    for (const order of [...this.orderList, this.combineOrder]) {
+      if (!order?.orderParam) continue;
+      const param = JSON.parse(order.orderParam.param);
+      param.buyer = { ...param.buyer, buyer_id: session.buyer_id, address_id: session.address_id };
+      order.orderParam.param = JSON.stringify(param);
+      order.orderParam.wdtoken = session.wdtoken;
+    }
     return '登录成功';
   }
 
   async queryCart() {
     console.log('查询购物车...');
-    await this.authorization();
+    if (!this.config.cookie || !this.config.wdtoken || !this.config.buyer_id || !this.config.address_id) {
+      await this.refreshSession();
+    }
     this.orderList = [];
     this.combineOrder = {};
     let list = [];

@@ -28,6 +28,10 @@ class Order {
     return await runSequential(this.orderTasks, task => task.queryCart());
   }
 
+  async refreshCookies() {
+    return (await runSequential(this.orderTasks, task => task.refreshCookies())).flat();
+  }
+
   async createOrder({ combine }) {
     return await runSequential(this.orderTasks, task => task.createOrder({ combine }));
   }

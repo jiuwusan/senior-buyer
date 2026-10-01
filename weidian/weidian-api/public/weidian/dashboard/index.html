@@ -13,9 +13,12 @@
         <div class="actions">
           <button class="btn btn-secondary" onclick="openApiModal()">接口调用</button>
           <button class="btn btn-secondary" onclick="loadConfig()">刷新配置</button>
+          <button id="refreshCookiesButton" class="btn btn-secondary" onclick="refreshCookies()">批量刷新 Cookie</button>
           <button class="btn btn-primary" onclick="saveConfig()">保存配置</button>
         </div>
       </div>
+
+      <div id="refreshResult" class="refresh-result" role="status" aria-live="polite"></div>
 
       <div id="tasksContainer" class="tasks">
         <div class="loading">加载中...</div>

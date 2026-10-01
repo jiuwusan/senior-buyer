@@ -19,6 +19,18 @@ class OrderTask {
     return await runSequential(this.buyers, buyer => buyer.queryCart());
   }
 
+  async refreshCookies() {
+    return await runSequential(this.buyers, async buyer => {
+      const username = buyer.credentials.username;
+      try {
+        await buyer.refreshSession();
+        return { username, status: 'success' };
+      } catch {
+        return { username, status: 'error', message: '登录失败' };
+      }
+    });
+  }
+
   async createOrder({ combine }) {
     return await runSequential(this.buyers, buyer => buyer.orderCart({ combine }));
   }

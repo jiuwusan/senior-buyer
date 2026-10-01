@@ -25,6 +25,14 @@ const apiDefinitions = [
     defaultParams: () => ({})
   },
   {
+    key: 'refreshCookies',
+    name: '批量刷新 Cookie',
+    method: 'POST',
+    path: '/weidian/api/order/cookies/refresh',
+    description: '重新登录所有已保存账号，刷新 Cookie、默认收货地址和已有下单参数；逐账号返回结果。',
+    defaultParams: () => ({})
+  },
+  {
     key: 'queryPreOrder',
     name: '查询预下单',
     method: 'GET',
@@ -118,6 +126,31 @@ async function saveConfig() {
     await loadConfig();
   } catch (error) {
     showMessage('保存配置失败: ' + error.message, 'error');
+  }
+}
+
+async function refreshCookies() {
+  const button = document.getElementById('refreshCookiesButton');
+  const resultEl = document.getElementById('refreshResult');
+  button.disabled = true;
+  resultEl.textContent = '正在刷新已保存账号的 Cookie...';
+  try {
+    const response = await fetch('/weidian/api/order/cookies/refresh', { method: 'POST' });
+    const result = await response.json();
+    if (!response.ok || result.code !== 200 || !Array.isArray(result.data)) {
+      throw new Error(result.msg || '请求失败');
+    }
+    const succeeded = result.data.filter(item => item.status === 'success').length;
+    const failed = result.data.filter(item => item.status !== 'success').map(item => item.username);
+    resultEl.textContent = result.data.length === 0
+      ? '没有已保存的账号，请先保存配置。'
+      : `Cookie 刷新完成：成功 ${succeeded} 个，失败 ${failed.length} 个。${failed.length ? `失败账号：${failed.join('、')}。` : ''}`;
+    showMessage(failed.length ? '部分账号刷新失败' : 'Cookie 刷新完成', failed.length ? 'error' : 'success');
+  } catch (error) {
+    resultEl.textContent = `Cookie 刷新失败：${error.message}`;
+    showMessage('Cookie 刷新失败', 'error');
+  } finally {
+    button.disabled = false;
   }
 }
 
