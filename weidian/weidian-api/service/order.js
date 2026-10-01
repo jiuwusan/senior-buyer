@@ -15,7 +15,22 @@ class Order {
   async updateTasks() {
     try {
       const cfg = await config.load();
-      this.orderTasks = [new OrderTask(cfg)];
+      const previousBuyers = new Map(this.orderTasks.flatMap(task => task.buyers.map(buyer => [buyer.credentials.username, buyer])));
+      const task = new OrderTask(cfg);
+      task.buyers = task.buyers.map(buyer => {
+        const existing = previousBuyers.get(buyer.credentials.username);
+        if (!existing) return buyer;
+        if (existing.config.source_id !== buyer.config.source_id || existing.config.shopid !== buyer.config.shopid) {
+          existing.orderList = [];
+          existing.combineOrder = {};
+          existing.succeedIds = [];
+        }
+        existing.credentials.password = buyer.credentials.password;
+        existing.config.source_id = buyer.config.source_id;
+        existing.config.shopid = buyer.config.shopid;
+        return existing;
+      });
+      this.orderTasks = [task];
     } catch (error) {
       this.orderTasks = [];
       throw error;

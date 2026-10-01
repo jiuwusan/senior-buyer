@@ -12,7 +12,7 @@ test('polling runs for 15 seconds and combines orders in the first 3 seconds', a
       return { load: async () => [] };
     }
     if (parent?.filename === orderPath && request === './order_task') {
-      return { OrderTask: class {} };
+      return { OrderTask: class { buyers = []; } };
     }
     return originalLoad.call(this, request, parent, isMain);
   };
@@ -20,6 +20,7 @@ test('polling runs for 15 seconds and combines orders in the first 3 seconds', a
   let order;
   try {
     order = require('./order');
+    await order.updateTasks();
   } finally {
     Module._load = originalLoad;
   }
