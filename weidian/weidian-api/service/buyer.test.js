@@ -77,3 +77,22 @@ test('cached user information exposes identity and address without session secre
   assert.ok(Number.isFinite(Date.parse(cached.refreshedAt)));
   assert.doesNotMatch(JSON.stringify(cached), /secret|test-password/);
 });
+
+test('cart query keeps orders only from the configured shop', async () => {
+  const buyer = new Buyer(
+    { source_id: 'source-1', shop_id: '1234567890', username: '13800000000', password: 'test-password' },
+    async credentials => ({ buyer_id: 123, address_id: 55, shopid: credentials.shop_id, wdtoken: 'token', cookie: 'wdtoken=token' })
+  );
+  const shops = ['1711911458', '1234567890'].map(shopId => ({
+    groupId: `group-${shopId}`, shopId,
+    partitions: [{ itemList: [{ itemId: `item-${shopId}`, count: 1, price: '10' }] }]
+  }));
+  buyer.fetchWeidianAPI = async () => `<div id="__rocker-render-inject__" data-obj='${JSON.stringify({ cart: { result: { shops } } })}'></div>`;
+
+  const result = await buyer.queryCart();
+
+  assert.equal(result.list.length, 1);
+  assert.equal(result.list[0].shopId, '1234567890');
+  assert.equal(buyer.orderList.length, 1);
+  assert.equal(JSON.parse(buyer.orderList[0].orderParam.param).shop_list[0].shop_id, '1234567890');
+});

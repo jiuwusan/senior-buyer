@@ -6,9 +6,9 @@ class OrderTask {
   buyers = [];
 
   constructor(config) {
-    const { source_id, users } = config;
+    const { source_id, shop_id, users } = config;
     this.publicConfig = publicView(config);
-    this.buyers = users.map(user => new Buyer({ source_id, ...user }));
+    this.buyers = users.map(user => new Buyer({ source_id, shop_id, ...user }));
   }
 
   getConfig() {

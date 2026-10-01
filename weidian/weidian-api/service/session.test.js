@@ -62,3 +62,17 @@ test('login errors do not include the submitted password', async () => {
     error => error.message.includes('需要图形验证') && !error.message.includes('test-password')
   );
 });
+
+test('login session uses the configured shop ID', async () => {
+  let calls = 0;
+  const fetchImpl = async () => ++calls === 1
+    ? response({ status: { status_code: 0 }, result: { bid: 123 } }, ['wdtoken=token123; Path=/'])
+    : response({ status: { code: 0 }, result: [{ id: 55, isDefault: 1 }] });
+
+  const session = await loginAndResolveBuyer(
+    { username: '13800000000', password: 'test-password', shop_id: '1234567890' },
+    fetchImpl
+  );
+
+  assert.equal(session.shopid, '1234567890');
+});

@@ -22,6 +22,7 @@ test('new configuration creates one task and public query hides passwords', asyn
     assert.equal(order.orderTasks[0].buyers.length, 1);
     assert.deepEqual(order.queryConfig(), {
       source_id: 'source-1',
+      shop_id: '1711911458',
       users: [{ username: '13800000000', passwordConfigured: true }]
     });
   } finally {

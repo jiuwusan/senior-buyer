@@ -2,6 +2,7 @@ const cheerio = require('cheerio');
 const { createOrderLimiter } = require('./create_order_limiter');
 const { runSequential } = require('./sequential');
 const { loginAndResolveBuyer } = require('./session');
+const { DEFAULT_SHOP_ID } = require('./config');
 
 class Buyer {
   config = {
@@ -16,10 +17,10 @@ class Buyer {
   orderList = [];
   succeedIds = [];
   combineOrder = {};
-  constructor({ source_id, username, password }, sessionLoader = loginAndResolveBuyer) {
+  constructor({ source_id, shop_id = DEFAULT_SHOP_ID, username, password }, sessionLoader = loginAndResolveBuyer) {
     this.credentials = { username, password };
     this.sessionLoader = sessionLoader;
-    this.config = { source_id, buyer_name: username };
+    this.config = { source_id, shopid: shop_id, buyer_name: username };
     this.lastLoginAt = null;
   }
 
@@ -98,7 +99,7 @@ class Buyer {
   }
 
   async refreshSession() {
-    const session = await this.sessionLoader(this.credentials);
+    const session = await this.sessionLoader({ ...this.credentials, shop_id: this.config.shopid });
     this.config = { ...this.config, ...session };
     for (const order of [...this.orderList, this.combineOrder]) {
       if (!order?.orderParam) continue;
@@ -142,7 +143,8 @@ class Buyer {
         }
       });
       const dataStr = this.extractDataObjFromHtml(htmlText);
-      list = JSON.parse(dataStr)?.cart?.result?.shops || [];
+      list = (JSON.parse(dataStr)?.cart?.result?.shops || [])
+        .filter(shop => String(shop.shopId) === this.config.shopid);
       console.log('查询购物车 结果:', list);
     } catch (error) {
       console.error('查询购物车时出错:', error);

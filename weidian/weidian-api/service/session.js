@@ -1,4 +1,4 @@
-const SHOP_ID = '1711911458';
+const { DEFAULT_SHOP_ID } = require('./config');
 const USER_AGENT =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1';
 
@@ -13,7 +13,7 @@ function getCookies(response) {
   return cookies;
 }
 
-async function loginAndResolveBuyer({ username, password }, fetchImpl = globalThis.fetch) {
+async function loginAndResolveBuyer({ username, password, shop_id = DEFAULT_SHOP_ID }, fetchImpl = globalThis.fetch) {
   const loginResponse = await fetchImpl('https://sso.weidian.com/user/login', {
     method: 'POST',
     headers: {
@@ -62,7 +62,7 @@ async function loginAndResolveBuyer({ username, password }, fetchImpl = globalTh
   return {
     buyer_id: buyerId,
     address_id: selectedAddress.id,
-    shopid: SHOP_ID,
+    shopid: shop_id,
     wdtoken,
     cookie
   };

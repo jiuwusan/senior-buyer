@@ -1,4 +1,4 @@
-let configData = { source_id: '', users: [] };
+let configData = { source_id: '', shop_id: '1711911458', users: [] };
 const apiDefinitions = [
   {
     key: 'timestamp',
@@ -80,6 +80,7 @@ const apiDefinitions = [
     description: '将当前页面配置提交到后端。',
     defaultParams: () => ({
       source_id: configData.source_id,
+      shop_id: configData.shop_id,
       users: configData.users.map(user => ({ username: user.username, password: '' }))
     })
   }
@@ -108,6 +109,7 @@ async function loadConfig() {
     if (result.code !== 200) throw new Error(result.msg || '加载失败');
     configData = {
       source_id: result.data.source_id || '',
+      shop_id: result.data.shop_id || '1711911458',
       users: (result.data.users || []).map(user => ({
         username: user.username,
         password: '',
@@ -206,6 +208,10 @@ function renderConfig() {
         <div class="form-group">
           <label>Source ID</label>
           <input type="text" value="${escapeHtml(configData.source_id)}" oninput="configData.source_id = this.value">
+        </div>
+        <div class="form-group">
+          <label>店铺 ID</label>
+          <input type="text" inputmode="numeric" value="${escapeHtml(configData.shop_id)}" oninput="configData.shop_id = this.value">
         </div>
       </div>
       <div class="buyers-section">

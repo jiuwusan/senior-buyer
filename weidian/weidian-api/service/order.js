@@ -22,7 +22,7 @@ class Order {
     }
   }
   queryConfig() {
-    return this.orderTasks[0]?.getConfig() || { source_id: '', users: [] };
+    return this.orderTasks[0]?.getConfig() || { source_id: '', shop_id: config.DEFAULT_SHOP_ID, users: [] };
   }
   queryCachedUsers() {
     return this.orderTasks.flatMap(task => task.getCachedUsers());
