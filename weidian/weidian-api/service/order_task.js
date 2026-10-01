@@ -15,16 +15,18 @@ class OrderTask {
     return this.publicConfig;
   }
 
-  getCachedUsers() {
-    return this.buyers.map(buyer => buyer.getCachedUserInfo());
+  getCachedUsers(username) {
+    const buyers = username === undefined ? this.buyers : this.buyers.filter(buyer => buyer.credentials.username === username);
+    return buyers.map(buyer => buyer.getCachedUserInfo());
   }
 
   async queryCart() {
     return await runSequential(this.buyers, buyer => buyer.queryCart());
   }
 
-  async refreshCookies() {
-    return await runSequential(this.buyers, async buyer => {
+  async refreshCookies(username) {
+    const buyers = username === undefined ? this.buyers : this.buyers.filter(buyer => buyer.credentials.username === username);
+    return await runSequential(buyers, async buyer => {
       const username = buyer.credentials.username;
       try {
         await buyer.refreshSession();

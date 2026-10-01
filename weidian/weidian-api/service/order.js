@@ -24,15 +24,19 @@ class Order {
   queryConfig() {
     return this.orderTasks[0]?.getConfig() || { source_id: '', shop_id: config.DEFAULT_SHOP_ID, users: [] };
   }
-  queryCachedUsers() {
-    return this.orderTasks.flatMap(task => task.getCachedUsers());
+  queryCachedUsers(username) {
+    const users = this.orderTasks.flatMap(task => task.getCachedUsers(username));
+    if (username !== undefined && users.length === 0) throw new Error('未找到指定用户');
+    return users;
   }
   async queryCart() {
     return await runSequential(this.orderTasks, task => task.queryCart());
   }
 
-  async refreshCookies() {
-    return (await runSequential(this.orderTasks, task => task.refreshCookies())).flat();
+  async refreshCookies(username) {
+    const results = (await runSequential(this.orderTasks, task => task.refreshCookies(username))).flat();
+    if (username !== undefined && results.length === 0) throw new Error('未找到指定用户');
+    return results;
   }
 
   async createOrder({ combine }) {

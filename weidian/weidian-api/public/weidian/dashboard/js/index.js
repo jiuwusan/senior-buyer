@@ -29,7 +29,7 @@ const apiDefinitions = [
     name: '查看缓存用户信息',
     method: 'GET',
     path: '/weidian/api/order/query/cached-users',
-    description: '查看当前进程内已登录账号的买家 ID、默认地址 ID 和最后登录时间，不返回 Cookie 或 token。',
+    description: '查看进程内缓存信息；可用 username 查询单个账号，不返回 Cookie 或 token。',
     defaultParams: () => ({})
   },
   {
@@ -37,7 +37,7 @@ const apiDefinitions = [
     name: '批量刷新 Cookie',
     method: 'POST',
     path: '/weidian/api/order/cookies/refresh',
-    description: '重新登录所有已保存账号，刷新 Cookie、默认收货地址和已有下单参数；逐账号返回结果。',
+    description: '重新登录已保存账号；请求 Body 可传 username 刷新单个账号，不传则批量刷新。',
     defaultParams: () => ({})
   },
   {
@@ -87,6 +87,7 @@ const apiDefinitions = [
 ];
 let activeApiKey = apiDefinitions[0].key;
 let messageTimeout;
+let refreshPending = false;
 
 function showMessage(msg, type = 'success') {
   const messageEl = document.getElementById('message');
@@ -146,14 +147,22 @@ async function saveConfig() {
   }
 }
 
-async function refreshCookies() {
-  const button = document.getElementById('refreshCookiesButton');
+async function refreshCookies(username, clickedButton) {
+  if (refreshPending) return;
+  refreshPending = true;
+  const button = clickedButton || document.getElementById('refreshCookiesButton');
+  const batchButton = document.getElementById('refreshCookiesButton');
   const resultEl = document.getElementById('refreshResult');
   button.disabled = true;
+  batchButton.disabled = true;
   resultEl.className = 'inline-status';
-  resultEl.textContent = '正在刷新已保存账号的 Cookie...';
+  resultEl.textContent = username ? `正在刷新账号 ${username} 的 Cookie...` : '正在刷新全部已保存账号的 Cookie...';
   try {
-    const response = await fetch('/weidian/api/order/cookies/refresh', { method: 'POST' });
+    const response = await fetch('/weidian/api/order/cookies/refresh', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(username === undefined ? {} : { username })
+    });
     const result = await response.json();
     if (!response.ok || result.code !== 200 || !Array.isArray(result.data)) {
       throw new Error(result.msg || '请求失败');
@@ -162,7 +171,9 @@ async function refreshCookies() {
     const failed = result.data.filter(item => item.status !== 'success').map(item => item.username);
     resultEl.textContent = result.data.length === 0
       ? '没有已保存的账号，请先保存配置。'
-      : `Cookie 刷新完成：成功 ${succeeded} 个，失败 ${failed.length} 个。${failed.length ? `失败账号：${failed.join('、')}。` : ''}`;
+      : username
+        ? `账号 ${username} 的 Cookie ${failed.length ? '刷新失败' : '已刷新'}。`
+        : `Cookie 刷新完成：成功 ${succeeded} 个，失败 ${failed.length} 个。${failed.length ? `失败账号：${failed.join('、')}。` : ''}`;
     if (failed.length) resultEl.classList.add('error');
     showMessage(failed.length ? '部分账号刷新失败' : 'Cookie 刷新完成', failed.length ? 'error' : 'success');
     await loadCachedUsers();
@@ -172,32 +183,39 @@ async function refreshCookies() {
     showMessage('Cookie 刷新失败', 'error');
   } finally {
     button.disabled = false;
+    batchButton.disabled = false;
+    refreshPending = false;
   }
 }
 
-async function loadCachedUsers() {
+async function loadCachedUsers(username) {
   const button = document.getElementById('cachedUsersButton');
   const resultEl = document.getElementById('cachedUsersResult');
   button.disabled = true;
   resultEl.textContent = '正在读取缓存用户信息...';
   try {
-    const response = await fetch('/weidian/api/order/query/cached-users');
+    const url = new URL('/weidian/api/order/query/cached-users', window.location.origin);
+    if (username !== undefined) url.searchParams.set('username', username);
+    const response = await fetch(url);
     const result = await response.json();
     if (!response.ok || result.code !== 200 || !Array.isArray(result.data)) {
       throw new Error(result.msg || '请求失败');
     }
-    document.getElementById('sessionCountSummary').textContent = String(result.data.filter(user => user.status === 'cached').length);
+    if (username === undefined) {
+      document.getElementById('sessionCountSummary').textContent = String(result.data.filter(user => user.status === 'cached').length);
+    }
     resultEl.innerHTML = result.data.length === 0
       ? '<p class="empty-note">没有已保存的账号。请先在左侧添加账号并保存。</p>'
-      : `<div class="session-list">${result.data.map(user => `
+      : `${username === undefined ? '' : `<p class="filter-note">正在查看 ${escapeHtml(username)} 的缓存信息</p>`}<div class="session-list">${result.data.map(user => `
           <div class="session-row">
             <div class="session-row-heading"><strong>${escapeHtml(user.username)}</strong><span class="status-badge ${user.status === 'cached' ? '' : 'muted'}">${user.status === 'cached' ? '已缓存' : '未登录'}</span></div>
-            <div class="session-details"><span>买家 ID <strong>${escapeHtml(user.buyer_id ?? '—')}</strong></span><span>默认地址 ID <strong>${escapeHtml(user.address_id ?? '—')}</strong></span></div>
+            <div class="session-details"><span>买家 ID <strong>${escapeHtml(user.buyer_id ?? '—')}</strong></span><span>默认地址 ID <strong>${escapeHtml(user.address_id ?? '—')}</strong></span><span>店铺 ID <strong>${escapeHtml(user.shopid ?? '—')}</strong></span></div>
             <div class="session-time">最后登录：${escapeHtml(user.refreshedAt ? new Date(user.refreshedAt).toLocaleString('zh-CN') : '—')}</div>
+            <div class="session-row-actions"><button class="btn btn-quiet btn-sm" type="button" data-view-user="${escapeHtml(user.username)}">查看</button><button class="btn btn-secondary btn-sm" type="button" data-refresh-user="${escapeHtml(user.username)}">刷新 Cookie</button></div>
           </div>`).join('')}</div>`;
   } catch (error) {
     resultEl.textContent = `读取缓存用户信息失败：${error.message}`;
-    document.getElementById('sessionCountSummary').textContent = '—';
+    if (username === undefined) document.getElementById('sessionCountSummary').textContent = '—';
   } finally {
     button.disabled = false;
   }
@@ -479,6 +497,16 @@ document.addEventListener('input', event => {
   if (event.target && event.target.id === 'apiParamsInput') {
     updateApiRequestPreview();
   }
+});
+
+document.addEventListener('click', event => {
+  const refreshButton = event.target.closest('[data-refresh-user]');
+  if (refreshButton) {
+    refreshCookies(refreshButton.dataset.refreshUser, refreshButton);
+    return;
+  }
+  const viewButton = event.target.closest('[data-view-user]');
+  if (viewButton) loadCachedUsers(viewButton.dataset.viewUser);
 });
 
 loadConfig();

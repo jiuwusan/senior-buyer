@@ -30,3 +30,18 @@ test('task reports cached information for every configured buyer', () => {
     { username: 'user-2', status: 'not_logged_in' }
   ]);
 });
+
+test('single user refresh and lookup do not touch other buyers', async () => {
+  const task = new OrderTask({ source_id: 'source-1', users: [] });
+  const calls = [];
+  task.buyers = ['user-1', 'user-2'].map(username => ({
+    credentials: { username },
+    refreshSession: async () => { calls.push(username); },
+    getCachedUserInfo: () => ({ username, status: 'cached' })
+  }));
+
+  assert.deepEqual(await task.refreshCookies('user-2'), [{ username: 'user-2', status: 'success' }]);
+  assert.deepEqual(calls, ['user-2']);
+  assert.deepEqual(task.getCachedUsers('user-1'), [{ username: 'user-1', status: 'cached' }]);
+  assert.deepEqual(await task.refreshCookies('missing'), []);
+});

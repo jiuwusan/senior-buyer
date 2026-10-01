@@ -6,9 +6,21 @@ const router = new Router();
 
 router.get('/timestamp', ctx => ctx.success(Date.now()));
 router.get('/order/query/config', async ctx => ctx.success(await order.queryConfig()));
-router.get('/order/query/cached-users', ctx => ctx.success(order.queryCachedUsers()));
+router.get('/order/query/cached-users', ctx => {
+  const username = ctx.query.username;
+  if (username !== undefined && (typeof username !== 'string' || !username.trim())) {
+    return ctx.fail(-1, 'username 必须是非空字符串');
+  }
+  ctx.success(order.queryCachedUsers(username?.trim()));
+});
 router.get('/order/query/cart', async ctx => ctx.success(await order.queryCart()));
-router.post('/order/cookies/refresh', async ctx => ctx.success(await order.refreshCookies()));
+router.post('/order/cookies/refresh', async ctx => {
+  const username = ctx.request.body?.username;
+  if (username !== undefined && (typeof username !== 'string' || !username.trim())) {
+    return ctx.fail(-1, 'username 必须是非空字符串');
+  }
+  ctx.success(await order.refreshCookies(username?.trim()));
+});
 router.get('/order/query/preOrder', async ctx => ctx.success(await order.queryPreOrder()));
 router.post('/order/create', async ctx => ctx.success(await order.createOrder(ctx.request.body || {})));
 router.post('/order/polling/create', async ctx => ctx.success(await order.pollingOrder(ctx.request.body || {})));

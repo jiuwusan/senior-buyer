@@ -22,4 +22,6 @@
 
 `GET /weidian/api/order/query/cached-users` 和控制面板的“查看缓存用户信息”按钮可查看当前进程内各账号的登录状态、买家 ID、默认地址 ID、店铺 ID 和最后登录时间。响应不含密码、Cookie 或 token；服务重启或保存配置后，这些进程内信息会重置。
 
+上述两个会话接口都支持单用户操作：`GET /weidian/api/order/query/cached-users?username=13800000000` 只查询指定账号；`POST /weidian/api/order/cookies/refresh` 的请求 Body 为 `{"username":"13800000000"}` 时只刷新该账号。不传 `username` 时仍处理全部账号。控制面板的账号状态卡片提供单独的“查看”和“刷新 Cookie”按钮。
+
 定时触发由外部 crontab 负责。到点调用 `POST /weidian/api/order/polling/create`，请求 Body 为 `{"polling":true}`；单次轮询最长运行 15 秒，前 3 秒聚合下单。示例见项目根目录 `README.md`。

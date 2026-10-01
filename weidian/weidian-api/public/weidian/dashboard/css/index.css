@@ -85,10 +85,12 @@ h2 { margin: 0 0 8px; font-size: 19px; letter-spacing: -.025em; }
 .session-row { padding: 14px; border: 1px solid #e6eee8; border-radius: 9px; background: #fbfcfb; }
 .session-row-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 13px; font-size: 13px; }
 .session-row-heading strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.session-details { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.session-details { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .session-details span { min-width: 0; color: #788b81; font-size: 11px; }
 .session-details strong { display: block; overflow: hidden; margin-top: 4px; color: #3d564a; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
 .session-time { margin-top: 12px; color: #8a9a90; font-size: 11px; }
+.session-row-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
+.filter-note { margin: 0 0 12px; color: #496e60; font-size: 12px; }
 .status-badge { display: inline-block; padding: 4px 8px; border-radius: 99px; background: #e8f5ec; color: #2c7645; font-size: 11px; font-weight: 700; }
 .status-badge.muted { background: #f0f3f1; color: #75867d; }
 .privacy-note { margin: 16px 0 0; color: #899991; font-size: 11px; line-height: 1.6; }
