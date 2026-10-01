@@ -104,6 +104,30 @@ body.modal-open {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.schedule-card {
+  margin-top: 20px;
+}
+
+.schedule-card p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.schedule-card p:last-child {
+  margin-bottom: 0;
+}
+
+.schedule-card pre {
+  overflow-x: auto;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  background: #0f172a;
+  color: #dbeafe;
+  line-height: 1.5;
+}
+
 .task-header {
   display: flex;
   justify-content: space-between;

@@ -53,7 +53,7 @@ const apiDefinitions = [
     name: '轮询下单',
     method: 'POST',
     path: '/weidian/api/order/polling/create',
-    description: '开启或停止轮询下单。',
+    description: '手动开启或停止轮询。开启后最长运行 15 秒，前 3 秒聚合下单；定时触发请在服务器 crontab 中配置。',
     defaultParams: () => ({ polling: true })
   },
   {

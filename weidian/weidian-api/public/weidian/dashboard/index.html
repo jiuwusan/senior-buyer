@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>微店抢购配置编辑器</title>
+    <title>微店抢购控制面板</title>
     <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body>
     <div class="container">
       <div class="header">
-        <h1>微店抢购配置编辑器</h1>
+        <h1>微店抢购控制面板</h1>
         <div class="actions">
           <button class="btn btn-secondary" onclick="openApiModal()">接口调用</button>
           <button class="btn btn-secondary" onclick="loadConfig()">刷新配置</button>
@@ -20,6 +20,13 @@
       <div id="tasksContainer" class="tasks">
         <div class="loading">加载中...</div>
       </div>
+
+      <section class="task-card schedule-card" aria-labelledby="scheduleTitle">
+        <div class="task-header"><h2 id="scheduleTitle" class="task-title">定时触发</h2></div>
+        <p>到点下单由服务器的 crontab 触发。请先保存上方账号配置，再将以下命令加入服务器的 crontab；页面不保存执行时间。</p>
+        <pre><code>20 12 * * * curl --fail --silent --show-error -X POST http://127.0.0.1:37071/weidian/api/order/polling/create -H 'Content-Type: application/json' -d '{"polling":true}' &gt;&gt; /tmp/weidian_curl.log 2&gt;&amp;1</code></pre>
+        <p>示例每天 12:20 触发。每次轮询最长 15 秒，前 3 秒聚合下单；请按实际时间修改 crontab 表达式。</p>
+      </section>
     </div>
 
     <div id="message" class="message"></div>
@@ -29,7 +36,7 @@
         <div class="modal-header">
           <div>
             <h2>接口调用</h2>
-            <p>支持所有微店接口调用，GET 请求会自动追加时间戳避免缓存。</p>
+            <p>可手动调用微店接口；定时执行请在服务器 crontab 中配置。GET 请求会自动追加时间戳避免缓存。</p>
           </div>
           <button class="btn btn-secondary btn-sm" onclick="closeApiModal()">关闭</button>
         </div>
