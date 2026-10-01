@@ -20,6 +20,7 @@ class Buyer {
     this.credentials = { username, password };
     this.sessionLoader = sessionLoader;
     this.config = { source_id, buyer_name: username };
+    this.lastLoginAt = null;
   }
 
   uuid() {
@@ -106,7 +107,20 @@ class Buyer {
       order.orderParam.param = JSON.stringify(param);
       order.orderParam.wdtoken = session.wdtoken;
     }
+    this.lastLoginAt = new Date().toISOString();
     return '登录成功';
+  }
+
+  getCachedUserInfo() {
+    const cached = Boolean(this.config.cookie && this.config.wdtoken && this.config.buyer_id && this.config.address_id);
+    return {
+      username: this.credentials.username,
+      status: cached ? 'cached' : 'not_logged_in',
+      buyer_id: cached ? this.config.buyer_id : null,
+      address_id: cached ? this.config.address_id : null,
+      shopid: cached ? this.config.shopid : null,
+      refreshedAt: cached ? this.lastLoginAt : null
+    };
   }
 
   async queryCart() {

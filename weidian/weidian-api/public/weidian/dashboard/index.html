@@ -14,11 +14,18 @@
           <button class="btn btn-secondary" onclick="openApiModal()">接口调用</button>
           <button class="btn btn-secondary" onclick="loadConfig()">刷新配置</button>
           <button id="refreshCookiesButton" class="btn btn-secondary" onclick="refreshCookies()">批量刷新 Cookie</button>
+          <button id="cachedUsersButton" class="btn btn-secondary" onclick="loadCachedUsers()">查看缓存用户信息</button>
           <button class="btn btn-primary" onclick="saveConfig()">保存配置</button>
         </div>
       </div>
 
       <div id="refreshResult" class="refresh-result" role="status" aria-live="polite"></div>
+
+      <section id="cachedUsersPanel" class="task-card cached-users-panel" aria-labelledby="cachedUsersTitle" hidden>
+        <div class="task-header"><h2 id="cachedUsersTitle" class="task-title">进程内缓存用户信息</h2></div>
+        <p>仅显示账号、买家 ID、默认收货地址 ID、店铺 ID 和最后登录时间；不显示密码、Cookie 或 token。</p>
+        <div id="cachedUsersResult" role="status" aria-live="polite"></div>
+      </section>
 
       <div id="tasksContainer" class="tasks">
         <div class="loading">加载中...</div>

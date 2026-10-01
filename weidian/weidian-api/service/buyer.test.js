@@ -56,3 +56,24 @@ test('refreshing a session updates cached order tokens and address', async () =>
   }
   assert.equal(buyer.config.cookie, 'wdtoken=token-2');
 });
+
+test('cached user information exposes identity and address without session secrets', async () => {
+  const buyer = new Buyer(
+    { source_id: 'source-1', username: '13800000000', password: 'test-password' },
+    async () => ({ buyer_id: 123, address_id: 55, shopid: '1711911458', wdtoken: 'secret-token', cookie: 'secret-cookie' })
+  );
+
+  assert.deepEqual(buyer.getCachedUserInfo(), {
+    username: '13800000000', status: 'not_logged_in', buyer_id: null,
+    address_id: null, shopid: null, refreshedAt: null
+  });
+
+  await buyer.refreshSession();
+  const cached = buyer.getCachedUserInfo();
+  assert.equal(cached.status, 'cached');
+  assert.equal(cached.buyer_id, 123);
+  assert.equal(cached.address_id, 55);
+  assert.equal(cached.shopid, '1711911458');
+  assert.ok(Number.isFinite(Date.parse(cached.refreshedAt)));
+  assert.doesNotMatch(JSON.stringify(cached), /secret|test-password/);
+});

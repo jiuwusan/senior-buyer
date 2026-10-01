@@ -25,6 +25,14 @@ const apiDefinitions = [
     defaultParams: () => ({})
   },
   {
+    key: 'queryCachedUsers',
+    name: '查看缓存用户信息',
+    method: 'GET',
+    path: '/weidian/api/order/query/cached-users',
+    description: '查看当前进程内已登录账号的买家 ID、默认地址 ID 和最后登录时间，不返回 Cookie 或 token。',
+    defaultParams: () => ({})
+  },
+  {
     key: 'refreshCookies',
     name: '批量刷新 Cookie',
     method: 'POST',
@@ -124,6 +132,7 @@ async function saveConfig() {
     if (result.code !== 200) throw new Error(result.msg || '保存失败');
     showMessage('配置保存成功');
     await loadConfig();
+    if (!document.getElementById('cachedUsersPanel').hidden) await loadCachedUsers();
   } catch (error) {
     showMessage('保存配置失败: ' + error.message, 'error');
   }
@@ -146,9 +155,43 @@ async function refreshCookies() {
       ? '没有已保存的账号，请先保存配置。'
       : `Cookie 刷新完成：成功 ${succeeded} 个，失败 ${failed.length} 个。${failed.length ? `失败账号：${failed.join('、')}。` : ''}`;
     showMessage(failed.length ? '部分账号刷新失败' : 'Cookie 刷新完成', failed.length ? 'error' : 'success');
+    if (!document.getElementById('cachedUsersPanel').hidden) await loadCachedUsers();
   } catch (error) {
     resultEl.textContent = `Cookie 刷新失败：${error.message}`;
     showMessage('Cookie 刷新失败', 'error');
+  } finally {
+    button.disabled = false;
+  }
+}
+
+async function loadCachedUsers() {
+  const button = document.getElementById('cachedUsersButton');
+  const panel = document.getElementById('cachedUsersPanel');
+  const resultEl = document.getElementById('cachedUsersResult');
+  panel.hidden = false;
+  button.disabled = true;
+  resultEl.textContent = '正在读取缓存用户信息...';
+  try {
+    const response = await fetch('/weidian/api/order/query/cached-users');
+    const result = await response.json();
+    if (!response.ok || result.code !== 200 || !Array.isArray(result.data)) {
+      throw new Error(result.msg || '请求失败');
+    }
+    resultEl.innerHTML = result.data.length === 0
+      ? '<p>没有已保存的账号。</p>'
+      : `<div class="cached-users-table-wrap"><table class="cached-users-table">
+          <thead><tr><th>账号</th><th>状态</th><th>买家 ID</th><th>默认地址 ID</th><th>店铺 ID</th><th>最后登录时间</th></tr></thead>
+          <tbody>${result.data.map(user => `<tr>
+            <td>${escapeHtml(user.username)}</td>
+            <td>${user.status === 'cached' ? '已缓存' : '未登录'}</td>
+            <td>${escapeHtml(user.buyer_id ?? '—')}</td>
+            <td>${escapeHtml(user.address_id ?? '—')}</td>
+            <td>${escapeHtml(user.shopid ?? '—')}</td>
+            <td>${escapeHtml(user.refreshedAt ? new Date(user.refreshedAt).toLocaleString('zh-CN') : '—')}</td>
+          </tr>`).join('')}</tbody>
+        </table></div>`;
+  } catch (error) {
+    resultEl.textContent = `读取缓存用户信息失败：${error.message}`;
   } finally {
     button.disabled = false;
   }

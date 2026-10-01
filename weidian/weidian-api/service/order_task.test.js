@@ -17,3 +17,16 @@ test('batch refresh attempts every buyer and returns no session secrets', async 
   ]);
   assert.doesNotMatch(JSON.stringify(results), /secret/);
 });
+
+test('task reports cached information for every configured buyer', () => {
+  const task = new OrderTask({ source_id: 'source-1', users: [] });
+  task.buyers = [
+    { getCachedUserInfo: () => ({ username: 'user-1', status: 'cached' }) },
+    { getCachedUserInfo: () => ({ username: 'user-2', status: 'not_logged_in' }) }
+  ];
+
+  assert.deepEqual(task.getCachedUsers(), [
+    { username: 'user-1', status: 'cached' },
+    { username: 'user-2', status: 'not_logged_in' }
+  ]);
+});

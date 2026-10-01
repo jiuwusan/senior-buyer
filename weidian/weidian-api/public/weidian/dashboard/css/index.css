@@ -54,6 +54,32 @@ body.modal-open {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.cached-users-panel {
+  margin-bottom: 20px;
+}
+
+.cached-users-panel p {
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.cached-users-table-wrap {
+  overflow-x: auto;
+}
+
+.cached-users-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.cached-users-table th,
+.cached-users-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e8e8e8;
+  white-space: nowrap;
+}
+
 .btn {
   padding: 10px 20px;
   border: none;

@@ -24,6 +24,9 @@ class Order {
   queryConfig() {
     return this.orderTasks[0]?.getConfig() || { source_id: '', users: [] };
   }
+  queryCachedUsers() {
+    return this.orderTasks.flatMap(task => task.getCachedUsers());
+  }
   async queryCart() {
     return await runSequential(this.orderTasks, task => task.queryCart());
   }

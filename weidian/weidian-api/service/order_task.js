@@ -15,6 +15,10 @@ class OrderTask {
     return this.publicConfig;
   }
 
+  getCachedUsers() {
+    return this.buyers.map(buyer => buyer.getCachedUserInfo());
+  }
+
   async queryCart() {
     return await runSequential(this.buyers, buyer => buyer.queryCart());
   }
