@@ -86,12 +86,14 @@ const apiDefinitions = [
   }
 ];
 let activeApiKey = apiDefinitions[0].key;
+let messageTimeout;
 
 function showMessage(msg, type = 'success') {
   const messageEl = document.getElementById('message');
   messageEl.textContent = msg;
   messageEl.className = `message ${type} show`;
-  setTimeout(() => {
+  clearTimeout(messageTimeout);
+  messageTimeout = setTimeout(() => {
     messageEl.className = 'message';
   }, 3000);
 }
@@ -102,7 +104,7 @@ function escapeHtml(value) {
   })[character]);
 }
 
-async function loadConfig() {
+async function loadConfig(showSuccess = false) {
   try {
     const response = await fetch('/weidian/api/order/query/config');
     const result = await response.json();
@@ -117,13 +119,15 @@ async function loadConfig() {
       }))
     };
     renderConfig();
-    showMessage('配置加载成功');
+    if (showSuccess) showMessage('配置已重新载入');
   } catch (error) {
     showMessage('加载配置失败: ' + error.message, 'error');
   }
 }
 
 async function saveConfig() {
+  const button = document.getElementById('saveConfigButton');
+  button.disabled = true;
   try {
     const response = await fetch('/weidian/api/order/update/config', {
       method: 'POST',
@@ -134,9 +138,11 @@ async function saveConfig() {
     if (result.code !== 200) throw new Error(result.msg || '保存失败');
     showMessage('配置保存成功');
     await loadConfig();
-    if (!document.getElementById('cachedUsersPanel').hidden) await loadCachedUsers();
+    await loadCachedUsers();
   } catch (error) {
     showMessage('保存配置失败: ' + error.message, 'error');
+  } finally {
+    button.disabled = false;
   }
 }
 
@@ -144,6 +150,7 @@ async function refreshCookies() {
   const button = document.getElementById('refreshCookiesButton');
   const resultEl = document.getElementById('refreshResult');
   button.disabled = true;
+  resultEl.className = 'inline-status';
   resultEl.textContent = '正在刷新已保存账号的 Cookie...';
   try {
     const response = await fetch('/weidian/api/order/cookies/refresh', { method: 'POST' });
@@ -156,10 +163,12 @@ async function refreshCookies() {
     resultEl.textContent = result.data.length === 0
       ? '没有已保存的账号，请先保存配置。'
       : `Cookie 刷新完成：成功 ${succeeded} 个，失败 ${failed.length} 个。${failed.length ? `失败账号：${failed.join('、')}。` : ''}`;
+    if (failed.length) resultEl.classList.add('error');
     showMessage(failed.length ? '部分账号刷新失败' : 'Cookie 刷新完成', failed.length ? 'error' : 'success');
-    if (!document.getElementById('cachedUsersPanel').hidden) await loadCachedUsers();
+    await loadCachedUsers();
   } catch (error) {
     resultEl.textContent = `Cookie 刷新失败：${error.message}`;
+    resultEl.classList.add('error');
     showMessage('Cookie 刷新失败', 'error');
   } finally {
     button.disabled = false;
@@ -168,9 +177,7 @@ async function refreshCookies() {
 
 async function loadCachedUsers() {
   const button = document.getElementById('cachedUsersButton');
-  const panel = document.getElementById('cachedUsersPanel');
   const resultEl = document.getElementById('cachedUsersResult');
-  panel.hidden = false;
   button.disabled = true;
   resultEl.textContent = '正在读取缓存用户信息...';
   try {
@@ -179,21 +186,18 @@ async function loadCachedUsers() {
     if (!response.ok || result.code !== 200 || !Array.isArray(result.data)) {
       throw new Error(result.msg || '请求失败');
     }
+    document.getElementById('sessionCountSummary').textContent = String(result.data.filter(user => user.status === 'cached').length);
     resultEl.innerHTML = result.data.length === 0
-      ? '<p>没有已保存的账号。</p>'
-      : `<div class="cached-users-table-wrap"><table class="cached-users-table">
-          <thead><tr><th>账号</th><th>状态</th><th>买家 ID</th><th>默认地址 ID</th><th>店铺 ID</th><th>最后登录时间</th></tr></thead>
-          <tbody>${result.data.map(user => `<tr>
-            <td>${escapeHtml(user.username)}</td>
-            <td>${user.status === 'cached' ? '已缓存' : '未登录'}</td>
-            <td>${escapeHtml(user.buyer_id ?? '—')}</td>
-            <td>${escapeHtml(user.address_id ?? '—')}</td>
-            <td>${escapeHtml(user.shopid ?? '—')}</td>
-            <td>${escapeHtml(user.refreshedAt ? new Date(user.refreshedAt).toLocaleString('zh-CN') : '—')}</td>
-          </tr>`).join('')}</tbody>
-        </table></div>`;
+      ? '<p class="empty-note">没有已保存的账号。请先在左侧添加账号并保存。</p>'
+      : `<div class="session-list">${result.data.map(user => `
+          <div class="session-row">
+            <div class="session-row-heading"><strong>${escapeHtml(user.username)}</strong><span class="status-badge ${user.status === 'cached' ? '' : 'muted'}">${user.status === 'cached' ? '已缓存' : '未登录'}</span></div>
+            <div class="session-details"><span>买家 ID <strong>${escapeHtml(user.buyer_id ?? '—')}</strong></span><span>默认地址 ID <strong>${escapeHtml(user.address_id ?? '—')}</strong></span></div>
+            <div class="session-time">最后登录：${escapeHtml(user.refreshedAt ? new Date(user.refreshedAt).toLocaleString('zh-CN') : '—')}</div>
+          </div>`).join('')}</div>`;
   } catch (error) {
     resultEl.textContent = `读取缓存用户信息失败：${error.message}`;
+    document.getElementById('sessionCountSummary').textContent = '—';
   } finally {
     button.disabled = false;
   }
@@ -201,43 +205,47 @@ async function loadCachedUsers() {
 
 function renderConfig() {
   const container = document.getElementById('tasksContainer');
+  document.getElementById('shopIdSummary').textContent = configData.shop_id || '—';
+  document.getElementById('accountCountSummary').textContent = String(configData.users.length);
   container.innerHTML = `
-    <div class="task-card">
-      <div class="task-header"><span class="task-title">微店账号配置</span></div>
-      <div class="form-grid">
+      <div class="config-fields">
         <div class="form-group">
           <label>Source ID</label>
           <input type="text" value="${escapeHtml(configData.source_id)}" oninput="configData.source_id = this.value">
         </div>
         <div class="form-group">
           <label>店铺 ID</label>
-          <input type="text" inputmode="numeric" value="${escapeHtml(configData.shop_id)}" oninput="configData.shop_id = this.value">
+          <input type="text" inputmode="numeric" value="${escapeHtml(configData.shop_id)}" oninput="updateShopId(this.value)">
         </div>
       </div>
       <div class="buyers-section">
         <div class="section-header">
-          <span class="section-title">账号 (${configData.users.length})</span>
-          <button class="btn btn-primary btn-sm" onclick="addUser()">添加账号</button>
+          <span class="section-title">买家账号 · ${configData.users.length}</span>
+          <button class="btn btn-quiet btn-sm" type="button" onclick="addUser()">＋ 添加账号</button>
         </div>
-        ${configData.users.length ? configData.users.map((user, index) => `
-          <div class="form-grid" style="margin-top: 16px;">
+        <div class="account-list">${configData.users.length ? configData.users.map((user, index) => `
+          <div class="account-row">
             <div class="form-group">
               <label>手机号</label>
-              <input type="text" value="${escapeHtml(user.username)}" autocomplete="off" oninput="updateUser(${index}, 'username', this.value)">
+              <input type="text" inputmode="tel" value="${escapeHtml(user.username)}" autocomplete="off" oninput="updateUser(${index}, 'username', this.value)">
             </div>
             <div class="form-group">
               <label>登录密码</label>
               <input type="password" value="" autocomplete="new-password" placeholder="${user.passwordConfigured ? '已设置，留空保持不变' : '请输入密码'}" oninput="updateUser(${index}, 'password', this.value)">
             </div>
             <div class="form-group">
-              <button class="btn btn-danger btn-sm" onclick="removeUser(${index})">删除账号</button>
+              <button class="btn btn-danger btn-sm" type="button" onclick="removeUser(${index})">移除</button>
             </div>
           </div>
-        `).join('') : '<p>暂无账号</p>'}
+        `).join('') : '<p class="empty-note">还没有账号。添加账号后保存配置即可开始使用。</p>'}</div>
       </div>
-    </div>
   `;
   syncApiDebugger(false);
+}
+
+function updateShopId(value) {
+  configData.shop_id = value;
+  document.getElementById('shopIdSummary').textContent = value || '—';
 }
 
 function addUser() {
@@ -254,6 +262,16 @@ function removeUser(index) {
   configData.users.splice(index, 1);
   renderConfig();
 }
+
+async function copyCronCommand() {
+  try {
+    await navigator.clipboard.writeText(document.getElementById('cronCommand').textContent.trim());
+    showMessage('crontab 示例已复制');
+  } catch {
+    showMessage('复制失败，请手动选择示例命令', 'error');
+  }
+}
+
 function getApiDefinition(apiKey = activeApiKey) {
   return apiDefinitions.find(api => api.key === apiKey) || apiDefinitions[0];
 }
@@ -463,5 +481,5 @@ document.addEventListener('input', event => {
   }
 });
 
-// Load config on page load
 loadConfig();
+loadCachedUsers();

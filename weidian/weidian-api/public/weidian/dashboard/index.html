@@ -3,89 +3,96 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>微店抢购控制面板</title>
+    <title>微店控制台</title>
     <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="header">
-        <h1>微店抢购控制面板</h1>
-        <div class="actions">
-          <button class="btn btn-secondary" onclick="openApiModal()">接口调用</button>
-          <button class="btn btn-secondary" onclick="loadConfig()">刷新配置</button>
-          <button id="refreshCookiesButton" class="btn btn-secondary" onclick="refreshCookies()">批量刷新 Cookie</button>
-          <button id="cachedUsersButton" class="btn btn-secondary" onclick="loadCachedUsers()">查看缓存用户信息</button>
-          <button class="btn btn-primary" onclick="saveConfig()">保存配置</button>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">微</span><span>微店控制台</span></div>
+        <button class="btn btn-quiet" type="button" onclick="openApiModal()">接口调试 <span aria-hidden="true">↗</span></button>
+      </header>
+
+      <main class="container">
+        <section class="page-heading" aria-labelledby="pageTitle">
+          <div>
+            <p class="eyebrow">SENIOR BUYER / WEIDIAN</p>
+            <h1 id="pageTitle">店铺与账号</h1>
+            <p class="page-subtitle">设置目标店铺，管理买家账号与登录会话。</p>
+          </div>
+          <button id="saveConfigButton" class="btn btn-primary" type="button" onclick="saveConfig()">保存配置</button>
+        </section>
+
+        <div class="overview" aria-label="当前配置概览">
+          <div class="overview-item"><span class="overview-label">目标店铺</span><strong id="shopIdSummary">—</strong></div>
+          <div class="overview-item"><span class="overview-label">已配置账号</span><strong id="accountCountSummary">—</strong></div>
+          <div class="overview-item"><span class="overview-label">已缓存会话</span><strong id="sessionCountSummary">—</strong></div>
+          <div class="overview-item"><span class="overview-label">轮询窗口</span><strong>15 秒 <small>前 3 秒聚合</small></strong></div>
         </div>
-      </div>
 
-      <div id="refreshResult" class="refresh-result" role="status" aria-live="polite"></div>
+        <div class="dashboard-grid">
+          <section class="panel config-panel" aria-labelledby="configTitle">
+            <div class="panel-heading">
+              <div><span class="section-index">01 / 配置</span><h2 id="configTitle">店铺与买家账号</h2><p>店铺 ID 和 Source ID 对所有账号共用。</p></div>
+              <button class="btn btn-quiet btn-sm" type="button" onclick="loadConfig(true)">重新载入</button>
+            </div>
+            <div id="tasksContainer" class="config-content"><div class="loading">正在读取配置...</div></div>
+          </section>
 
-      <section id="cachedUsersPanel" class="task-card cached-users-panel" aria-labelledby="cachedUsersTitle" hidden>
-        <div class="task-header"><h2 id="cachedUsersTitle" class="task-title">进程内缓存用户信息</h2></div>
-        <p>仅显示账号、买家 ID、默认收货地址 ID、店铺 ID 和最后登录时间；不显示密码、Cookie 或 token。</p>
-        <div id="cachedUsersResult" role="status" aria-live="polite"></div>
-      </section>
+          <section id="cachedUsersPanel" class="panel session-panel" aria-labelledby="cachedUsersTitle">
+            <div class="panel-heading">
+              <div><span class="section-index">02 / 会话</span><h2 id="cachedUsersTitle">登录状态</h2><p>查看当前进程中的买家 ID 和默认地址。</p></div>
+            </div>
+            <div class="session-actions">
+              <button id="refreshCookiesButton" class="btn btn-secondary" type="button" onclick="refreshCookies()">批量刷新 Cookie</button>
+              <button id="cachedUsersButton" class="btn btn-quiet" type="button" onclick="loadCachedUsers()">刷新状态</button>
+            </div>
+            <div id="refreshResult" class="inline-status" role="status" aria-live="polite"></div>
+            <div id="cachedUsersResult" role="status" aria-live="polite"><p class="empty-note">正在读取登录状态...</p></div>
+            <p class="privacy-note">只显示缓存状态、买家 ID、默认地址 ID 和最后登录时间。密码、Cookie 和 token 不会显示。</p>
+          </section>
+        </div>
 
-      <div id="tasksContainer" class="tasks">
-        <div class="loading">加载中...</div>
-      </div>
-
-      <section class="task-card schedule-card" aria-labelledby="scheduleTitle">
-        <div class="task-header"><h2 id="scheduleTitle" class="task-title">定时触发</h2></div>
-        <p>到点下单由服务器的 crontab 触发。请先保存上方账号配置，再将以下命令加入服务器的 crontab；页面不保存执行时间。</p>
-        <pre><code>20 12 * * * curl --fail --silent --show-error -X POST http://127.0.0.1:37071/weidian/api/order/polling/create -H 'Content-Type: application/json' -d '{"polling":true}' &gt;&gt; /tmp/weidian_curl.log 2&gt;&amp;1</code></pre>
-        <p>示例每天 12:20 触发。每次轮询最长 15 秒，前 3 秒聚合下单；请按实际时间修改 crontab 表达式。</p>
-      </section>
+        <section class="panel schedule-panel" aria-labelledby="scheduleTitle">
+          <div class="panel-heading">
+            <div><span class="section-index">03 / 定时调用</span><h2 id="scheduleTitle">由服务器触发轮询</h2><p>在服务器的 crontab 中设置执行时间。页面不保存定时任务。</p></div>
+            <span class="pill">外部 crontab</span>
+          </div>
+          <div class="schedule-grid">
+            <div class="schedule-explainer">
+              <span class="step-number">1</span><p>保存店铺和账号配置，并刷新登录会话。</p>
+              <span class="step-number">2</span><p>在服务器上编辑 crontab，按需修改示例中的执行时间。</p>
+              <span class="step-number">3</span><p>到点后由 curl 调用轮询接口，单次最长运行 15 秒。</p>
+            </div>
+            <div class="code-panel">
+              <div class="code-heading"><span>crontab 示例 · 每天 12:20</span><button class="copy-button" type="button" onclick="copyCronCommand()">复制</button></div>
+              <code id="cronCommand">20 12 * * * curl --fail --silent --show-error -X POST http://127.0.0.1:37071/weidian/api/order/polling/create -H 'Content-Type: application/json' -d '{"polling":true}' &gt;&gt; /tmp/weidian_curl.log 2&gt;&amp;1</code>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
 
-    <div id="message" class="message"></div>
+    <div id="message" class="message" role="status" aria-live="polite"></div>
 
-    <div id="apiModal" class="modal-overlay" onclick="handleModalOverlayClick(event)">
+    <div id="apiModal" class="modal-overlay" onclick="handleModalOverlayClick(event)" role="dialog" aria-modal="true" aria-labelledby="apiModalTitle">
       <div class="modal-card">
         <div class="modal-header">
-          <div>
-            <h2>接口调用</h2>
-            <p>可手动调用微店接口；定时执行请在服务器 crontab 中配置。GET 请求会自动追加时间戳避免缓存。</p>
-          </div>
-          <button class="btn btn-secondary btn-sm" onclick="closeApiModal()">关闭</button>
+          <div><p class="eyebrow">ADVANCED</p><h2 id="apiModalTitle">接口调试</h2><p>手动调用微店接口。GET 请求会自动追加时间戳。</p></div>
+          <button class="btn btn-quiet btn-sm" type="button" onclick="closeApiModal()">关闭</button>
         </div>
-
         <div class="api-debugger">
           <div class="api-sidebar">
-            <div class="form-group">
-              <label>接口选择</label>
-              <select id="apiSelect" onchange="handleApiSelectionChange(this.value)"></select>
-            </div>
+            <div class="form-group"><label for="apiSelect">接口选择</label><select id="apiSelect" onchange="handleApiSelectionChange(this.value)"></select></div>
             <div id="apiList" class="api-list"></div>
           </div>
-
           <div class="api-main">
-            <div class="api-meta">
-              <span id="apiMethod" class="api-method"></span>
-              <code id="apiPath" class="api-path"></code>
-            </div>
+            <div class="api-meta"><span id="apiMethod" class="api-method"></span><code id="apiPath" class="api-path"></code></div>
             <p id="apiDescription" class="api-description"></p>
-
-            <div class="form-group">
-              <label id="apiParamsLabel">请求参数 (JSON)</label>
-              <textarea id="apiParamsInput" rows="12" spellcheck="false"></textarea>
-            </div>
-
-            <div class="api-actions">
-              <button class="btn btn-secondary btn-sm" onclick="fillApiDefaultParams()">重置默认参数</button>
-              <button class="btn btn-primary" onclick="invokeSelectedApi()">调用接口</button>
-            </div>
-
-            <div class="form-group">
-              <label>实际请求地址</label>
-              <input id="apiRequestUrl" type="text" readonly />
-            </div>
-
-            <div class="form-group">
-              <label>调用结果</label>
-              <pre id="apiResult" class="api-result">请选择接口并发起调用</pre>
-            </div>
+            <div class="form-group"><label id="apiParamsLabel" for="apiParamsInput">请求参数 (JSON)</label><textarea id="apiParamsInput" rows="10" spellcheck="false"></textarea></div>
+            <div class="api-actions"><button class="btn btn-quiet btn-sm" type="button" onclick="fillApiDefaultParams()">重置参数</button><button class="btn btn-primary" type="button" onclick="invokeSelectedApi()">调用接口</button></div>
+            <div class="form-group"><label for="apiRequestUrl">实际请求地址</label><input id="apiRequestUrl" type="text" readonly /></div>
+            <div class="form-group"><label for="apiResult">调用结果</label><pre id="apiResult" class="api-result" tabindex="0">请选择接口并发起调用</pre></div>
           </div>
         </div>
       </div>
