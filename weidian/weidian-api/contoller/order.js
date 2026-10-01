@@ -10,7 +10,6 @@ router.get('/order/query/cart', async ctx => ctx.success(await order.queryCart()
 router.get('/order/query/preOrder', async ctx => ctx.success(await order.queryPreOrder()));
 router.post('/order/create', async ctx => ctx.success(await order.createOrder(ctx.request.body || {})));
 router.post('/order/polling/create', async ctx => ctx.success(await order.pollingOrder(ctx.request.body || {})));
-router.post('/order/target/create', async ctx => ctx.success(await order.targetOrder(ctx.request.body || {})));
 router.post('/order/update/config', async ctx => {
   const data = ctx.request.body;
   if (!data || Array.isArray(data) || typeof data.source_id !== 'string' || !Array.isArray(data.users)) {

@@ -57,14 +57,6 @@ const apiDefinitions = [
     defaultParams: () => ({ polling: true })
   },
   {
-    key: 'targetCreate',
-    name: '目标时间下单',
-    method: 'POST',
-    path: '/weidian/api/order/target/create',
-    description: '在请求 Body 中提供目标时间；时间参数只对本次请求生效。',
-    defaultParams: () => ({ targetTime: new Date(Date.now() + 10000).toISOString() })
-  },
-  {
     key: 'updateConfig',
     name: '更新配置',
     method: 'POST',

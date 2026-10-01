@@ -76,10 +76,6 @@ class Order {
     return polling ? '开始轮询...' : '取消轮询...';
   }
 
-  async targetOrder() {
-    const currentTimestamp = Date.now();
-    return await Promise.all(this.orderTasks.map(task => task.checkTargetTime(currentTimestamp)));
-  }
 }
 
 module.exports = new Order();

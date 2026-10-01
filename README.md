@@ -13,8 +13,8 @@
 crontab -l
 crontab -e
 
-20 12 * * * curl -X POST http://127.0.0.1:37071/weidian/api/order/polling/create -H "Content-Type: application/json" -d '{"polling": true, "interval": 50}' >> /tmp/weidian_curl.log 2>&1
-00 12 * * * curl -X POST http://127.0.0.1:37072/youzan/api/order/polling/create -H "Content-Type: application/json" -d '{"polling": true, "interval": 50}' >> /tmp/youzan_curl.log 2>&1
+20 12 * * * curl --fail --silent --show-error -X POST http://127.0.0.1:37071/weidian/api/order/polling/create -H "Content-Type: application/json" -d '{"polling":true}' >> /tmp/weidian_curl.log 2>&1
+00 12 * * * curl --fail --silent --show-error -X POST http://127.0.0.1:37072/youzan/api/order/polling/create -H "Content-Type: application/json" -d '{"polling":true,"interval":50}' >> /tmp/youzan_curl.log 2>&1
 ```
 
 # GitHub Actions 构建与 Docker Hub 发布
@@ -23,7 +23,7 @@ crontab -e
 
 在 GitHub 仓库的 **Settings → Secrets and variables → Actions** 中配置仓库密钥 `DOCKERHUB_TOKEN`，值为 Docker Hub 账户 `jiuwusan` 的访问令牌。发布工作流不会把令牌写入镜像。
 
-微店和有赞的账户配置分别保存在 `weidian/weidian-api/database/config.json` 与 `youzan/youzan-api/database/config.json`。它们不会进入 Git 或镜像；部署前请在服务器上准备好这两个文件。若文件不存在，服务会初始化为空数组 `[]`。
+微店和有赞的账户配置分别保存在 `weidian/weidian-api/database/config.json` 与 `youzan/youzan-api/database/config.json`。它们不会进入 Git 或镜像；部署前请在服务器上准备好这两个文件。微店配置格式见 `weidian/README.md`；有赞配置仍为任务数组。旧版有赞配置中的目标时间参数不再生效。
 
 # Docker Compose 启动
 

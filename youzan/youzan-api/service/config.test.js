@@ -10,10 +10,10 @@ test('loads Youzan tasks from the configured runtime file', async () => {
   const previousPath = process.env.YOUZAN_CONFIG_PATH;
 
   try {
-    await fs.writeFile(configPath, JSON.stringify([{ targetTime: '2030/01/01 12:00:00' }]));
+    await fs.writeFile(configPath, JSON.stringify([{ buyers: [] }]));
     process.env.YOUZAN_CONFIG_PATH = configPath;
     const config = require('./config');
-    assert.deepEqual(await config.load(), [{ targetTime: '2030/01/01 12:00:00' }]);
+    assert.deepEqual(await config.load(), [{ buyers: [] }]);
   } finally {
     if (previousPath === undefined) delete process.env.YOUZAN_CONFIG_PATH;
     else process.env.YOUZAN_CONFIG_PATH = previousPath;

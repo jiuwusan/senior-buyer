@@ -17,4 +17,4 @@
 
 `GET /weidian/api/order/query/config` 不返回密码。控制台更新已有账号时，密码留空表示保留现有密码；新增账号必须提供密码。请限制 `37071` 端口和配置文件的访问权限。
 
-`POST /weidian/api/order/target/create` 的目标时间改为在请求 Body 中提供，例如 `{"targetTime":"2026-10-01T12:00:00.000Z"}`。可选的毫秒参数为 `advanceTimestamps`、`advancePostInterval`、`postDuration`、`postInterval`，只对本次请求生效。
+定时触发由外部 crontab 负责。到点调用 `POST /weidian/api/order/polling/create`，请求 Body 为 `{"polling":true}`；单次轮询最长运行 15 秒，前 3 秒聚合下单。示例见项目根目录 `README.md`。

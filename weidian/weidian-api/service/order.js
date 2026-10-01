@@ -70,10 +70,6 @@ class Order {
     return polling ? '开始轮询...' : '取消轮询...';
   }
 
-  async targetOrder(options = {}) {
-    const currentTimestamp = Date.now();
-    return await runSequential(this.orderTasks, task => task.checkTargetTime(currentTimestamp, options));
-  }
 }
 
 module.exports = new Order();
