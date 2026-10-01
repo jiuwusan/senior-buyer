@@ -1,6 +1,27 @@
 const assert = require('node:assert/strict');
 const test = require('node:test');
 const Buyer = require('./buyer');
+const { LoginLimiter } = require('./login_limiter');
+const noWaitLimiter = new LoginLimiter({ intervalMs: 0 });
+
+test('buyers share the login interval when sessions refresh together', async () => {
+  let time = 0;
+  const starts = [];
+  const limiter = new LoginLimiter({ intervalMs: 5000, now: () => time, sleep: async ms => { time += ms; } });
+  const buyers = ['user-1', 'user-2'].map(username => new Buyer(
+    { source_id: 'source-1', username, password: 'test-password' },
+    async () => {
+      starts.push(time);
+      return { buyer_id: username, address_id: 55, shopid: '1711911458', wdtoken: 'token', cookie: 'wdtoken=token' };
+    },
+    limiter
+  ));
+
+  await Promise.all(buyers.map(buyer => buyer.refreshSession()));
+  assert.deepEqual(starts, [0, 5000]);
+  assert.equal(buyers[0].getCachedUserInfo().status, 'cached');
+  assert.equal(buyers[1].getCachedUserInfo().status, 'cached');
+});
 
 test('cart query uses login-derived buyer and address fields', async () => {
   const shop = {
@@ -15,7 +36,8 @@ test('cart query uses login-derived buyer and address fields', async () => {
     async credentials => {
       sessionCalls.push(credentials);
       return { buyer_id: 123, address_id: 55, shopid: '1711911458', wdtoken: 'token123', cookie: 'wdtoken=token123' };
-    }
+    },
+    noWaitLimiter
   );
   buyer.fetchWeidianAPI = async () => html;
 
@@ -41,7 +63,8 @@ test('refreshing a session updates cached order tokens and address', async () =>
     async () => {
       loginCount += 1;
       return { buyer_id: 123, address_id: loginCount, shopid: '1711911458', wdtoken: `token-${loginCount}`, cookie: `wdtoken=token-${loginCount}` };
-    }
+    },
+    noWaitLimiter
   );
   const shop = { groupId: 'group-1', shopId: '1711911458', partitions: [{ itemList: [{ itemId: 'item-1', count: 1, price: '10' }] }] };
   buyer.fetchWeidianAPI = async () => `<div id="__rocker-render-inject__" data-obj='${JSON.stringify({ cart: { result: { shops: [shop] } } })}'></div>`;
@@ -60,7 +83,8 @@ test('refreshing a session updates cached order tokens and address', async () =>
 test('cached user information exposes identity and address without session secrets', async () => {
   const buyer = new Buyer(
     { source_id: 'source-1', username: '13800000000', password: 'test-password' },
-    async () => ({ buyer_id: 123, address_id: 55, shopid: '1711911458', wdtoken: 'secret-token', cookie: 'secret-cookie' })
+    async () => ({ buyer_id: 123, address_id: 55, shopid: '1711911458', wdtoken: 'secret-token', cookie: 'secret-cookie' }),
+    noWaitLimiter
   );
 
   assert.deepEqual(buyer.getCachedUserInfo(), {
@@ -81,7 +105,8 @@ test('cached user information exposes identity and address without session secre
 test('cart query keeps orders only from the configured shop', async () => {
   const buyer = new Buyer(
     { source_id: 'source-1', shop_id: '1234567890', username: '13800000000', password: 'test-password' },
-    async credentials => ({ buyer_id: 123, address_id: 55, shopid: credentials.shop_id, wdtoken: 'token', cookie: 'wdtoken=token' })
+    async credentials => ({ buyer_id: 123, address_id: 55, shopid: credentials.shop_id, wdtoken: 'token', cookie: 'wdtoken=token' }),
+    noWaitLimiter
   );
   const shops = ['1711911458', '1234567890'].map(shopId => ({
     groupId: `group-${shopId}`, shopId,

@@ -18,9 +18,9 @@
 
 `GET /weidian/api/order/query/config` 不返回密码。控制台更新已有账号时，密码留空表示保留现有密码；新增账号必须提供密码。请限制 `37071` 端口和配置文件的访问权限。
 
-首次查询购物车会登录并将会话保存在进程内；后续查询复用该会话。`POST /weidian/api/order/cookies/refresh` 会逐个重新登录已保存账号，刷新进程内的 Cookie、默认收货地址以及已生成下单参数中的 token 和地址。接口只返回每个账号的刷新状态，不返回 Cookie 或密码；控制面板提供“批量刷新 Cookie”按钮。未保存的页面改动不会用于刷新。
+首次查询购物车会登录并将会话保存在进程内；后续查询复用该会话。`POST /weidian/api/order/cookies/refresh` 会逐个重新登录已保存账号，刷新进程内的 Cookie、默认收货地址以及已生成下单参数中的 token 和地址。所有登录请求共用队列，默认相邻两次登录至少间隔 5 秒且不并发；可通过环境变量 `WEIDIAN_LOGIN_INTERVAL_MS` 调整间隔（单位：毫秒，Docker Compose 可在宿主机设置此变量）。登录失败不会自动重试，以免加重频控。接口只返回每个账号的刷新状态，不返回 Cookie 或密码；控制面板提供“批量刷新 Cookie”按钮。未保存的页面改动不会用于刷新。
 
-`GET /weidian/api/order/query/cached-users` 和控制面板的“查看缓存用户信息”按钮可查看当前进程内各账号的登录状态、买家 ID、默认地址 ID、店铺 ID 和最后登录时间。响应不含密码、Cookie 或 token；服务重启或保存配置后，这些进程内信息会重置。
+`GET /weidian/api/order/query/cached-users` 和控制面板的“查看缓存用户信息”按钮可查看当前进程内各账号的登录状态、买家 ID、默认地址 ID、店铺 ID 和最后登录时间。响应不含密码、Cookie 或 token；服务重启会清空这些进程内信息，保存配置会保留仍在配置中的账号缓存。
 
 上述两个会话接口都支持单用户操作：`GET /weidian/api/order/query/cached-users?username=13800000000` 只查询指定账号；`POST /weidian/api/order/cookies/refresh` 的请求 Body 为 `{"username":"13800000000"}` 时只刷新该账号。不传 `username` 时仍处理全部账号。控制面板的账号状态卡片提供单独的“查看”和“刷新 Cookie”按钮。
 

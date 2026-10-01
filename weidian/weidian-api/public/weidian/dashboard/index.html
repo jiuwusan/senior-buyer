@@ -47,6 +47,7 @@
               <button id="refreshCookiesButton" class="btn btn-secondary" type="button" onclick="refreshCookies()">批量刷新 Cookie</button>
               <button id="cachedUsersButton" class="btn btn-quiet" type="button" onclick="loadCachedUsers()">查看全部</button>
             </div>
+            <p class="privacy-note">批量刷新会逐个登录，默认每个账号至少间隔 5 秒；账号较多时请等待完成。</p>
             <div id="refreshResult" class="inline-status" role="status" aria-live="polite"></div>
             <div id="cachedUsersResult" role="status" aria-live="polite"><p class="empty-note">正在读取登录状态...</p></div>
             <p class="privacy-note">只显示缓存状态、买家 ID、默认地址 ID 和最后登录时间。密码、Cookie 和 token 不会显示。</p>

@@ -3,6 +3,7 @@ const { createOrderLimiter } = require('./create_order_limiter');
 const { runSequential } = require('./sequential');
 const { loginAndResolveBuyer } = require('./session');
 const { DEFAULT_SHOP_ID } = require('./config');
+const { loginLimiter } = require('./login_limiter');
 
 class Buyer {
   config = {
@@ -17,9 +18,10 @@ class Buyer {
   orderList = [];
   succeedIds = [];
   combineOrder = {};
-  constructor({ source_id, shop_id = DEFAULT_SHOP_ID, username, password }, sessionLoader = loginAndResolveBuyer) {
+  constructor({ source_id, shop_id = DEFAULT_SHOP_ID, username, password }, sessionLoader = loginAndResolveBuyer, sessionLimiter = loginLimiter) {
     this.credentials = { username, password };
     this.sessionLoader = sessionLoader;
+    this.sessionLimiter = sessionLimiter;
     this.config = { source_id, shopid: shop_id, buyer_name: username };
     this.lastLoginAt = null;
   }
@@ -99,7 +101,7 @@ class Buyer {
   }
 
   async refreshSession() {
-    const session = await this.sessionLoader({ ...this.credentials, shop_id: this.config.shopid });
+    const session = await this.sessionLimiter.run(() => this.sessionLoader({ ...this.credentials, shop_id: this.config.shopid }));
     this.config = { ...this.config, ...session };
     for (const order of [...this.orderList, this.combineOrder]) {
       if (!order?.orderParam) continue;
