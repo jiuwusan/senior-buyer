@@ -26,6 +26,7 @@ class Order {
           existing.succeedIds = [];
         }
         existing.credentials.password = buyer.credentials.password;
+        existing.enabled = buyer.enabled;
         existing.config.source_id = buyer.config.source_id;
         existing.config.shopid = buyer.config.shopid;
         return existing;
@@ -63,7 +64,7 @@ class Order {
   }
 
   pollingOrder({ polling = false } = {}) {
-    if (polling && !this.orderTasks.some(task => task.buyers.length > 0)) {
+    if (polling && !this.orderTasks.some(task => task.activeBuyers.length > 0)) {
       return '没有可下单的用户';
     }
     const isStarting = polling && !this.polling; // 记录是否是从“关”到“开”

@@ -23,7 +23,7 @@ test('new configuration creates one task and public query hides passwords', asyn
     assert.deepEqual(order.queryConfig(), {
       source_id: 'source-1',
       shop_id: '1711911458',
-      users: [{ username: '13800000000', passwordConfigured: true }]
+      users: [{ username: '13800000000', passwordConfigured: true, enabled: true }]
     });
   } finally {
     if (previousPath === undefined) delete process.env.WEIDIAN_CONFIG_PATH;
@@ -66,6 +66,22 @@ test('saving configuration preserves cached login for an existing user', async (
     assert.deepEqual(order.queryCachedUsers('user-1'), [beforeSave]);
     assert.equal(order.queryCachedUsers('user-2')[0].status, 'not_logged_in');
     assert.equal(order.orderTasks[0].buyers[0].config.source_id, 'source-2');
+
+    await config.update({
+      source_id: 'source-2', shop_id: '1711911458',
+      users: [{ username: 'user-1', password: '', enabled: false }]
+    });
+    await order.updateTasks();
+    assert.equal(order.queryCachedUsers('user-1')[0].status, 'cached');
+    assert.equal(order.queryCachedUsers('user-1')[0].enabled, false);
+    assert.deepEqual(await order.queryCart(), [[]]);
+
+    await config.update({
+      source_id: 'source-2', shop_id: '1711911458',
+      users: [{ username: 'user-1', password: '', enabled: true }]
+    });
+    await order.updateTasks();
+    assert.deepEqual(order.queryCachedUsers('user-1'), [beforeSave]);
   } finally {
     if (previousPath === undefined) delete process.env.WEIDIAN_CONFIG_PATH;
     else process.env.WEIDIAN_CONFIG_PATH = previousPath;

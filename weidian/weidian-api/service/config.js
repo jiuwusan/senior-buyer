@@ -23,12 +23,14 @@ function validate(data) {
   const users = data.users.map((user, index) => {
     const username = typeof user?.username === 'string' ? user.username.trim() : '';
     const password = user?.password;
+    const enabled = user?.enabled === undefined ? true : user.enabled;
     if (!username || typeof password !== 'string' || !password) {
       throw new Error(`第 ${index + 1} 个用户需要用户名和密码`);
     }
+    if (typeof enabled !== 'boolean') throw new Error(`第 ${index + 1} 个用户的 enabled 必须是布尔值`);
     if (usernames.has(username)) throw new Error(`重复的 username：${username}`);
     usernames.add(username);
-    return { username, password };
+    return { username, password, enabled };
   });
 
   return { source_id: data.source_id.trim(), shop_id: shopId.trim(), users };
@@ -52,13 +54,15 @@ async function load() {
 async function update(input) {
   const current = await load();
   const savedPasswords = new Map(current.users.map(user => [user.username, user.password]));
+  const savedEnabled = new Map(current.users.map(user => [user.username, user.enabled]));
   const merged = {
     source_id: input?.source_id,
     shop_id: input?.shop_id ?? current.shop_id,
     users: Array.isArray(input?.users)
       ? input.users.map(user => ({
           username: user?.username,
-          password: user?.password || savedPasswords.get(user?.username) || ''
+          password: user?.password || savedPasswords.get(user?.username) || '',
+          enabled: user?.enabled === undefined ? savedEnabled.get(user?.username) : user.enabled
         }))
       : input?.users
   };
@@ -72,7 +76,7 @@ function publicView(data) {
   return {
     source_id: data.source_id,
     shop_id: data.shop_id ?? DEFAULT_SHOP_ID,
-    users: data.users.map(user => ({ username: user.username, passwordConfigured: Boolean(user.password) }))
+    users: data.users.map(user => ({ username: user.username, passwordConfigured: Boolean(user.password), enabled: user.enabled !== false }))
   };
 }
 

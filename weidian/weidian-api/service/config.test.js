@@ -39,7 +39,7 @@ test('updating a user with a blank password retains the stored password', async 
     assert.deepEqual(JSON.parse(await fs.readFile(configPath, 'utf8')), {
       source_id: 'new',
       shop_id: '1711911458',
-      users: [{ username: '13800000000', password: 'saved-secret' }]
+      users: [{ username: '13800000000', password: 'saved-secret', enabled: true }]
     });
   });
 });
@@ -50,7 +50,7 @@ test('a new user requires a password and public configuration never returns one'
     assert.deepEqual(config.publicView({ source_id: 'source', users: [{ username: '13800000000', password: 'saved-secret' }] }), {
       source_id: 'source',
       shop_id: '1711911458',
-      users: [{ username: '13800000000', passwordConfigured: true }]
+      users: [{ username: '13800000000', passwordConfigured: true, enabled: true }]
     });
   });
 });
@@ -61,5 +61,22 @@ test('shop ID is configurable and old configurations retain the current shop', a
     await config.update({ source_id: 'source', shop_id: '1234567890', users: [] });
     assert.equal((await config.load()).shop_id, '1234567890');
     await assert.rejects(config.update({ source_id: 'source', shop_id: 'not-a-shop', users: [] }), /shop_id/);
+  });
+});
+
+test('disabled users stay saved and an omitted enabled flag keeps their state', async () => {
+  await withConfigFile({
+    source_id: 'source',
+    users: [{ username: 'user-1', password: 'secret', enabled: false }]
+  }, async () => {
+    assert.equal((await config.load()).users[0].enabled, false);
+    await config.update({ source_id: 'source', users: [{ username: 'user-1', password: '' }] });
+    assert.equal((await config.load()).users[0].enabled, false);
+    assert.deepEqual((await config.publicView(await config.load())).users, [
+      { username: 'user-1', passwordConfigured: true, enabled: false }
+    ]);
+    await config.update({ source_id: 'source', users: [{ username: 'user-1', password: '', enabled: true }] });
+    assert.equal((await config.load()).users[0].enabled, true);
+    await assert.rejects(config.update({ source_id: 'source', users: [{ username: 'user-1', password: '', enabled: 'false' }] }), /enabled/);
   });
 });

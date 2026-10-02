@@ -15,19 +15,24 @@ class OrderTask {
     return this.publicConfig;
   }
 
+  get activeBuyers() {
+    return this.buyers.filter(buyer => buyer.enabled !== false);
+  }
+
   getCachedUsers(username) {
     const buyers = username === undefined ? this.buyers : this.buyers.filter(buyer => buyer.credentials.username === username);
     return buyers.map(buyer => buyer.getCachedUserInfo());
   }
 
   async queryCart() {
-    return await runSequential(this.buyers, buyer => buyer.queryCart());
+    return await runSequential(this.activeBuyers, buyer => buyer.queryCart());
   }
 
   async refreshCookies(username) {
-    const buyers = username === undefined ? this.buyers : this.buyers.filter(buyer => buyer.credentials.username === username);
+    const buyers = username === undefined ? this.activeBuyers : this.buyers.filter(buyer => buyer.credentials.username === username);
     return await runSequential(buyers, async buyer => {
       const username = buyer.credentials.username;
+      if (buyer.enabled === false) return { username, status: 'skipped', message: '账号已禁用' };
       try {
         await buyer.refreshSession();
         return { username, status: 'success' };
@@ -38,11 +43,11 @@ class OrderTask {
   }
 
   async createOrder({ combine }) {
-    return await runSequential(this.buyers, buyer => buyer.orderCart({ combine }));
+    return await runSequential(this.activeBuyers, buyer => buyer.orderCart({ combine }));
   }
 
   async queryPreOrder() {
-    return await runSequential(this.buyers, buyer => buyer.queryPreOrder());
+    return await runSequential(this.activeBuyers, buyer => buyer.queryPreOrder());
   }
 }
 

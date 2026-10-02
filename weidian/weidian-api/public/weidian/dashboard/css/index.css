@@ -73,7 +73,10 @@ h2 { margin: 0 0 8px; font-size: 19px; letter-spacing: -.025em; }
 .section-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 12px; margin-bottom: 6px; }
 .section-title { font-size: 14px; font-weight: 800; }
 .account-list { display: flex; flex-direction: column; gap: 10px; }
-.account-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; align-items: end; gap: 12px; padding: 16px; border: 1px solid #e7eeea; border-radius: 10px; background: #fbfcfb; }
+.account-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto auto; align-items: end; gap: 12px; padding: 16px; border: 1px solid #e7eeea; border-radius: 10px; background: #fbfcfb; }
+.account-row.is-disabled { background: #f4f6f5; }
+.account-toggle { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; white-space: nowrap; color: #415850; font-size: 12px; font-weight: 700; cursor: pointer; }
+.account-toggle input { width: 16px; height: 16px; margin: 0; accent-color: #358159; }
 .account-row .btn { align-self: end; }
 .empty-note { margin: 0; padding: 22px; border: 1px dashed #d8e4dd; border-radius: 10px; color: #798b82; font-size: 13px; text-align: center; }
 .loading { padding: 24px; color: #798b82; font-size: 13px; text-align: center; }

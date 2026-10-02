@@ -18,8 +18,9 @@ class Buyer {
   orderList = [];
   succeedIds = [];
   combineOrder = {};
-  constructor({ source_id, shop_id = DEFAULT_SHOP_ID, username, password }, sessionLoader = loginAndResolveBuyer, sessionLimiter = loginLimiter) {
+  constructor({ source_id, shop_id = DEFAULT_SHOP_ID, username, password, enabled = true }, sessionLoader = loginAndResolveBuyer, sessionLimiter = loginLimiter) {
     this.credentials = { username, password };
+    this.enabled = enabled;
     this.sessionLoader = sessionLoader;
     this.sessionLimiter = sessionLimiter;
     this.config = { source_id, shopid: shop_id, buyer_name: username };
@@ -118,6 +119,7 @@ class Buyer {
     const cached = Boolean(this.config.cookie && this.config.wdtoken && this.config.buyer_id && this.config.address_id);
     return {
       username: this.credentials.username,
+      enabled: this.enabled,
       status: cached ? 'cached' : 'not_logged_in',
       buyer_id: cached ? this.config.buyer_id : null,
       address_id: cached ? this.config.address_id : null,

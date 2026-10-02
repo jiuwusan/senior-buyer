@@ -88,7 +88,7 @@ test('cached user information exposes identity and address without session secre
   );
 
   assert.deepEqual(buyer.getCachedUserInfo(), {
-    username: '13800000000', status: 'not_logged_in', buyer_id: null,
+    username: '13800000000', enabled: true, status: 'not_logged_in', buyer_id: null,
     address_id: null, shopid: null, refreshedAt: null
   });
 

@@ -81,7 +81,7 @@ const apiDefinitions = [
     defaultParams: () => ({
       source_id: configData.source_id,
       shop_id: configData.shop_id,
-      users: configData.users.map(user => ({ username: user.username, password: '' }))
+      users: configData.users.map(user => ({ username: user.username, password: '', enabled: user.enabled !== false }))
     })
   }
 ];
@@ -116,7 +116,8 @@ async function loadConfig(showSuccess = false) {
       users: (result.data.users || []).map(user => ({
         username: user.username,
         password: '',
-        passwordConfigured: user.passwordConfigured
+        passwordConfigured: user.passwordConfigured,
+        enabled: user.enabled !== false
       }))
     };
     renderConfig();
@@ -170,7 +171,7 @@ async function refreshCookies(username, clickedButton) {
     const succeeded = result.data.filter(item => item.status === 'success').length;
     const failed = result.data.filter(item => item.status !== 'success').map(item => item.username);
     resultEl.textContent = result.data.length === 0
-      ? '没有已保存的账号，请先保存配置。'
+      ? '没有可刷新的已启用账号。'
       : username
         ? `账号 ${username} 的 Cookie ${failed.length ? '刷新失败' : '已刷新'}。`
         : `Cookie 刷新完成：成功 ${succeeded} 个，失败 ${failed.length} 个。${failed.length ? `失败账号：${failed.join('、')}。` : ''}`;
@@ -202,16 +203,16 @@ async function loadCachedUsers(username) {
       throw new Error(result.msg || '请求失败');
     }
     if (username === undefined) {
-      document.getElementById('sessionCountSummary').textContent = String(result.data.filter(user => user.status === 'cached').length);
+      document.getElementById('sessionCountSummary').textContent = String(result.data.filter(user => user.enabled !== false && user.status === 'cached').length);
     }
     resultEl.innerHTML = result.data.length === 0
       ? '<p class="empty-note">没有已保存的账号。请先在左侧添加账号并保存。</p>'
       : `${username === undefined ? '' : `<p class="filter-note">正在查看 ${escapeHtml(username)} 的缓存信息</p>`}<div class="session-list">${result.data.map(user => `
           <div class="session-row">
-            <div class="session-row-heading"><strong>${escapeHtml(user.username)}</strong><span class="status-badge ${user.status === 'cached' ? '' : 'muted'}">${user.status === 'cached' ? '已缓存' : '未登录'}</span></div>
+            <div class="session-row-heading"><strong>${escapeHtml(user.username)}</strong><span class="status-badge ${user.enabled !== false && user.status === 'cached' ? '' : 'muted'}">${user.enabled === false ? '已禁用' : user.status === 'cached' ? '已缓存' : '未登录'}</span></div>
             <div class="session-details"><span>买家 ID <strong>${escapeHtml(user.buyer_id ?? '—')}</strong></span><span>默认地址 ID <strong>${escapeHtml(user.address_id ?? '—')}</strong></span><span>店铺 ID <strong>${escapeHtml(user.shopid ?? '—')}</strong></span></div>
             <div class="session-time">最后登录：${escapeHtml(user.refreshedAt ? new Date(user.refreshedAt).toLocaleString('zh-CN') : '—')}</div>
-            <div class="session-row-actions"><button class="btn btn-quiet btn-sm" type="button" data-view-user="${escapeHtml(user.username)}">查看</button><button class="btn btn-secondary btn-sm" type="button" data-refresh-user="${escapeHtml(user.username)}">刷新 Cookie</button></div>
+            <div class="session-row-actions"><button class="btn btn-quiet btn-sm" type="button" data-view-user="${escapeHtml(user.username)}">查看</button><button class="btn btn-secondary btn-sm" type="button" data-refresh-user="${escapeHtml(user.username)}" ${user.enabled === false ? 'disabled title="请先启用账号并保存配置"' : ''}>刷新 Cookie</button></div>
           </div>`).join('')}</div>`;
   } catch (error) {
     resultEl.textContent = `读取缓存用户信息失败：${error.message}`;
@@ -242,7 +243,7 @@ function renderConfig() {
           <button class="btn btn-quiet btn-sm" type="button" onclick="addUser()">＋ 添加账号</button>
         </div>
         <div class="account-list">${configData.users.length ? configData.users.map((user, index) => `
-          <div class="account-row">
+          <div class="account-row ${user.enabled === false ? 'is-disabled' : ''}">
             <div class="form-group">
               <label>手机号</label>
               <input type="text" inputmode="tel" value="${escapeHtml(user.username)}" autocomplete="off" oninput="updateUser(${index}, 'username', this.value)">
@@ -251,6 +252,7 @@ function renderConfig() {
               <label>登录密码</label>
               <input type="password" value="" autocomplete="new-password" placeholder="${user.passwordConfigured ? '已设置，留空保持不变' : '请输入密码'}" oninput="updateUser(${index}, 'password', this.value)">
             </div>
+            <label class="account-toggle"><input type="checkbox" ${user.enabled !== false ? 'checked' : ''} onchange="updateUser(${index}, 'enabled', this.checked); this.closest('.account-row').classList.toggle('is-disabled', !this.checked)">启用账号</label>
             <div class="form-group">
               <button class="btn btn-danger btn-sm" type="button" onclick="removeUser(${index})">移除</button>
             </div>
@@ -267,7 +269,7 @@ function updateShopId(value) {
 }
 
 function addUser() {
-  configData.users.push({ username: '', password: '', passwordConfigured: false });
+  configData.users.push({ username: '', password: '', passwordConfigured: false, enabled: true });
   renderConfig();
 }
 

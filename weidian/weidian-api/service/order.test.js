@@ -12,7 +12,7 @@ test('polling runs for 15 seconds and combines orders in the first 3 seconds', a
       return { load: async () => [] };
     }
     if (parent?.filename === orderPath && request === './order_task') {
-      return { OrderTask: class { buyers = []; } };
+      return { OrderTask: class { buyers = []; get activeBuyers() { return this.buyers; } } };
     }
     return originalLoad.call(this, request, parent, isMain);
   };
@@ -34,7 +34,7 @@ test('polling runs for 15 seconds and combines orders in the first 3 seconds', a
     calls.push(combine);
     elapsedMs += 1000;
   };
-  order.orderTasks = [{ buyers: [{}] }];
+  order.orderTasks = [{ buyers: [{}], activeBuyers: [{}] }];
 
   try {
     order.pollingOrder({ polling: true });
@@ -58,7 +58,7 @@ test('polling does not start when no users are configured', async () => {
       return { load: async () => ({ source_id: '', users: [] }) };
     }
     if (parent?.filename === orderPath && request === './order_task') {
-      return { OrderTask: class { buyers = []; } };
+      return { OrderTask: class { buyers = []; get activeBuyers() { return this.buyers; } } };
     }
     return originalLoad.call(this, request, parent, isMain);
   };
